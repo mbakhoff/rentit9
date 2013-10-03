@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_esi_rentit9_domain_Invoice" object="${invoice}" path="/invoices" z="fm3Y4lz/UGSqIYpRXVoIW0F4Bag=">
+        <field:display field="purchaseOrder" id="s_esi_rentit9_domain_Invoice_purchaseOrder" object="${invoice}" z="O/gDnko0jx2kZjTOB0/XCzTsoWg="/>
+        <field:display calendar="true" dateTimePattern="${invoice_duedate_date_format}" field="dueDate" id="s_esi_rentit9_domain_Invoice_dueDate" object="${invoice}" z="3lC+iJVJBJATFCYDG8W7/bDrKfs="/>
+    </page:show>
+</div>

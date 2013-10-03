@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_esi_rentit9_domain_Invoice" items="${invoices}" z="/+IHs5McXx1C5H6OhYkb398vw6w=">
+        <table:table data="${invoices}" id="l_esi_rentit9_domain_Invoice" path="/invoices" z="x8UPJ4KwoDrpEq0g0Kex7O2cpaY=">
+            <table:column id="c_esi_rentit9_domain_Invoice_purchaseOrder" property="purchaseOrder" z="gUxW1uu5cvmzBOhR5/8DlQbnJUs="/>
+            <table:column calendar="true" dateTimePattern="${invoice_duedate_date_format}" id="c_esi_rentit9_domain_Invoice_dueDate" property="dueDate" z="dC8IxnNPOBDFDa2wHZ18c5gsRHo="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_esi_rentit9_domain_PurchaseOrderLine" modelAttribute="purchaseOrderLine" path="/purchaseorderlines" versionField="Version" z="kg3mB74GI2muACIPPePKh7z0rCM=">
+        <field:select field="purchaseOrder" id="c_esi_rentit9_domain_PurchaseOrderLine_purchaseOrder" itemValue="id" items="${purchaseorders}" path="/purchaseorders" z="6HoeV/a8bvjRW74zkrHf/8/gkUU="/>
+        <field:select field="plant" id="c_esi_rentit9_domain_PurchaseOrderLine_plant" itemValue="id" items="${plants}" path="/plants" z="AT1dTSCx8v3S1jUxGNCeXpTA9n0="/>
+        <field:datetime dateTimePattern="${purchaseOrderLine_startdate_date_format}" field="startDate" id="c_esi_rentit9_domain_PurchaseOrderLine_startDate" z="kgiznDI1aG9iQu1IZq13IFlX0Jc="/>
+        <field:datetime dateTimePattern="${purchaseOrderLine_enddate_date_format}" field="endDate" id="c_esi_rentit9_domain_PurchaseOrderLine_endDate" z="rF4n2KbRk1tfWzcjgT418ab7koo="/>
+    </form:update>
+</div>
