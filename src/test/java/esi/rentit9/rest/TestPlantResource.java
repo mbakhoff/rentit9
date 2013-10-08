@@ -11,11 +11,20 @@ import static org.junit.Assert.assertTrue;
 
 public class TestPlantResource {
 
-	// @Test TODO: fixme
+	public static final String URL_PLANTS = "https://rentit9.herokuapp.com/rest/plants";
+
+	//@Test
+	public void testGetPlants() throws Exception {
+		Client client = Client.create();
+		WebResource webResource = client.resource(URL_PLANTS);
+		PlantResourceList plants = webResource.get(PlantResourceList.class);
+		assertTrue(plants != null);
+	}
+
+	//@Test
 	public void testResources() throws Exception {
 		Client client = Client.create();
-		WebResource webResource =
-				client.resource("http://localhost:8080/rest/plant");
+		WebResource webResource = client.resource(URL_PLANTS);
 		PlantResource newPlantResource = new PlantResource();
 		newPlantResource.setDescription("Dodge 2013");
 		newPlantResource.setName("Truck");

@@ -29,7 +29,7 @@ public class PlantResourceController {
 		return response;
 	}
 
-	@RequestMapping(value = "plant", method = RequestMethod.POST)
+	@RequestMapping(value = "plants", method = RequestMethod.POST)
 	public ResponseEntity<Void> createPlantResource(@RequestBody PlantResource res) {
 		Plant p = new Plant();
 		p.setDescription(res.getDescription());
