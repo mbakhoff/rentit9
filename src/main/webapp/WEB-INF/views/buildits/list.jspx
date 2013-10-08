@@ -5,6 +5,7 @@
     <page:list id="pl_esi_rentit9_domain_BuildIt" items="${buildits}" z="SW7jgRmxIm4BRB+njtSFsipDqJk=">
         <table:table data="${buildits}" id="l_esi_rentit9_domain_BuildIt" path="/buildits" z="0ohCcLLWBtQqYK6cmaZDXnOx4/A=">
             <table:column id="c_esi_rentit9_domain_BuildIt_name" property="name" z="uK5KWorYtoBXh1pTL8DBNI/fjlM="/>
+            <table:column id="c_esi_rentit9_domain_BuildIt_url" property="url" z="YY6x33vDRR47ND6vE1vbHV/4MVs="/>
         </table:table>
     </page:list>
 </div>

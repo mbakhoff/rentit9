@@ -11,4 +11,8 @@ public class BuildIt {
     /**
      */
     private String name;
+
+    /**
+     */
+    private String url;
 }

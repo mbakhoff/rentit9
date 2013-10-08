@@ -34,4 +34,8 @@ public class PurchaseOrderLine {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Calendar endDate;
+
+    /**
+     */
+    private float total;
 }

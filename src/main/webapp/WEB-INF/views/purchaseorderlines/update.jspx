@@ -7,5 +7,6 @@
         <field:select field="plant" id="c_esi_rentit9_domain_PurchaseOrderLine_plant" itemValue="id" items="${plants}" path="/plants" z="AT1dTSCx8v3S1jUxGNCeXpTA9n0="/>
         <field:datetime dateTimePattern="${purchaseOrderLine_startdate_date_format}" field="startDate" id="c_esi_rentit9_domain_PurchaseOrderLine_startDate" z="kgiznDI1aG9iQu1IZq13IFlX0Jc="/>
         <field:datetime dateTimePattern="${purchaseOrderLine_enddate_date_format}" field="endDate" id="c_esi_rentit9_domain_PurchaseOrderLine_endDate" z="rF4n2KbRk1tfWzcjgT418ab7koo="/>
+        <field:input field="total" id="c_esi_rentit9_domain_PurchaseOrderLine_total" z="84OPG3fHFKcTwh8TN55OLWhK/UA="/>
     </form:update>
 </div>

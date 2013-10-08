@@ -15,4 +15,12 @@ privileged aspect BuildIt_Roo_JavaBean {
         this.name = name;
     }
     
+    public String BuildIt.getUrl() {
+        return this.url;
+    }
+    
+    public void BuildIt.setUrl(String url) {
+        this.url = url;
+    }
+    
 }

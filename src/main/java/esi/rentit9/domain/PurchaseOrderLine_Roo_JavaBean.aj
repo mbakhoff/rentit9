@@ -42,4 +42,12 @@ privileged aspect PurchaseOrderLine_Roo_JavaBean {
         this.endDate = endDate;
     }
     
+    public float PurchaseOrderLine.getTotal() {
+        return this.total;
+    }
+    
+    public void PurchaseOrderLine.setTotal(float total) {
+        this.total = total;
+    }
+    
 }

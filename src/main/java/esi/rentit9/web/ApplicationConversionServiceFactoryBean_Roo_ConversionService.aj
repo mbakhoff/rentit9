@@ -21,7 +21,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<BuildIt, String> ApplicationConversionServiceFactoryBean.getBuildItToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.rentit9.domain.BuildIt, java.lang.String>() {
             public String convert(BuildIt buildIt) {
-                return new StringBuilder().append(buildIt.getName()).toString();
+                return new StringBuilder().append(buildIt.getName()).append(' ').append(buildIt.getUrl()).toString();
             }
         };
     }
@@ -117,7 +117,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<PurchaseOrderLine, String> ApplicationConversionServiceFactoryBean.getPurchaseOrderLineToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.rentit9.domain.PurchaseOrderLine, java.lang.String>() {
             public String convert(PurchaseOrderLine purchaseOrderLine) {
-                return new StringBuilder().append(purchaseOrderLine.getStartDate()).append(' ').append(purchaseOrderLine.getEndDate()).toString();
+                return new StringBuilder().append(purchaseOrderLine.getStartDate()).append(' ').append(purchaseOrderLine.getEndDate()).append(' ').append(purchaseOrderLine.getTotal()).toString();
             }
         };
     }
