@@ -8,9 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -20,10 +18,15 @@ import java.util.List;
 @RequestMapping("/rest")
 public class PlantResourceController {
 
+	private PlantResourceAssembler assembler;
+
+	public PlantResourceController() {
+		assembler = new PlantResourceAssembler();
+	}
+
 	@RequestMapping("plants")
 	public ResponseEntity<PlantResourceList> getAllPlants() {
 		List<Plant> plants = Plant.findAllPlants();
-		PlantResourceAssembler assembler = new PlantResourceAssembler();
 		ResponseEntity<PlantResourceList> response =
 				new ResponseEntity<PlantResourceList>(assembler.toResource(plants), HttpStatus.OK);
 		return response;
@@ -46,4 +49,13 @@ public class PlantResourceController {
 				ResponseEntity<Void>(headers, HttpStatus.CREATED);
 		return response;
 	}
+
+	@RequestMapping("plant/{id}")
+	public ResponseEntity<PlantResource> getById(@PathVariable Long id) {
+		Plant plant = Plant.findPlant(id);
+		ResponseEntity<PlantResource> response =
+				new ResponseEntity<PlantResource>(assembler.toResource(plant), HttpStatus.OK);
+		return response;
+	}
+
 }
