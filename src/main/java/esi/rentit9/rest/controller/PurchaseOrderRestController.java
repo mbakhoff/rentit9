@@ -8,6 +8,7 @@ import esi.rentit9.rest.PurchaseOrderLineResource;
 import esi.rentit9.rest.PurchaseOrderLineResourceList;
 import esi.rentit9.rest.PurchaseOrderResource;
 import esi.rentit9.rest.PurchaseOrderResourceAssembler;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,20 +78,14 @@ public class PurchaseOrderRestController {
 	}
 
 	private BuildIt getOrCreateBuildIt(String incomingUrl) {
-		List<BuildIt> buildIts = BuildIt.findAllBuildIts();
-		BuildIt match = null;
-		for (BuildIt buildIt : buildIts) {
-			if (buildIt.getUrl().equals(incomingUrl)) {
-				match = buildIt;
-				break;
-			}
-		}
-		if (match == null) {
-			match = new BuildIt();
+		try {
+			return BuildIt.getByUrl(incomingUrl);
+		} catch (DataRetrievalFailureException notFound) {
+			BuildIt match = new BuildIt();
 			match.setUrl(incomingUrl);
 			match.persist();
+			return match;
 		}
-		return match;
 	}
 
 	@XmlRootElement(name = "purchaseorders")
