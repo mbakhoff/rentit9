@@ -5,6 +5,7 @@ import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrder;
 import esi.rentit9.domain.PurchaseOrderLine;
 import esi.rentit9.rest.PurchaseOrderLineResource;
+import esi.rentit9.rest.PurchaseOrderLineResourceList;
 import esi.rentit9.rest.PurchaseOrderResource;
 import esi.rentit9.rest.PurchaseOrderResourceAssembler;
 import org.springframework.http.HttpHeaders;
@@ -55,8 +56,8 @@ public class PurchaseOrderRestController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-	private void attachLines(PurchaseOrder order, List<PurchaseOrderLineResource> purchaseOrderLines) {
-		for (PurchaseOrderLineResource res : purchaseOrderLines) {
+	private void attachLines(PurchaseOrder order, PurchaseOrderLineResourceList purchaseOrderLines) {
+		for (PurchaseOrderLineResource res : purchaseOrderLines.purchaseOrders) {
 			attachLine(order, res);
 		}
 	}

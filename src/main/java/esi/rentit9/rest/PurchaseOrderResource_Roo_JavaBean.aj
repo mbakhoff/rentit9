@@ -3,10 +3,6 @@
 
 package esi.rentit9.rest;
 
-import esi.rentit9.rest.PurchaseOrderLineResource;
-import esi.rentit9.rest.PurchaseOrderResource;
-import java.util.List;
-
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
     public String PurchaseOrderResource.getBuildit() {
@@ -25,11 +21,11 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.siteAddress = siteAddress;
     }
     
-    public List<PurchaseOrderLineResource> PurchaseOrderResource.getPurchaseOrderLines() {
+    public PurchaseOrderLineResourceList PurchaseOrderResource.getPurchaseOrderLines() {
         return this.purchaseOrderLines;
     }
     
-    public void PurchaseOrderResource.setPurchaseOrderLines(List<PurchaseOrderLineResource> purchaseOrderLines) {
+    public void PurchaseOrderResource.setPurchaseOrderLines(PurchaseOrderLineResourceList purchaseOrderLines) {
         this.purchaseOrderLines = purchaseOrderLines;
     }
     
