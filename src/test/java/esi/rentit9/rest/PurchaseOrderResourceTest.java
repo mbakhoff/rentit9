@@ -1,6 +1,13 @@
 package esi.rentit9.rest;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+
+import esi.rentit9.rest.controller.PurchaseOrderRestController.PurchaseOrderResourceList;
 
 public class PurchaseOrderResourceTest {
 
@@ -10,6 +17,10 @@ public class PurchaseOrderResourceTest {
 
 	@Test
 	public void testGetAllOrders() throws Exception {
+		Client client = Client.create();
+		WebResource webResource = client.resource(URL_POS);
+		PurchaseOrderResourceList purchaseOrder = webResource.get(PurchaseOrderResourceList.class);
+		assertTrue(purchaseOrder != null);
 	}
 
 	@Test

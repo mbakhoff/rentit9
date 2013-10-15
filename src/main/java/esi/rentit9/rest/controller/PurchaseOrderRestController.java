@@ -64,6 +64,14 @@ public class PurchaseOrderRestController {
 		PurchaseOrderResource resources = assembler.toResource(order);
 		return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "po/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+		deleteLines(order);
+		order.remove();
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "po/{id}/modify", method = RequestMethod.PUT)
 	public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
@@ -82,14 +90,6 @@ public class PurchaseOrderRestController {
 						pathSegment(order.getId().toString()).build().toUri();
 		headers.setLocation(location);
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-	}
-
-	@RequestMapping(value = "po/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
-		deleteLines(order);
-		order.remove();
-		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	private void deleteLines(PurchaseOrder order) {
