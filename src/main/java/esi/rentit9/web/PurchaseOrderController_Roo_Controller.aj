@@ -5,6 +5,7 @@ package esi.rentit9.web;
 
 import esi.rentit9.domain.BuildIt;
 import esi.rentit9.domain.PurchaseOrder;
+import esi.rentit9.domain.PurchaseOrderLine;
 import esi.rentit9.web.PurchaseOrderController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -88,6 +89,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
     void PurchaseOrderController.populateEditForm(Model uiModel, PurchaseOrder purchaseOrder) {
         uiModel.addAttribute("purchaseOrder", purchaseOrder);
         uiModel.addAttribute("buildits", BuildIt.findAllBuildIts());
+        uiModel.addAttribute("purchaseorderlines", PurchaseOrderLine.findAllPurchaseOrderLines());
     }
     
     String PurchaseOrderController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

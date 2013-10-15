@@ -8,14 +8,6 @@ import java.util.Calendar;
 
 privileged aspect PurchaseOrderLineResource_Roo_JavaBean {
     
-    public int PurchaseOrderLineResource.getId() {
-        return this.id;
-    }
-    
-    public void PurchaseOrderLineResource.setId(int id) {
-        this.id = id;
-    }
-    
     public String PurchaseOrderLineResource.getPlantId() {
         return this.plantId;
     }
@@ -40,12 +32,12 @@ privileged aspect PurchaseOrderLineResource_Roo_JavaBean {
         this.endDate = endDate;
     }
     
-    public float PurchaseOrderLineResource.getTotal_price() {
-        return this.total_price;
+    public float PurchaseOrderLineResource.getTotalPrice() {
+        return this.totalPrice;
     }
     
-    public void PurchaseOrderLineResource.setTotal_price(float total_price) {
-        this.total_price = total_price;
+    public void PurchaseOrderLineResource.setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
     }
     
 }
