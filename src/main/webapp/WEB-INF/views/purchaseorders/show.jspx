@@ -2,9 +2,9 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_esi_rentit9_domain_PurchaseOrder" object="${purchaseOrders}" path="/purchaseorders" z="Ighg6YtBcFHuNVuANuLk/UHpueY=">
-        <field:display field="buildit" id="s_esi_rentit9_domain_PurchaseOrder_buildit" object="${purchaseOrders}" z="g54rNfxh3FNc9dVeMXCWFXRgTUU="/>
-        <field:display field="approved" id="s_esi_rentit9_domain_PurchaseOrder_approved" object="${purchaseOrders}" z="VrdTJAHS/hXaK9LSMyaP/mpjBRk="/>
-        <field:display field="siteAddress" id="s_esi_rentit9_domain_PurchaseOrder_siteAddress" object="${purchaseOrders}" z="4qJPyU7fN+69f7wEpBlHe8I96Rg="/>
+    <page:show id="ps_esi_rentit9_domain_PurchaseOrder" object="${purchaseOrders}" path="/purchaseorders" z="user-managed">
+        <field:display field="buildit" id="s_esi_rentit9_domain_PurchaseOrder_buildit" object="${purchaseOrders}" z="user-managed"/>
+        <field:display field="approved" id="s_esi_rentit9_domain_PurchaseOrder_approved" object="${purchaseOrders}" z="user-managed"/>
+        <field:display field="siteAddress" id="s_esi_rentit9_domain_PurchaseOrder_siteAddress" object="${purchaseOrders}" z="user-managed"/>
     </page:show>
 </div>
