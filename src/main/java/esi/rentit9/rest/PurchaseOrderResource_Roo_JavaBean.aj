@@ -3,6 +3,8 @@
 
 package esi.rentit9.rest;
 
+import esi.rentit9.rest.PurchaseOrderLineResource;
+import esi.rentit9.rest.PurchaseOrderResource;
 import java.util.List;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
