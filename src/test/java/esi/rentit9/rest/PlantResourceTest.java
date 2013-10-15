@@ -10,10 +10,10 @@ import javax.ws.rs.core.MediaType;
 
 import static org.junit.Assert.assertTrue;
 
-public class TestPlantResource {
+public class PlantResourceTest {
 
 	public static final String URL_PLANTS = "https://rentit9.herokuapp.com/rest/plants";
-    private static final String URL_PLANT = "https://rentit9.herokuapp.com/rest/plant";
+	public static final String URL_PLANT = "https://rentit9.herokuapp.com/rest/plant";
 
     //@Test
 	public void testGetPlants() throws Exception {
