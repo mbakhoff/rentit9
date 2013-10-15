@@ -96,6 +96,7 @@ public class PurchaseOrderRestController {
 	public static class PurchaseOrderResourceList {
 		public List<PurchaseOrderResource> purchaseorder;
 
+		@SuppressWarnings("UnusedDeclaration")
 		public PurchaseOrderResourceList() {
 		}
 
