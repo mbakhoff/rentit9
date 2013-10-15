@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class TestPlantResource {
 
 	public static final String URL_PLANTS = "https://rentit9.herokuapp.com/rest/plants";
-    private static final String URL_PLANT = "https://rentit9.heorkuapp.com/rest/plant";
+    private static final String URL_PLANT = "https://rentit9.herokuapp.com/rest/plant";
 
     //@Test
 	public void testGetPlants() throws Exception {
