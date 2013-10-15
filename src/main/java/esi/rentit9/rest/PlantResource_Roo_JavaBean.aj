@@ -7,6 +7,14 @@ import esi.rentit9.rest.PlantResource;
 
 privileged aspect PlantResource_Roo_JavaBean {
     
+    public long PlantResource.getId() {
+        return this.id;
+    }
+    
+    public void PlantResource.setId(long id) {
+        this.id = id;
+    }
+    
     public String PlantResource.getName() {
         return this.name;
     }
