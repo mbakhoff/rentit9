@@ -6,6 +6,7 @@ import esi.rentit9.domain.PurchaseOrder;
 import esi.rentit9.domain.PurchaseOrderLine;
 import esi.rentit9.rest.PurchaseOrderLineResource;
 import esi.rentit9.rest.PurchaseOrderResource;
+import esi.rentit9.rest.PurchaseOrderResourceAssembler;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +16,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
 import java.util.List;
 
 @Controller
 @RequestMapping("/rest")
 public class PurchaseOrderRestController {
+
+	private PurchaseOrderResourceAssembler assembler;
+
+	public PurchaseOrderRestController() {
+		assembler = new PurchaseOrderResourceAssembler();
+	}
+
+	@RequestMapping("pos")
+	public ResponseEntity<PurchaseOrderResourceList> getAll() {
+		List<PurchaseOrder> orders = PurchaseOrder.findAllPurchaseOrders();
+		List<PurchaseOrderResource> resources = assembler.toResource(orders);
+		return new ResponseEntity<PurchaseOrderResourceList>(
+				new PurchaseOrderResourceList(resources), HttpStatus.OK);
+	}
 
     @RequestMapping(value = "pos", method = RequestMethod.POST)
     public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
@@ -74,5 +90,17 @@ public class PurchaseOrderRestController {
 			match.persist();
 		}
 		return match;
+	}
+
+	@XmlRootElement(name = "purchaseorders")
+	public static class PurchaseOrderResourceList {
+		public List<PurchaseOrderResource> purchaseorder;
+
+		public PurchaseOrderResourceList() {
+		}
+
+		public PurchaseOrderResourceList(List<PurchaseOrderResource> purchaseorder) {
+			this.purchaseorder = purchaseorder;
+		}
 	}
 }
