@@ -41,9 +41,9 @@ public class PurchaseOrderRestController {
 				new PurchaseOrderResourceList(resources), HttpStatus.OK);
 	}
 
-    @RequestMapping(value = "pos", method = RequestMethod.POST)
-    public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
-        PurchaseOrder order = new PurchaseOrder();
+	@RequestMapping(value = "pos", method = RequestMethod.POST)
+	public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
+		PurchaseOrder order = new PurchaseOrder();
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
 		order.setSiteAddress(res.getSiteAddress());
 		order.persist();
@@ -56,15 +56,22 @@ public class PurchaseOrderRestController {
 						pathSegment(order.getId().toString()).build().toUri();
 		headers.setLocation(location);
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-    }
-    
-    @RequestMapping(value = "po/{id}/modify", method = RequestMethod.PUT)
-    public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
-        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+	}
+
+	@RequestMapping("po/{id}")
+	public ResponseEntity<PurchaseOrderResource> getById(@PathVariable Long id) {
+		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+		PurchaseOrderResource resources = assembler.toResource(order);
+		return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "po/{id}/modify", method = RequestMethod.PUT)
+	public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
+		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
 		order.setSiteAddress(res.getSiteAddress());
 		order.persist();
-		
+
 		deleteLines(order);
 
 		attachLines(order, res.getPurchaseOrderLines());
@@ -75,7 +82,15 @@ public class PurchaseOrderRestController {
 						pathSegment(order.getId().toString()).build().toUri();
 		headers.setLocation(location);
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-    }
+	}
+
+	@RequestMapping(value = "po/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+		deleteLines(order);
+		order.remove();
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 
 	private void deleteLines(PurchaseOrder order) {
 		for (PurchaseOrderLine line : order.getLines()){
