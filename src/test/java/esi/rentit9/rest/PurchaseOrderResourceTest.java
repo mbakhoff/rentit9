@@ -3,13 +3,14 @@ package esi.rentit9.rest;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import esi.rentit9.rest.controller.PurchaseOrderRestController.PurchaseOrderResourceList;
 import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
-
 import java.util.Calendar;
 
 import static org.junit.Assert.assertTrue;
+
 
 public class PurchaseOrderResourceTest {
 
@@ -19,6 +20,10 @@ public class PurchaseOrderResourceTest {
 
 	@Test
 	public void testGetAllOrders() throws Exception {
+		Client client = Client.create();
+		WebResource webResource = client.resource(URL_POS);
+		PurchaseOrderResourceList purchaseOrder = webResource.get(PurchaseOrderResourceList.class);
+		assertTrue(purchaseOrder != null);
 	}
 
 	@Test
