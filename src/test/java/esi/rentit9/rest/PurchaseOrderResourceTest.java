@@ -56,7 +56,7 @@ public class PurchaseOrderResourceTest {
         ClientResponse response2 = webResource2.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po2);
         
-		assertTrue(response2.getStatus() == ClientResponse.Status.CREATED.getStatusCode());
+		assertTrue(response2.getStatus() == ClientResponse.Status.OK.getStatusCode());
 	}
 
 	private static PurchaseOrderResource createDummyOrder() {

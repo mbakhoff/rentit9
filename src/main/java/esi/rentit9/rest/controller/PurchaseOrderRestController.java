@@ -88,7 +88,7 @@ public class PurchaseOrderRestController {
 				ServletUriComponentsBuilder.fromCurrentRequestUri().
 						pathSegment(order.getId().toString()).build().toUri();
 		headers.setLocation(location);
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		return new ResponseEntity<Void>(headers, HttpStatus.OK);
 	}
 
 	private void deleteLines(PurchaseOrder order) {
