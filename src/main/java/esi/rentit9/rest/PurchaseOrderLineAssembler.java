@@ -1,5 +1,6 @@
 package esi.rentit9.rest;
 
+import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrderLine;
 
 import java.util.List;
@@ -8,14 +9,22 @@ public class PurchaseOrderLineAssembler {
 
     public PurchaseOrderLineResource toResource(PurchaseOrderLine line) {
        	PurchaseOrderLineResource res = new PurchaseOrderLineResource();
-		res.setPlantId(line.getPlant().getId().toString());
+		res.setPlantId(getPlantId(line));
 		res.setStartDate(line.getStartDate());
 		res.setEndDate(line.getEndDate());
 		res.setTotalPrice(line.getTotal());
 		return res;
     }
 
-    public PurchaseOrderLineResourceList toResource(List<PurchaseOrderLine> lines) {
+	private String getPlantId(PurchaseOrderLine line) {
+		Plant plant = line.getPlant();
+		if (plant != null) {
+			return plant.getId().toString();
+		}
+		return null;
+	}
+
+	public PurchaseOrderLineResourceList toResource(List<PurchaseOrderLine> lines) {
 		PurchaseOrderLineResourceList all = new PurchaseOrderLineResourceList();
 		for (PurchaseOrderLine line : lines) {
 			all.purchaseOrders.add(toResource(line));
