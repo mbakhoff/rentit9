@@ -3,9 +3,6 @@
 
 package esi.rentit9.domain;
 
-import esi.rentit9.domain.BuildIt;
-import esi.rentit9.domain.PurchaseOrder;
-
 privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public BuildIt PurchaseOrder.getBuildit() {
@@ -16,12 +13,12 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.buildit = buildit;
     }
     
-    public Boolean PurchaseOrder.getApproved() {
-        return this.approved;
+    public OrderStatus PurchaseOrder.getStatus() {
+        return this.status;
     }
     
-    public void PurchaseOrder.setApproved(Boolean approved) {
-        this.approved = approved;
+    public void PurchaseOrder.setStatus(OrderStatus status) {
+        this.status = status;
     }
     
     public String PurchaseOrder.getSiteAddress() {

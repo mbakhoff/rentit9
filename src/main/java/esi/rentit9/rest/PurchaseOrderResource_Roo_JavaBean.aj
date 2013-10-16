@@ -3,8 +3,7 @@
 
 package esi.rentit9.rest;
 
-import esi.rentit9.rest.PurchaseOrderLineResourceList;
-import esi.rentit9.rest.PurchaseOrderResource;
+import esi.rentit9.domain.OrderStatus;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
@@ -22,6 +21,14 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
     public void PurchaseOrderResource.setSiteAddress(String siteAddress) {
         this.siteAddress = siteAddress;
+    }
+    
+    public OrderStatus PurchaseOrderResource.getStatus() {
+        return this.status;
+    }
+    
+    public void PurchaseOrderResource.setStatus(OrderStatus status) {
+        this.status = status;
     }
     
     public PurchaseOrderLineResourceList PurchaseOrderResource.getPurchaseOrderLines() {

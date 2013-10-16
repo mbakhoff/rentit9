@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_esi_rentit9_domain_PurchaseOrder" modelAttribute="purchaseOrder" path="/purchaseorders" versionField="Version" z="T2Vn/NxIsLNdJv+C7oIjHPdPUDE=">
         <field:select field="buildit" id="c_esi_rentit9_domain_PurchaseOrder_buildit" itemValue="id" items="${buildits}" path="/buildits" z="5o6Zh4FrTadw3LknaaNSS2jRubY="/>
-        <field:checkbox field="approved" id="c_esi_rentit9_domain_PurchaseOrder_approved" z="Fyuu+gTbmu+Jdp5fPmhEjrZrA04="/>
         <field:input field="siteAddress" id="c_esi_rentit9_domain_PurchaseOrder_siteAddress" z="vfJl50AevI4OWZKuvLs15tGSFgg="/>
+        <field:select field="status" id="c_esi_rentit9_domain_PurchaseOrder_status" items="${orderstatuses}" path="orderstatuses" z="gmVZQfYrKE5ONeZb1JU1yPc9yqI="/>
     </form:update>
 </div>

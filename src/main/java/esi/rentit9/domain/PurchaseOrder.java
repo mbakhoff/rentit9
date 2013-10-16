@@ -23,7 +23,7 @@ public class PurchaseOrder {
 
     /**
      */
-    private Boolean approved;
+    private OrderStatus status;
 
     /**
      */

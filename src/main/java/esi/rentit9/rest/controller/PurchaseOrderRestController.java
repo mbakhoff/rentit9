@@ -1,9 +1,6 @@
 package esi.rentit9.rest.controller;
 
-import esi.rentit9.domain.BuildIt;
-import esi.rentit9.domain.Plant;
-import esi.rentit9.domain.PurchaseOrder;
-import esi.rentit9.domain.PurchaseOrderLine;
+import esi.rentit9.domain.*;
 import esi.rentit9.rest.PurchaseOrderLineResource;
 import esi.rentit9.rest.PurchaseOrderLineResourceList;
 import esi.rentit9.rest.PurchaseOrderResource;
@@ -46,6 +43,7 @@ public class PurchaseOrderRestController {
 		PurchaseOrder order = new PurchaseOrder();
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
 		order.setSiteAddress(res.getSiteAddress());
+		order.setStatus(OrderStatus.Created);
 		order.persist();
 
 		attachLines(order, res.getPurchaseOrderLines());
@@ -69,8 +67,8 @@ public class PurchaseOrderRestController {
 	@RequestMapping(value = "po/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
-		deleteLines(order);
-		order.remove();
+		order.setStatus(OrderStatus.Cancelled);
+		order.persist();
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 

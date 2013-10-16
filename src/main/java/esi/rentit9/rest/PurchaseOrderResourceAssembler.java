@@ -17,6 +17,7 @@ public class PurchaseOrderResourceAssembler {
 		PurchaseOrderResource res = new PurchaseOrderResource();
 		res.setBuildit(order.getBuildit().getUrl());
 		res.setSiteAddress(order.getSiteAddress());
+		res.setStatus(order.getStatus());
 		res.setPurchaseOrderLines(lineAssembler.toResource(order.getLines()));
 		return res;
 	}
