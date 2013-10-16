@@ -45,13 +45,15 @@ public class PurchaseOrderResourceTest {
 		WebResource webResource = client.resource(URL_POS);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
+		
+		Client client2 = Client.create();
 		List<String> id = response.getHeaders().get("RentItId");
 		PurchaseOrderResource po2 = createDummyOrder();
 		po2.setSiteAddress("NewModifiedDerpland 404");
 		
-        String requestUrl = URL_PO+"/"+(id.toString().replaceAll("\\[", "").replaceAll("\\]",""))+"/modify";
-        webResource = client.resource(requestUrl);
-        ClientResponse response2 = webResource.type(MediaType.APPLICATION_XML)
+        String requestUrl = URL_PO+"/"+id.get(0)+"/modify";
+        WebResource webResource2 = client2.resource(requestUrl);
+        ClientResponse response2 = webResource2.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po2);
         
 		assertTrue(response2.getStatus() == ClientResponse.Status.CREATED.getStatusCode());

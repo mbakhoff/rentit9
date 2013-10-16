@@ -3,6 +3,10 @@
 
 package esi.rentit9.domain;
 
+import esi.rentit9.domain.BuildIt;
+import esi.rentit9.domain.OrderStatus;
+import esi.rentit9.domain.PurchaseOrder;
+
 privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public BuildIt PurchaseOrder.getBuildit() {
