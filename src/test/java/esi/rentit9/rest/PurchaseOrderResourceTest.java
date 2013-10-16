@@ -49,7 +49,7 @@ public class PurchaseOrderResourceTest {
 		PurchaseOrderResource po2 = createDummyOrder();
 		po2.setSiteAddress("NewModifiedDerpland 404");
 		
-        String requestUrl = URL_PO+"/"+id+"/modify";
+        String requestUrl = URL_PO+"/"+id.toString().replaceAll("[]", "")+"/modify";
         webResource = client.resource(requestUrl);
         ClientResponse response2 = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po2);
