@@ -55,6 +55,7 @@ public class PurchaseOrderRestController {
 				ServletUriComponentsBuilder.fromCurrentRequestUri().
 						pathSegment(order.getId().toString()).build().toUri();
 		headers.setLocation(location);
+		headers.add("RentItId", (order.getId()).toString());
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
