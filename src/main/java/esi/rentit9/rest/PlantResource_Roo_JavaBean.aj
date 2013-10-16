@@ -3,15 +3,13 @@
 
 package esi.rentit9.rest;
 
-import esi.rentit9.rest.PlantResource;
-
 privileged aspect PlantResource_Roo_JavaBean {
     
-    public long PlantResource.getId() {
+    public Long PlantResource.getId() {
         return this.id;
     }
     
-    public void PlantResource.setId(long id) {
+    public void PlantResource.setId(Long id) {
         this.id = id;
     }
     

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="plant")
 public class PlantResource {
 
-    private long id;
+    private Long id;
 
 	private String name;
 

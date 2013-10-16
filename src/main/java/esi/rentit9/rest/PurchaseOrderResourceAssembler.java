@@ -15,6 +15,7 @@ public class PurchaseOrderResourceAssembler {
 
 	public PurchaseOrderResource toResource(PurchaseOrder order) {
 		PurchaseOrderResource res = new PurchaseOrderResource();
+		res.setId(order.getId());
 		res.setBuildit(order.getBuildit().getUrl());
 		res.setSiteAddress(order.getSiteAddress());
 		res.setStatus(order.getStatus());
