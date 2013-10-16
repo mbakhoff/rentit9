@@ -45,17 +45,36 @@ public class PurchaseOrderResourceTest {
 		WebResource webResource = client.resource(URL_POS);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
+		List<String> id = response.getHeaders().get("RentItId");
+		client.destroy();
 		
 		Client client2 = Client.create();
-		List<String> id = response.getHeaders().get("RentItId");
 		PurchaseOrderResource po2 = createDummyOrder();
 		po2.setSiteAddress("NewModifiedDerpland 404");
 		
         String requestUrl = URL_PO+"/"+id.get(0)+"/modify";
         WebResource webResource2 = client2.resource(requestUrl);
         ClientResponse response2 = webResource2.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po2);
+				.accept(MediaType.APPLICATION_XML).put(ClientResponse.class, po2);
         
+		assertTrue(response2.getStatus() == ClientResponse.Status.OK.getStatusCode());
+	}
+	
+	@Test
+	public void testCancelOrder() throws Exception {
+		PurchaseOrderResource po = createDummyOrder();
+		Client client = Client.create();
+		WebResource webResource = client.resource(URL_POS);
+		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
+				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
+		List<String> id = response.getHeaders().get("RentItId");
+		client.destroy();
+		
+		Client client2 = Client.create();
+        String requestUrl = URL_PO+"/"+id.get(0);
+        WebResource webResource2 = client2.resource(requestUrl);
+        ClientResponse response2 = webResource2.type(MediaType.APPLICATION_XML)
+				.accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);
 		assertTrue(response2.getStatus() == ClientResponse.Status.OK.getStatusCode());
 	}
 
