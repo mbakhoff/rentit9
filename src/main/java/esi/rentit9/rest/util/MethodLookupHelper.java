@@ -26,12 +26,16 @@ public class MethodLookupHelper {
         if (mapping != null) {
             RequestMethod[] methods = mapping.method();
             if (methods.length == 0) {
-                return "GET";
-            } else {
+                return RequestMethod.GET.toString();
+            } else if (methods.length == 1) {
                 return methods[0].toString();
+            } else {
+                // if you hit this, you'll probably need to make this class return a list of links
+                // or you can create separate methods in your controller for each http method
+                throw new RuntimeException("Method " + method.getName() + " supports multiple HTTP methods");
             }
         }
-        throw new RuntimeException(method.getName() + " does not have a request mapping");
+        throw new RuntimeException("Method " + method.getName() + " does not have a request mapping");
     }
 
     private static Method find(Class clazz, int id) {
@@ -42,7 +46,7 @@ public class MethodLookupHelper {
                 return method;
             }
         }
-        return null;
+        throw new RuntimeException("Class " + clazz.getName() + " does not contain method with id " + id);
     }
 
 }
