@@ -8,14 +8,14 @@ import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class PlantResourceTest {
 
 	public static final String URL_PLANTS = "https://rentit9.herokuapp.com/rest/plants";
-	public static final String URL_PLANT = "https://rentit9.herokuapp.com/rest/plant";
 
-	@Test
+    @Test
 	public void testGetPlants() throws Exception {
 		Client client = Client.create();
 		WebResource webResource = client.resource(URL_PLANTS);
@@ -45,11 +45,11 @@ public class PlantResourceTest {
         assertTrue(plants!=null);
 
         PlantResource plant = plants.getPlant().get(0);
-        String requestUrl = URL_PLANT+"/"+plant.getId();
+        String requestUrl = URL_PLANTS +"/"+plant.getId();
         webResource = client.resource(requestUrl);
         PlantResource plantById = webResource.get(PlantResource.class);
 
-        assertTrue(plantById.getId()==plant.getId());
+        assertEquals(plantById.getId(), plant.getId());
     }
 
 }

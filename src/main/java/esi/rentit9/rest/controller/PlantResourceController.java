@@ -50,7 +50,7 @@ public class PlantResourceController {
 		return response;
 	}
 
-	@RequestMapping("plant/{id}")
+	@RequestMapping("plants/{id}")
 	public ResponseEntity<PlantResource> getById(@PathVariable Long id) {
 		Plant plant = Plant.findPlant(id);
 		ResponseEntity<PlantResource> response =

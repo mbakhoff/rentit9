@@ -18,9 +18,8 @@ public class PurchaseOrderResourceTest {
 	// curl -v -X POST -d @sample.xml -H "Content-Type: application/xml" http://localhost:8080/rest/pos
 
 	public static final String URL_POS = "https://rentit9.herokuapp.com/rest/pos";
-	public static final String URL_PO = "https://rentit9.herokuapp.com/rest/po";
 
-	@Test
+    @Test
 	public void testGetAllOrders() throws Exception {
 		Client client = Client.create();
 		WebResource webResource = client.resource(URL_POS);
@@ -50,7 +49,7 @@ public class PurchaseOrderResourceTest {
 		PurchaseOrderResource po2 = createDummyOrder();
 		po2.setSiteAddress("NewModifiedDerpland 404");
 		
-        String requestUrl = URL_PO+"/"+id.get(0);
+        String requestUrl = URL_POS +"/"+id.get(0);
         webResource = client.resource(requestUrl);
         ClientResponse response2 = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).put(ClientResponse.class, po2);
@@ -67,7 +66,7 @@ public class PurchaseOrderResourceTest {
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
 		List<String> id = response.getHeaders().get("RentItId");
 		
-        String requestUrl = URL_PO+"/"+id.get(0);
+        String requestUrl = URL_POS +"/"+id.get(0);
         webResource = client.resource(requestUrl);
         ClientResponse response2 = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);
