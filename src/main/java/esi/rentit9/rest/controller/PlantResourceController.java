@@ -15,7 +15,7 @@ import java.net.URI;
 import java.util.List;
 
 @Controller
-@RequestMapping("/rest")
+@RequestMapping("/rest/")
 public class PlantResourceController {
 
 	private PlantResourceAssembler assembler;
