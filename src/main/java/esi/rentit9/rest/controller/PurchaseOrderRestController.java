@@ -5,8 +5,6 @@ import esi.rentit9.rest.PurchaseOrderLineResource;
 import esi.rentit9.rest.PurchaseOrderLineResourceList;
 import esi.rentit9.rest.PurchaseOrderResource;
 import esi.rentit9.rest.PurchaseOrderResourceAssembler;
-import esi.rentit9.rest.util.MethodLookup;
-import esi.rentit9.rest.util.MethodLookupHelper;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,18 +21,14 @@ import java.net.URI;
 import java.util.List;
 
 @Controller
-@RequestMapping("/rest/")
+@RequestMapping("/rest")
 public class PurchaseOrderRestController {
 
-    private static final int METHOD_GET_PO_BY_ID = 1;
-
-    private final PurchaseOrderResourceAssembler assembler;
-    private final MethodLookupHelper linker;
+	private PurchaseOrderResourceAssembler assembler;
 
 	public PurchaseOrderRestController() {
 		assembler = new PurchaseOrderResourceAssembler();
-        linker = new MethodLookupHelper(PurchaseOrderRestController.class);
-    }
+	}
 
 	@RequestMapping("pos")
 	public ResponseEntity<PurchaseOrderResourceList> getAll() {
@@ -47,12 +41,12 @@ public class PurchaseOrderRestController {
 	@RequestMapping(value = "pos", method = RequestMethod.POST)
 	public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
 		PurchaseOrder order = new PurchaseOrder();
-		order.setBuildit(getOrCreateBuildIt(res.buildit));
-		order.setSiteAddress(res.siteAddress);
+		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
+		order.setSiteAddress(res.getSiteAddress());
 		order.setStatus(OrderStatus.Created);
 		order.persist();
 
-		attachLines(order, res.purchaseOrderLines);
+		attachLines(order, res.getPurchaseOrderLines());
 
 		HttpHeaders headers = new HttpHeaders();
 		URI location =
@@ -64,12 +58,10 @@ public class PurchaseOrderRestController {
 	}
 
 	@RequestMapping("po/{id}")
-    @MethodLookup(METHOD_GET_PO_BY_ID)
 	public ResponseEntity<PurchaseOrderResource> getById(@PathVariable Long id) {
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
-		PurchaseOrderResource resource = assembler.toResource(order);
-        resource.add(linker.buildLink(METHOD_GET_PO_BY_ID, order.getId()));
-		return new ResponseEntity<PurchaseOrderResource>(resource, HttpStatus.OK);
+		PurchaseOrderResource resources = assembler.toResource(order);
+		return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "po/{id}", method = RequestMethod.DELETE)
@@ -83,13 +75,13 @@ public class PurchaseOrderRestController {
 	@RequestMapping(value = "po/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
-		order.setBuildit(getOrCreateBuildIt(res.buildit));
-		order.setSiteAddress(res.siteAddress);
+		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
+		order.setSiteAddress(res.getSiteAddress());
 		order.persist();
 
 		deleteLines(order);
 
-		attachLines(order, res.purchaseOrderLines);
+		attachLines(order, res.getPurchaseOrderLines());
 
 		HttpHeaders headers = new HttpHeaders();
 		URI location =
@@ -113,10 +105,10 @@ public class PurchaseOrderRestController {
 
 	private void attachLine(PurchaseOrder order, PurchaseOrderLineResource res) {
 		PurchaseOrderLine line = new PurchaseOrderLine();
-		line.setPlant(getPlant(res.plantId));
-		line.setStartDate(res.startDate);
-		line.setEndDate(res.endDate);
-		line.setTotal(res.totalPrice); // TODO: recalculate
+		line.setPlant(getPlant(res.getPlantId()));
+		line.setStartDate(res.getStartDate());
+		line.setEndDate(res.getEndDate());
+		line.setTotal(res.getTotalPrice()); // TODO: recalculate
 		line.setPurchaseOrder(order);
 		line.persist();
 	}

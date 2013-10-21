@@ -1,16 +1,19 @@
 package esi.rentit9.rest;
 
+import org.springframework.roo.addon.javabean.RooJavaBean;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
+@RooJavaBean
 @XmlRootElement(name="plant")
 public class PlantResource {
 
-    public Long id;
+    private Long id;
 
-	public String name;
+	private String name;
 
-	public String description;
+	private String description;
 
-	public Float price;
+	private Float price;
 
 }

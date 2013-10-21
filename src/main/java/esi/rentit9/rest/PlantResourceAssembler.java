@@ -9,10 +9,10 @@ public class PlantResourceAssembler {
 
 	public PlantResource toResource(Plant plant) {
 		PlantResource res = new PlantResource();
-        res.id = plant.getId();
-		res.name = plant.getName();
-		res.description = plant.getDescription();
-		res.price = plant.getPrice();
+        res.setId(plant.getId());
+		res.setName(plant.getName());
+		res.setDescription(plant.getDescription());
+		res.setPrice(plant.getPrice());
 		return res;
 	}
 
@@ -22,7 +22,7 @@ public class PlantResourceAssembler {
 		for (Plant p : plants) {
 			resources.add(toResource(p));
 		}
-		list.plant = resources;
+		list.setPlant(resources);
 		return list;
 	}
 
