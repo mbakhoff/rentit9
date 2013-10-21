@@ -1,18 +1,21 @@
 package esi.rentit9.rest;
 
 import esi.rentit9.domain.OrderStatus;
-import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.hateoas.ResourceSupport;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@RooJavaBean
 @XmlRootElement(name="purchaseorder")
-public class PurchaseOrderResource {
+public class PurchaseOrderResource extends ResourceSupport {
 
-	private Long id;
-    private String buildit;
-	private String siteAddress;
-	private OrderStatus status;
-    private PurchaseOrderLineResourceList purchaseOrderLines;
+    // naming this to id would conflict with hateoas
+    @XmlElement(name = "id")
+	public Long internalId;
+
+    public String buildit;
+	public String siteAddress;
+	public OrderStatus status;
+    public PurchaseOrderLineResourceList purchaseOrderLines;
 
 }

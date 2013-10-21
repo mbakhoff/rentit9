@@ -15,7 +15,7 @@ import java.net.URI;
 import java.util.List;
 
 @Controller
-@RequestMapping("/rest")
+@RequestMapping("/rest/")
 public class PlantResourceController {
 
 	private PlantResourceAssembler assembler;
@@ -35,9 +35,9 @@ public class PlantResourceController {
 	@RequestMapping(value = "plants", method = RequestMethod.POST)
 	public ResponseEntity<Void> createPlantResource(@RequestBody PlantResource res) {
 		Plant p = new Plant();
-		p.setDescription(res.getDescription());
-		p.setName(res.getName());
-		p.setPrice(res.getPrice());
+		p.setDescription(res.description);
+		p.setName(res.name);
+		p.setPrice(res.price);
 		p.persist();
 
 		HttpHeaders headers = new HttpHeaders();

@@ -48,7 +48,7 @@ public class PurchaseOrderResourceTest {
 		List<String> id = response.getHeaders().get("RentItId");
 		
 		PurchaseOrderResource po2 = createDummyOrder();
-		po2.setSiteAddress("NewModifiedDerpland 404");
+		po2.siteAddress = "NewModifiedDerpland 404";
 		
         String requestUrl = URL_PO+"/"+id.get(0);
         webResource = client.resource(requestUrl);
@@ -76,25 +76,25 @@ public class PurchaseOrderResourceTest {
 
 	private static PurchaseOrderResource createDummyOrder() {
 		PurchaseOrderLineResource line1 = new PurchaseOrderLineResource();
-		line1.setPlantId("1");
-		line1.setTotalPrice(100f);
-		line1.setStartDate(Calendar.getInstance());
-		line1.setEndDate(Calendar.getInstance());
+		line1.plantId = "1";
+		line1.totalPrice = 100f;
+		line1.startDate = Calendar.getInstance();
+		line1.endDate = Calendar.getInstance();
 
 		PurchaseOrderLineResource line2 = new PurchaseOrderLineResource();
-		line2.setPlantId("2");
-		line2.setTotalPrice(50f);
-		line2.setStartDate(Calendar.getInstance());
-		line2.setEndDate(Calendar.getInstance());
+		line2.plantId = "2";
+		line2.totalPrice = 50f;
+		line2.startDate = Calendar.getInstance();
+		line2.endDate = Calendar.getInstance();
 
 		PurchaseOrderLineResourceList lines = new PurchaseOrderLineResourceList();
 		lines.purchaseOrders.add(line1);
 		lines.purchaseOrders.add(line2);
 
 		PurchaseOrderResource po = new PurchaseOrderResource();
-		po.setSiteAddress("derpland 100c, nowhere");
-		po.setBuildit("builders inc.");
-		po.setPurchaseOrderLines(lines);
+		po.siteAddress = "derpland 100c, nowhere";
+		po.buildit = "builders inc.";
+		po.purchaseOrderLines = lines;
 		return po;
 	}
 }

@@ -28,9 +28,9 @@ public class PlantResourceTest {
 		Client client = Client.create();
 		WebResource webResource = client.resource(URL_PLANTS);
 		PlantResource newPlantResource = new PlantResource();
-		newPlantResource.setDescription("Dodge 2013");
-		newPlantResource.setName("Truck");
-		newPlantResource.setPrice(200.0f);
+		newPlantResource.description = "Dodge 2013";
+		newPlantResource.name = "Truck";
+		newPlantResource.price= 200.0f;
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, newPlantResource);
 		assertTrue(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode());
@@ -44,12 +44,12 @@ public class PlantResourceTest {
 
         assertTrue(plants!=null);
 
-        PlantResource plant = plants.getPlant().get(0);
-        String requestUrl = URL_PLANT+"/"+plant.getId();
+        PlantResource plant = plants.plant.get(0);
+        String requestUrl = URL_PLANT+"/"+plant.id;
         webResource = client.resource(requestUrl);
         PlantResource plantById = webResource.get(PlantResource.class);
 
-        assertTrue(plantById.getId()==plant.getId());
+        assertTrue(plantById.id==plant.id);
     }
 
 }
