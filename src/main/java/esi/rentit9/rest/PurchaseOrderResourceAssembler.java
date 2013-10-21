@@ -17,7 +17,7 @@ public class PurchaseOrderResourceAssembler extends ResourceAssemblerSupport<Pur
 	}
 
 	public PurchaseOrderResource toResource(PurchaseOrder order) {
-		PurchaseOrderResource res = new PurchaseOrderResource();
+		PurchaseOrderResource res = createResourceWithId(order.getId(), order);
 		res.setInternalId(order.getId());
 		res.setBuildit(order.getBuildit().getUrl());
 		res.setSiteAddress(order.getSiteAddress());
