@@ -1,8 +1,8 @@
 package esi.rentit9.rest.controller;
 
 import esi.rentit9.domain.*;
+import esi.rentit9.rest.PurchaseOrderLineListResource;
 import esi.rentit9.rest.PurchaseOrderLineResource;
-import esi.rentit9.rest.PurchaseOrderLineResourceList;
 import esi.rentit9.rest.PurchaseOrderResource;
 import esi.rentit9.rest.PurchaseOrderResourceAssembler;
 import esi.rentit9.rest.util.MethodLookup;
@@ -117,7 +117,7 @@ public class PurchaseOrderRestController {
 		}
 	}
 
-	private void attachLines(PurchaseOrder order, PurchaseOrderLineResourceList purchaseOrderLines) {
+	private void attachLines(PurchaseOrder order, PurchaseOrderLineListResource purchaseOrderLines) {
 		for (PurchaseOrderLineResource res : purchaseOrderLines.purchaseOrders) {
 			attachLine(order, res);
 		}

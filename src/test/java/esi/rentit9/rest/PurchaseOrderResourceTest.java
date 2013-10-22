@@ -86,7 +86,7 @@ public class PurchaseOrderResourceTest {
 		line2.setStartDate(Calendar.getInstance());
 		line2.setEndDate(Calendar.getInstance());
 
-		PurchaseOrderLineResourceList lines = new PurchaseOrderLineResourceList();
+		PurchaseOrderLineListResource lines = new PurchaseOrderLineListResource();
 		lines.purchaseOrders.add(line1);
 		lines.purchaseOrders.add(line2);
 

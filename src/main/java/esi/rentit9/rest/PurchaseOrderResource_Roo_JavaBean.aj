@@ -4,7 +4,7 @@
 package esi.rentit9.rest;
 
 import esi.rentit9.domain.OrderStatus;
-import esi.rentit9.rest.PurchaseOrderLineResourceList;
+import esi.rentit9.rest.PurchaseOrderLineListResource;
 import esi.rentit9.rest.PurchaseOrderResource;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
@@ -41,11 +41,11 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.status = status;
     }
     
-    public PurchaseOrderLineResourceList PurchaseOrderResource.getPurchaseOrderLines() {
+    public PurchaseOrderLineListResource PurchaseOrderResource.getPurchaseOrderLines() {
         return this.purchaseOrderLines;
     }
     
-    public void PurchaseOrderResource.setPurchaseOrderLines(PurchaseOrderLineResourceList purchaseOrderLines) {
+    public void PurchaseOrderResource.setPurchaseOrderLines(PurchaseOrderLineListResource purchaseOrderLines) {
         this.purchaseOrderLines = purchaseOrderLines;
     }
     

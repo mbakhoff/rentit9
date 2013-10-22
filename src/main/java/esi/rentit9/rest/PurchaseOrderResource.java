@@ -14,6 +14,6 @@ public class PurchaseOrderResource extends ExtendedResourceSupport {
     private String buildit;
 	private String siteAddress;
 	private OrderStatus status;
-    private PurchaseOrderLineResourceList purchaseOrderLines;
+    private PurchaseOrderLineListResource purchaseOrderLines;
 
 }

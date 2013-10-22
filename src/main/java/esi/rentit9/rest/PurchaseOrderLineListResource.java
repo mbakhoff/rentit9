@@ -2,18 +2,16 @@ package esi.rentit9.rest;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @XmlRootElement(name = "orderlines")
-public class PurchaseOrderLineResourceList {
+public class PurchaseOrderLineListResource {
 
 	@XmlElement(name = "line")
 	public Set<PurchaseOrderLineResource> purchaseOrders;
 
-	public PurchaseOrderLineResourceList() {
+	public PurchaseOrderLineListResource() {
 		this.purchaseOrders = new HashSet<PurchaseOrderLineResource>();
 	}
 

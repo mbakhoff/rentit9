@@ -3,7 +3,6 @@ package esi.rentit9.rest;
 import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrderLine;
 
-import java.util.List;
 import java.util.Set;
 
 public class PurchaseOrderLineAssembler {
@@ -25,8 +24,8 @@ public class PurchaseOrderLineAssembler {
 		return null;
 	}
 
-	public PurchaseOrderLineResourceList toResource(Set<PurchaseOrderLine> lines) {
-		PurchaseOrderLineResourceList all = new PurchaseOrderLineResourceList();
+	public PurchaseOrderLineListResource toResource(Set<PurchaseOrderLine> lines) {
+		PurchaseOrderLineListResource all = new PurchaseOrderLineListResource();
 		for (PurchaseOrderLine line : lines) {
 			all.purchaseOrders.add(toResource(line));
 		}
