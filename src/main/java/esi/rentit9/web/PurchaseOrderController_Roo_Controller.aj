@@ -6,6 +6,7 @@ package esi.rentit9.web;
 import esi.rentit9.domain.BuildIt;
 import esi.rentit9.domain.OrderStatus;
 import esi.rentit9.domain.PurchaseOrder;
+import esi.rentit9.domain.PurchaseOrderLine;
 import esi.rentit9.web.PurchaseOrderController;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -91,6 +92,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         uiModel.addAttribute("purchaseOrder", purchaseOrder);
         uiModel.addAttribute("buildits", BuildIt.findAllBuildIts());
         uiModel.addAttribute("orderstatuses", Arrays.asList(OrderStatus.values()));
+        uiModel.addAttribute("purchaseorderlines", PurchaseOrderLine.findAllPurchaseOrderLines());
     }
     
     String PurchaseOrderController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

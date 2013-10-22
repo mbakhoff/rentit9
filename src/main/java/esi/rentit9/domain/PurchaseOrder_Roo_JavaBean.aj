@@ -6,6 +6,8 @@ package esi.rentit9.domain;
 import esi.rentit9.domain.BuildIt;
 import esi.rentit9.domain.OrderStatus;
 import esi.rentit9.domain.PurchaseOrder;
+import esi.rentit9.domain.PurchaseOrderLine;
+import java.util.Set;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
     
@@ -31,6 +33,14 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public void PurchaseOrder.setSiteAddress(String siteAddress) {
         this.siteAddress = siteAddress;
+    }
+    
+    public Set<PurchaseOrderLine> PurchaseOrder.getLines() {
+        return this.lines;
+    }
+    
+    public void PurchaseOrder.setLines(Set<PurchaseOrderLine> lines) {
+        this.lines = lines;
     }
     
 }

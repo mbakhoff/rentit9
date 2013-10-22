@@ -6,6 +6,7 @@
         <field:select field="buildit" id="c_esi_rentit9_domain_PurchaseOrder_buildit" itemValue="id" items="${buildits}" path="/buildits" z="5o6Zh4FrTadw3LknaaNSS2jRubY="/>
         <field:input field="siteAddress" id="c_esi_rentit9_domain_PurchaseOrder_siteAddress" z="vfJl50AevI4OWZKuvLs15tGSFgg="/>
         <field:select field="status" id="c_esi_rentit9_domain_PurchaseOrder_status" items="${orderstatuses}" path="orderstatuses" z="gmVZQfYrKE5ONeZb1JU1yPc9yqI="/>
+        <field:simple field="lines" id="c_esi_rentit9_domain_PurchaseOrder_lines" messageCode="entity_reference_not_managed" messageCodeAttribute="Purchase Order Line" z="PYjNYaFR0oxAgjjyBCCY71Sdcu0="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_rentit9_domain_PurchaseOrder" render="${not empty dependencies}" z="WlZi86GtJGOVlUMr1eSkHjBD+Uk="/>
 </div>
