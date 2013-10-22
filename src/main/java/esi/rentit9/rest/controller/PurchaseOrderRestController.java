@@ -26,11 +26,11 @@ import java.util.List;
 @RequestMapping("/rest/")
 public class PurchaseOrderRestController {
 
-    private static final int METHOD_GET_ALL = 1;
-    private static final int METHOD_CREATE_ORDER = 2;
-    private static final int METHOD_GET_BY_ID = 3;
-    private static final int METHOD_DELETE_BY_ID = 4;
-    private static final int METHOD_MODIFY_ORDER = 5;
+    public static final int METHOD_GET_ALL = 1;
+    public static final int METHOD_CREATE_ORDER = 2;
+    public static final int METHOD_GET_BY_ID = 3;
+    public static final int METHOD_DELETE_BY_ID = 4;
+    public static final int METHOD_MODIFY_ORDER = 5;
 
     private final PurchaseOrderResourceAssembler assembler;
     private final MethodLookupHelper linker;
