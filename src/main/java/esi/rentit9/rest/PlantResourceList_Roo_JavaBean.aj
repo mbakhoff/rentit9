@@ -3,6 +3,8 @@
 
 package esi.rentit9.rest;
 
+import esi.rentit9.rest.PlantResource;
+import esi.rentit9.rest.PlantResourceList;
 import java.util.List;
 
 privileged aspect PlantResourceList_Roo_JavaBean {
