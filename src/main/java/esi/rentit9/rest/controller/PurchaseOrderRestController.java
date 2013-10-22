@@ -5,6 +5,8 @@ import esi.rentit9.rest.PurchaseOrderLineResource;
 import esi.rentit9.rest.PurchaseOrderLineResourceList;
 import esi.rentit9.rest.PurchaseOrderResource;
 import esi.rentit9.rest.PurchaseOrderResourceAssembler;
+import esi.rentit9.rest.util.MethodLookup;
+import esi.rentit9.rest.util.MethodLookupHelper;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,16 +23,25 @@ import java.net.URI;
 import java.util.List;
 
 @Controller
-@RequestMapping("/rest")
+@RequestMapping("/rest/")
 public class PurchaseOrderRestController {
 
-	private PurchaseOrderResourceAssembler assembler;
+    private static final int METHOD_GET_ALL = 1;
+    private static final int METHOD_CREATE_ORDER = 2;
+    private static final int METHOD_GET_BY_ID = 3;
+    private static final int METHOD_DELETE_BY_ID = 4;
+    private static final int METHOD_MODIFY_ORDER = 5;
+
+    private final PurchaseOrderResourceAssembler assembler;
+    private final MethodLookupHelper linker;
 
 	public PurchaseOrderRestController() {
 		assembler = new PurchaseOrderResourceAssembler();
+        linker = new MethodLookupHelper(PurchaseOrderRestController.class);
 	}
 
 	@RequestMapping("pos")
+    @MethodLookup(METHOD_GET_ALL)
 	public ResponseEntity<PurchaseOrderResourceList> getAll() {
 		List<PurchaseOrder> orders = PurchaseOrder.findAllPurchaseOrders();
 		List<PurchaseOrderResource> resources = assembler.toResource(orders);
@@ -39,6 +50,7 @@ public class PurchaseOrderRestController {
 	}
 
 	@RequestMapping(value = "pos", method = RequestMethod.POST)
+    @MethodLookup(METHOD_CREATE_ORDER)
 	public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
 		PurchaseOrder order = new PurchaseOrder();
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
@@ -57,14 +69,18 @@ public class PurchaseOrderRestController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping("po/{id}")
+	@RequestMapping("pos/{id}")
+    @MethodLookup(METHOD_GET_BY_ID)
 	public ResponseEntity<PurchaseOrderResource> getById(@PathVariable Long id) {
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
 		PurchaseOrderResource resources = assembler.toResource(order);
+        resources.add(linker.buildLink(METHOD_DELETE_BY_ID, order.getId()));
+        resources.add(linker.buildLink(METHOD_MODIFY_ORDER, order.getId()));
 		return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "po/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "pos/{id}", method = RequestMethod.DELETE)
+    @MethodLookup(METHOD_DELETE_BY_ID)
 	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
 		order.setStatus(OrderStatus.Cancelled);
@@ -72,7 +88,8 @@ public class PurchaseOrderRestController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "po/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "pos/{id}", method = RequestMethod.PUT)
+    @MethodLookup(METHOD_MODIFY_ORDER)
 	public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));

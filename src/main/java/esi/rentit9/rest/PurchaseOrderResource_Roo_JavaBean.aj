@@ -9,12 +9,12 @@ import esi.rentit9.rest.PurchaseOrderResource;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
-    public Long PurchaseOrderResource.getId() {
-        return this.id;
+    public Long PurchaseOrderResource.getInternalId() {
+        return this.internalId;
     }
     
-    public void PurchaseOrderResource.setId(Long id) {
-        this.id = id;
+    public void PurchaseOrderResource.setInternalId(Long internalId) {
+        this.internalId = internalId;
     }
     
     public String PurchaseOrderResource.getBuildit() {

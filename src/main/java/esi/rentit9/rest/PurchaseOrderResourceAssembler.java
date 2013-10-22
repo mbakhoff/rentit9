@@ -1,21 +1,24 @@
 package esi.rentit9.rest;
 
 import esi.rentit9.domain.PurchaseOrder;
+import esi.rentit9.rest.controller.PurchaseOrderRestController;
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseOrderResourceAssembler {
+public class PurchaseOrderResourceAssembler extends ResourceAssemblerSupport<PurchaseOrder, PurchaseOrderResource> {
 
 	private PurchaseOrderLineAssembler lineAssembler;
 
 	public PurchaseOrderResourceAssembler() {
-		lineAssembler = new PurchaseOrderLineAssembler();
+        super(PurchaseOrderRestController.class, PurchaseOrderResource.class);
+        lineAssembler = new PurchaseOrderLineAssembler();
 	}
 
 	public PurchaseOrderResource toResource(PurchaseOrder order) {
-		PurchaseOrderResource res = new PurchaseOrderResource();
-		res.setId(order.getId());
+		PurchaseOrderResource res = createResourceWithId(order.getId(), order);
+		res.setInternalId(order.getId());
 		res.setBuildit(order.getBuildit().getUrl());
 		res.setSiteAddress(order.getSiteAddress());
 		res.setStatus(order.getStatus());
