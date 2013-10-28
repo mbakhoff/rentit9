@@ -14,8 +14,8 @@ public class PlantAssembler {
         return res;
     }
 
-    public PlantListResource toResource(List<Plant> plants) {
-        PlantListResource list = new PlantListResource();
+    public PlantResourceList toResource(List<Plant> plants) {
+        PlantResourceList list = new PlantResourceList();
 
         for (Plant p : plants) {
             list.plants.add(toResource(p));

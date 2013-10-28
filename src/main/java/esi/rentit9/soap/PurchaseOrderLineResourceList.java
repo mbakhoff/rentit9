@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @XmlRootElement(name = "purchaseorderlines")
-public class PurchaseOrderLineListResource {
+public class PurchaseOrderLineResourceList {
 
     @XmlElement(name = "purchaseorderline")
     public Set<PurchaseOrderLineResource> purchaseOrderLines;
 
-    public PurchaseOrderLineListResource() {
+    public PurchaseOrderLineResourceList() {
         purchaseOrderLines = new HashSet<PurchaseOrderLineResource>();
     }
 }

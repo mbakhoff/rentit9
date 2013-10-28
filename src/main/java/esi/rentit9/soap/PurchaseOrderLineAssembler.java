@@ -24,8 +24,8 @@ public class PurchaseOrderLineAssembler {
         return null;
     }
 
-    public PurchaseOrderLineListResource toResource(Set<PurchaseOrderLine> lines) {
-        PurchaseOrderLineListResource all = new PurchaseOrderLineListResource();
+    public PurchaseOrderLineResourceList toResource(Set<PurchaseOrderLine> lines) {
+        PurchaseOrderLineResourceList all = new PurchaseOrderLineResourceList();
         for (PurchaseOrderLine line : lines) {
             all.purchaseOrderLines.add(toResource(line));
         }

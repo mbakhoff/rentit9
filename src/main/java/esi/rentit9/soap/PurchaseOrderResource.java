@@ -12,5 +12,5 @@ public class PurchaseOrderResource {
     private String buildit;
     private String siteAddress;
     private OrderStatus status;
-    private PurchaseOrderLineListResource purchaseOrderLines;
+    private PurchaseOrderLineResourceList purchaseOrderLines;
 }

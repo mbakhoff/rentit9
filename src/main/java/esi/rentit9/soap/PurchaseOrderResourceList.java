@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement(name="purchaseorders")
-public class PurchaseOrderListResource {
+public class PurchaseOrderResourceList {
 
     @XmlElement(name="purchaseorder")
     public List<PurchaseOrderResource> purchaseOrders;
 
-    public PurchaseOrderListResource() {
+    public PurchaseOrderResourceList() {
         this.purchaseOrders = new ArrayList<PurchaseOrderResource>();
     }
 }
