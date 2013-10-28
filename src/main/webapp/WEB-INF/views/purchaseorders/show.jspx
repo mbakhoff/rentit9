@@ -6,5 +6,6 @@
         <field:display field="buildit" id="s_esi_rentit9_domain_PurchaseOrder_buildit" object="${purchaseorder}" z="g54rNfxh3FNc9dVeMXCWFXRgTUU="/>
         <field:display field="siteAddress" id="s_esi_rentit9_domain_PurchaseOrder_siteAddress" object="${purchaseorder}" z="4qJPyU7fN+69f7wEpBlHe8I96Rg="/>
         <field:display field="status" id="s_esi_rentit9_domain_PurchaseOrder_status" object="${purchaseorder}" z="6utDBsdH11L335cSF6tKJZMR+XE="/>
+        <field:display field="senderSideId" id="s_esi_rentit9_domain_PurchaseOrder_senderSideId" object="${purchaseorder}" z="zuBGAOncBdSkv6pfu+4opR0Ci7E="/>
     </page:show>
 </div>

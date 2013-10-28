@@ -1,5 +1,6 @@
 package esi.rentit9.soap;
 
+import esi.rentit9.domain.BuildIt;
 import esi.rentit9.domain.PurchaseOrder;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class PurchaseOrderAssembler {
 
     public PurchaseOrderResource toResource(PurchaseOrder order) {
         PurchaseOrderResource res = new PurchaseOrderResource();
-        res.setId(order.getId());
+        res.setInternalId(order.getId());
         res.setBuildit(order.getBuildit().getUrl());
         res.setSiteAddress(order.getSiteAddress());
         res.setStatus(order.getStatus());
@@ -28,5 +29,16 @@ public class PurchaseOrderAssembler {
             all.add(toResource(order));
         }
         return all;
+    }
+
+    public PurchaseOrder fromResource(PurchaseOrder purchaseOrder,PurchaseOrderResource orderResource){
+        purchaseOrder.setBuildit(BuildIt.getByUrl(orderResource.getBuildit()));
+        purchaseOrder.setSiteAddress(orderResource.getSiteAddress());
+        purchaseOrder.setStatus(orderResource.getStatus());
+        purchaseOrder.setSenderSideId(orderResource.getSenderSideId());
+
+        purchaseOrder.setLines(lineAssembler.fromResource(purchaseOrder,orderResource.getPurchaseOrderLines()));
+
+        return purchaseOrder;
     }
 }

@@ -35,6 +35,14 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.siteAddress = siteAddress;
     }
     
+    public String PurchaseOrder.getSenderSideId() {
+        return this.senderSideId;
+    }
+    
+    public void PurchaseOrder.setSenderSideId(String senderSideId) {
+        this.senderSideId = senderSideId;
+    }
+    
     public Set<PurchaseOrderLine> PurchaseOrder.getLines() {
         return this.lines;
     }

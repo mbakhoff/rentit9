@@ -7,5 +7,6 @@
         <field:input field="siteAddress" id="c_esi_rentit9_domain_PurchaseOrder_siteAddress" z="vfJl50AevI4OWZKuvLs15tGSFgg="/>
         <field:select field="status" id="c_esi_rentit9_domain_PurchaseOrder_status" items="${orderstatuses}" path="orderstatuses" z="gmVZQfYrKE5ONeZb1JU1yPc9yqI="/>
         <field:simple field="lines" id="c_esi_rentit9_domain_PurchaseOrder_lines" messageCode="entity_reference_not_managed" messageCodeAttribute="Purchase Order Line" z="PYjNYaFR0oxAgjjyBCCY71Sdcu0="/>
+        <field:input field="senderSideId" id="c_esi_rentit9_domain_PurchaseOrder_senderSideId" z="nR5mJsOP2cb0ETDwbcSFnLvXZIU="/>
     </form:update>
 </div>

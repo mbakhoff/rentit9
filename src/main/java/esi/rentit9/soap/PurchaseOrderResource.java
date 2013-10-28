@@ -8,7 +8,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @RooJavaBean
 @XmlRootElement(name="purchaseorder")
 public class PurchaseOrderResource {
-    private Long id;
+    private Long internalId;
+    private String senderSideId;
     private String buildit;
     private String siteAddress;
     private OrderStatus status;

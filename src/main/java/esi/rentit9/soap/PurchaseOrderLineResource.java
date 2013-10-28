@@ -12,4 +12,5 @@ public class PurchaseOrderLineResource {
     private Calendar startDate;
     private Calendar endDate;
     private float totalPrice;
+
 }

@@ -33,6 +33,9 @@ public class PurchaseOrder {
      */
     private String siteAddress;
 
+
+    private String senderSideId;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
     private Set<PurchaseOrderLine> lines;
 

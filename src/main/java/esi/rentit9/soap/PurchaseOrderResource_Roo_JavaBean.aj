@@ -9,12 +9,20 @@ import esi.rentit9.soap.PurchaseOrderResource;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
-    public Long PurchaseOrderResource.getId() {
-        return this.id;
+    public Long PurchaseOrderResource.getInternalId() {
+        return this.internalId;
     }
     
-    public void PurchaseOrderResource.setId(Long id) {
-        this.id = id;
+    public void PurchaseOrderResource.setInternalId(Long internalId) {
+        this.internalId = internalId;
+    }
+    
+    public String PurchaseOrderResource.getSenderSideId() {
+        return this.senderSideId;
+    }
+    
+    public void PurchaseOrderResource.setSenderSideId(String senderSideId) {
+        this.senderSideId = senderSideId;
     }
     
     public String PurchaseOrderResource.getBuildit() {
