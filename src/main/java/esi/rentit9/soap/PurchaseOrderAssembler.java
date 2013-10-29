@@ -32,14 +32,12 @@ public class PurchaseOrderAssembler {
         return all;
     }
 
-    public PurchaseOrder fromResource(PurchaseOrder purchaseOrder,PurchaseOrderResource orderResource){
+    public PurchaseOrder fromResource(PurchaseOrder purchaseOrder, PurchaseOrderResource orderResource) {
         purchaseOrder.setBuildit(getOrCreateBuildit(orderResource.getBuildit()));
         purchaseOrder.setSiteAddress(orderResource.getSiteAddress());
         purchaseOrder.setStatus(orderResource.getStatus());
         purchaseOrder.setSenderSideId(orderResource.getSenderSideId());
-
-        purchaseOrder.setLines(lineAssembler.fromResource(purchaseOrder,orderResource.getPurchaseOrderLines()));
-
+        purchaseOrder.setLines(lineAssembler.fromResource(purchaseOrder, orderResource.getPurchaseOrderLines()));
         return purchaseOrder;
     }
 

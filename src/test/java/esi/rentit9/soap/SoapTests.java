@@ -1,15 +1,15 @@
 package esi.rentit9.soap;
 
 import esi.rentit9.domain.OrderStatus;
-import esi.rentit9.rest.PurchaseOrderLineListResource;
 import esi.rentit9.soap.web.PlantSoapService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext-*.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,8 +34,8 @@ public class SoapTests {
         line.setStartDate(startDate);
         line.setEndDate(endDate);
 
-        PurchaseOrderLineResourceList purchaseOrderLineResourceList = new PurchaseOrderLineResourceList();
-        purchaseOrderLineResourceList.purchaseOrderLines.add(line);
+        List<PurchaseOrderLineResource> purchaseOrderLineResourceList = new ArrayList<PurchaseOrderLineResource>();
+        purchaseOrderLineResourceList.add(line);
         //resource.setPurchaseOrderLines(purchaseOrderLineResourceList);
 
         PurchaseOrderResource result = plantSoapService.createPurchaseOrder(resource);

@@ -2,9 +2,11 @@ package esi.rentit9.soap;
 
 import esi.rentit9.domain.Plant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlantAssembler {
+
     public PlantResource toResource(Plant plant) {
         PlantResource res = new PlantResource();
         res.setId(plant.getId());
@@ -14,14 +16,11 @@ public class PlantAssembler {
         return res;
     }
 
-    public PlantResourceList toResource(List<Plant> plants) {
-        PlantResourceList list = new PlantResourceList();
-
+    public List<PlantResource> toResource(List<Plant> plants) {
+        List<PlantResource> list = new ArrayList<PlantResource>();
         for (Plant p : plants) {
-            list.plants.add(toResource(p));
-
+            list.add(toResource(p));
         }
-
         return list;
     }
 }

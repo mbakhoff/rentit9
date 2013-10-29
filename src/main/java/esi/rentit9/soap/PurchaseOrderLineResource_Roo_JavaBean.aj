@@ -3,7 +3,6 @@
 
 package esi.rentit9.soap;
 
-import esi.rentit9.soap.PurchaseOrderLineResource;
 import java.util.Calendar;
 
 privileged aspect PurchaseOrderLineResource_Roo_JavaBean {
@@ -32,11 +31,11 @@ privileged aspect PurchaseOrderLineResource_Roo_JavaBean {
         this.endDate = endDate;
     }
     
-    public float PurchaseOrderLineResource.getTotalPrice() {
+    public Float PurchaseOrderLineResource.getTotalPrice() {
         return this.totalPrice;
     }
     
-    public void PurchaseOrderLineResource.setTotalPrice(float totalPrice) {
+    public void PurchaseOrderLineResource.setTotalPrice(Float totalPrice) {
         this.totalPrice = totalPrice;
     }
     
