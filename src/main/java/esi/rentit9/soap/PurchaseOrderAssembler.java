@@ -2,6 +2,7 @@ package esi.rentit9.soap;
 
 import esi.rentit9.domain.BuildIt;
 import esi.rentit9.domain.PurchaseOrder;
+import org.springframework.dao.DataRetrievalFailureException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class PurchaseOrderAssembler {
     }
 
     public PurchaseOrder fromResource(PurchaseOrder purchaseOrder,PurchaseOrderResource orderResource){
-        purchaseOrder.setBuildit(BuildIt.getByUrl(orderResource.getBuildit()));
+        purchaseOrder.setBuildit(getOrCreateBuildit(orderResource.getBuildit()));
         purchaseOrder.setSiteAddress(orderResource.getSiteAddress());
         purchaseOrder.setStatus(orderResource.getStatus());
         purchaseOrder.setSenderSideId(orderResource.getSenderSideId());
@@ -40,5 +41,16 @@ public class PurchaseOrderAssembler {
         purchaseOrder.setLines(lineAssembler.fromResource(purchaseOrder,orderResource.getPurchaseOrderLines()));
 
         return purchaseOrder;
+    }
+
+    private BuildIt getOrCreateBuildit(String buildit) {
+        try {
+            return BuildIt.getByUrl(buildit);
+        } catch (DataRetrievalFailureException ex) {
+            BuildIt buildIt = new BuildIt();
+            buildIt.setUrl(buildit);
+            buildIt.persist();
+            return buildIt;
+        }
     }
 }
