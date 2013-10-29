@@ -23,7 +23,7 @@ public class SoapTests {
         PurchaseOrderResource resource=new PurchaseOrderResource();
         resource.setBuildit("Test");
         resource.setSiteAddress("Test");
-        resource.setStatus(OrderStatus.Created);
+        resource.setStatus(OrderStatus.CREATED);
 
         PurchaseOrderLineResource line = new PurchaseOrderLineResource();
         Calendar startDate = Calendar.getInstance();
