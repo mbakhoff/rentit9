@@ -9,6 +9,7 @@ public interface BuilditInterop {
 
     public static interface Rest {
         void sendAccept(PurchaseOrder order);
+        void sendReject(PurchaseOrder order);
     }
 
     public static interface Soap {

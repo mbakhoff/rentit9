@@ -27,6 +27,18 @@ public class Team9Rest implements BuilditInterop.Rest {
         }
     }
 
+    @Override
+    public void sendReject(PurchaseOrder order) {
+        ClientResponse createRequest = Client.create()
+                .resource(getConfirmUrl(order))
+                .delete(ClientResponse.class);
+
+        int status = createRequest.getStatus();
+        if (status != ClientResponse.Status.OK.getStatusCode()) {
+            throw new InteropException();
+        }
+    }
+
     private static String getConfirmUrl(PurchaseOrder order) {
         return String.format("%s/%d/confirm", BUILDIT_POS, order.getId());
     }
