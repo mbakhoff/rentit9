@@ -4,10 +4,7 @@
 package esi.rentit9.web;
 
 import esi.rentit9.domain.BuildIt;
-import esi.rentit9.web.BuildItController;
-import java.io.UnsupportedEncodingException;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import esi.rentit9.interop.InteropImplementation;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 privileged aspect BuildItController_Roo_Controller {
     
@@ -86,6 +88,7 @@ privileged aspect BuildItController_Roo_Controller {
     
     void BuildItController.populateEditForm(Model uiModel, BuildIt buildIt) {
         uiModel.addAttribute("buildIt", buildIt);
+        uiModel.addAttribute("interopimplementations", Arrays.asList(InteropImplementation.values()));
     }
     
     String BuildItController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

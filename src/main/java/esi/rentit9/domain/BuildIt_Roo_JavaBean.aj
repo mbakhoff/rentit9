@@ -3,7 +3,7 @@
 
 package esi.rentit9.domain;
 
-import esi.rentit9.domain.BuildIt;
+import esi.rentit9.interop.InteropImplementation;
 
 privileged aspect BuildIt_Roo_JavaBean {
     
@@ -21,6 +21,14 @@ privileged aspect BuildIt_Roo_JavaBean {
     
     public void BuildIt.setUrl(String url) {
         this.url = url;
+    }
+    
+    public InteropImplementation BuildIt.getProvider() {
+        return this.provider;
+    }
+    
+    public void BuildIt.setProvider(InteropImplementation provider) {
+        this.provider = provider;
     }
     
 }

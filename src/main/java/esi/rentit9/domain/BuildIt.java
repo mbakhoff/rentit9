@@ -1,4 +1,5 @@
 package esi.rentit9.domain;
+import esi.rentit9.interop.InteropImplementation;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -19,6 +20,8 @@ public class BuildIt {
     /**
      */
     private String url;
+
+    private InteropImplementation provider;
 
     public static BuildIt getByUrl(String url) {
         TypedQuery<BuildIt> query = entityManager().createQuery(QUERY_BY_URL, BuildIt.class);
