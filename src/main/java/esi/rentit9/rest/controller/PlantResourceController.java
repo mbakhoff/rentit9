@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -31,6 +32,13 @@ public class PlantResourceController {
 				new ResponseEntity<PlantResourceList>(assembler.toResource(plants), HttpStatus.OK);
 		return response;
 	}
+
+    @RequestMapping(value="plants/find?name={name}&startDate={start}&endDate={end}", method = RequestMethod.GET)
+    public ResponseEntity<PlantResourceList> getInTimerange(@PathVariable String name, @PathVariable Calendar start, @PathVariable Calendar end) {
+        List<Plant> plants = Plant.getPlantsBetween(name, start, end);
+        PlantResourceList resources = assembler.toResource(plants);
+        return new ResponseEntity<PlantResourceList>(resources, HttpStatus.OK);
+    }
 
 	@RequestMapping(value = "plants", method = RequestMethod.POST)
 	public ResponseEntity<Void> createPlantResource(@RequestBody PlantResource res) {
