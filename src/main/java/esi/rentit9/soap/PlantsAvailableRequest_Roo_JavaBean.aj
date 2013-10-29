@@ -3,6 +3,7 @@
 
 package esi.rentit9.soap;
 
+import esi.rentit9.soap.PlantsAvailableRequest;
 import java.util.Calendar;
 
 privileged aspect PlantsAvailableRequest_Roo_JavaBean {

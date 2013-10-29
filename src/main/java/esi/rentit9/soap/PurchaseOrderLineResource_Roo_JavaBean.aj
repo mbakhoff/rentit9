@@ -3,6 +3,7 @@
 
 package esi.rentit9.soap;
 
+import esi.rentit9.soap.PurchaseOrderLineResource;
 import java.util.Calendar;
 
 privileged aspect PurchaseOrderLineResource_Roo_JavaBean {

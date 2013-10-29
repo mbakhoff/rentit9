@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 public class PlantResourceTest {
 
 	public static final String URL_PLANTS = "https://rentit9.herokuapp.com/rest/plants";
-    private final DateTimeFormatter fmt = ISODateTimeFormat.yearMonthDay();;
+    private final DateTimeFormatter fmt = ISODateTimeFormat.yearMonthDay();
 
     @Test
 	public void testGetPlants() throws Exception {
