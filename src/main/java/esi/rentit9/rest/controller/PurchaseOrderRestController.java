@@ -58,7 +58,7 @@ public class PurchaseOrderRestController {
 		PurchaseOrder order = new PurchaseOrder();
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
 		order.setSiteAddress(res.getSiteAddress());
-		order.setStatus(OrderStatus.Created);
+		order.setStatus(OrderStatus.CREATED);
 		order.persist();
 
 		attachLines(order, res.getPurchaseOrderLines());
@@ -86,7 +86,7 @@ public class PurchaseOrderRestController {
     @MethodLookup(METHOD_DELETE_BY_ID)
 	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
-		order.setStatus(OrderStatus.Cancelled);
+		order.setStatus(OrderStatus.CANCELLED);
 		order.persist();
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

@@ -36,7 +36,7 @@ public class Plant {
         query.setParameter("name", '%'+nameLike+'%');
         query.setParameter("start", startDate);
         query.setParameter("end", endDate);
-        query.setParameter("postatus", OrderStatus.Approved);
+        query.setParameter("postatus", OrderStatus.APPROVED);
         return query.getResultList();
     }
 }

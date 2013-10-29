@@ -58,7 +58,7 @@ public class PlantTests {
 
     private static void createApprovedOrder(Plant derp, Calendar orderStart, Calendar orderEnd) {
         PurchaseOrder order = new PurchaseOrder();
-        order.setStatus(OrderStatus.Approved);
+        order.setStatus(OrderStatus.APPROVED);
         order.persist();
 
         PurchaseOrderLine line = new PurchaseOrderLine();
