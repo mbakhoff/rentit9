@@ -14,7 +14,7 @@ public class RemittanceAdviceResourceAssembler {
 
 	public RemittanaceAdviceResource toResource(RemittanceAdvice rem) {
 		RemittanaceAdviceResource res = new RemittanaceAdviceResource();
-		res.setInvoice(rem.getInvoice());
+		res.setInvoiceId(rem.getInvoice().getId());
 		res.setPayDay(rem.getPayDay());
 		return res;
 	}

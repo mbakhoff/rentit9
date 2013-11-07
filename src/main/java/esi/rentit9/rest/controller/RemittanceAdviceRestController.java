@@ -1,12 +1,11 @@
 package esi.rentit9.rest.controller;
 
+import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.RemittanceAdvice;
-import esi.rentit9.rest.PurchaseOrderResourceAssembler;
 import esi.rentit9.rest.RemittanaceAdviceResource;
 import esi.rentit9.rest.RemittanceAdviceResourceAssembler;
 import esi.rentit9.rest.util.MethodLookup;
 import esi.rentit9.rest.util.MethodLookupHelper;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +40,13 @@ public class RemittanceAdviceRestController {
     @RequestMapping(value = "ra", method = RequestMethod.POST)
     @MethodLookup(METHOD_CREATE_RA)
 	public ResponseEntity<Void> createRemittance(@RequestBody RemittanaceAdviceResource res) {
+        Invoice invoice = Invoice.findInvoice(res.getInvoiceId());
+        if (invoice == null) {
+            throw new IllegalArgumentException("invoice " + res.getInvoiceId() + " was not found");
+        }
+
 		RemittanceAdvice remittanceAdvice = new RemittanceAdvice();
-		remittanceAdvice.setInvoice(res.getInvoice());
+		remittanceAdvice.setInvoice(invoice);
 		remittanceAdvice.setPayDay(res.getPayDay());
 		remittanceAdvice.persist();
 
