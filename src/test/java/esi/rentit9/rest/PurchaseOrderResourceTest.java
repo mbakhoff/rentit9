@@ -7,31 +7,31 @@ import esi.rentit9.rest.controller.PurchaseOrderRestController.PurchaseOrderReso
 import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
-import java.util.Calendar;
 import java.util.List;
 
+import static esi.rentit9.rest.Common.withBasicAuth;
 import static org.junit.Assert.assertTrue;
 
 
 public class PurchaseOrderResourceTest {
 
-	// curl -v -X POST -d @sample.xml -H "Content-Type: application/xml" http://localhost:8080/rest/pos
+    private final Client client;
 
-	public static final String URL_POS = "https://rentit9.herokuapp.com/rest/pos";
+    public PurchaseOrderResourceTest() {
+        client = withBasicAuth(Client.create());
+    }
 
     @Test
 	public void testGetAllOrders() throws Exception {
-		Client client = Client.create();
-		WebResource webResource = client.resource(URL_POS);
+		WebResource webResource = client.resource(Common.URL_POS);
 		PurchaseOrderResourceList purchaseOrder = webResource.get(PurchaseOrderResourceList.class);
 		assertTrue(purchaseOrder != null);
 	}
 
 	@Test
 	public void testPostOrder() throws Exception {
-		PurchaseOrderResource po = createDummyOrder();
-		Client client = Client.create();
-		WebResource webResource = client.resource(URL_POS);
+		PurchaseOrderResource po = Common.createDummyOrder();
+        WebResource webResource = client.resource(Common.URL_POS);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
 		assertTrue(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode());
@@ -39,17 +39,16 @@ public class PurchaseOrderResourceTest {
 	
 	@Test
 	public void testModifyPostOrder() throws Exception {
-		PurchaseOrderResource po = createDummyOrder();
-		Client client = Client.create();
-		WebResource webResource = client.resource(URL_POS);
+		PurchaseOrderResource po = Common.createDummyOrder();
+		WebResource webResource = client.resource(Common.URL_POS);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
 		List<String> id = response.getHeaders().get("RentItId");
 		
-		PurchaseOrderResource po2 = createDummyOrder();
+		PurchaseOrderResource po2 = Common.createDummyOrder();
 		po2.setSiteAddress("NewModifiedDerpland 404");
 		
-        String requestUrl = URL_POS +"/"+id.get(0);
+        String requestUrl = Common.URL_POS +"/"+id.get(0);
         webResource = client.resource(requestUrl);
         ClientResponse response2 = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).put(ClientResponse.class, po2);
@@ -59,41 +58,17 @@ public class PurchaseOrderResourceTest {
 	
 	@Test
 	public void testCancelOrder() throws Exception {
-		PurchaseOrderResource po = createDummyOrder();
-		Client client = Client.create();
-		WebResource webResource = client.resource(URL_POS);
+		PurchaseOrderResource po = Common.createDummyOrder();
+		WebResource webResource = client.resource(Common.URL_POS);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
 		List<String> id = response.getHeaders().get("RentItId");
 		
-        String requestUrl = URL_POS +"/"+id.get(0);
+        String requestUrl = Common.URL_POS +"/"+id.get(0);
         webResource = client.resource(requestUrl);
         ClientResponse response2 = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);
 		assertTrue(response2.getStatus() == ClientResponse.Status.OK.getStatusCode());
 	}
 
-	private static PurchaseOrderResource createDummyOrder() {
-		PurchaseOrderLineResource line1 = new PurchaseOrderLineResource();
-		line1.setPlantId("1");
-		line1.setTotalPrice(100f);
-		line1.setStartDate(Calendar.getInstance());
-		line1.setEndDate(Calendar.getInstance());
-
-		PurchaseOrderLineResource line2 = new PurchaseOrderLineResource();
-		line2.setPlantId("2");
-		line2.setTotalPrice(50f);
-		line2.setStartDate(Calendar.getInstance());
-		line2.setEndDate(Calendar.getInstance());
-
-		PurchaseOrderLineListResource lines = new PurchaseOrderLineListResource();
-		lines.purchaseOrders.add(line1);
-		lines.purchaseOrders.add(line2);
-
-		PurchaseOrderResource po = new PurchaseOrderResource();
-		po.setSiteAddress("derpland 100c, nowhere");
-		po.setBuildit("builders inc.");
-		po.setPurchaseOrderLines(lines);
-		return po;
-	}
 }
