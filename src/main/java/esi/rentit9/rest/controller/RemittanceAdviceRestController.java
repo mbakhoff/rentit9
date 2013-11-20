@@ -4,6 +4,7 @@ import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.RemittanceAdvice;
 import esi.rentit9.rest.RemittanaceAdviceResource;
 import esi.rentit9.rest.RemittanceAdviceResourceAssembler;
+import esi.rentit9.rest.util.HttpHelpers;
 import esi.rentit9.rest.util.MethodLookup;
 import esi.rentit9.rest.util.MethodLookupHelper;
 import org.springframework.http.HttpHeaders;
@@ -34,7 +35,7 @@ public class RemittanceAdviceRestController {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception ex) {
         ex.printStackTrace();
-        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<String>(HttpHelpers.getStack(ex), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
     @RequestMapping(value = "ra", method = RequestMethod.POST)

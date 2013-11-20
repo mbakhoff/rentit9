@@ -4,6 +4,7 @@ import esi.rentit9.domain.Plant;
 import esi.rentit9.rest.PlantResource;
 import esi.rentit9.rest.PlantResourceAssembler;
 import esi.rentit9.rest.PlantResourceList;
+import esi.rentit9.rest.util.HttpHelpers;
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class PlantResourceController {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception ex) {
         ex.printStackTrace();
-        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<String>(HttpHelpers.getStack(ex), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 	@RequestMapping("plants")
