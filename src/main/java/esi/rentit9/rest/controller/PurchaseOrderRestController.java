@@ -1,5 +1,6 @@
 package esi.rentit9.rest.controller;
 
+import esi.rentit9.RBAC;
 import esi.rentit9.domain.*;
 import esi.rentit9.rest.PurchaseOrderLineListResource;
 import esi.rentit9.rest.PurchaseOrderLineResource;
@@ -56,6 +57,8 @@ public class PurchaseOrderRestController {
 	@RequestMapping(value = "pos", method = RequestMethod.POST)
     @MethodLookup(METHOD_CREATE_ORDER)
 	public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
+        RBAC.assertAuthority(RBAC.ROLE_CLIENT);
+
 		PurchaseOrder order = new PurchaseOrder();
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
 		order.setSiteAddress(res.getSiteAddress());
@@ -86,6 +89,8 @@ public class PurchaseOrderRestController {
 	@RequestMapping(value = "pos/{id}", method = RequestMethod.DELETE)
     @MethodLookup(METHOD_DELETE_BY_ID)
 	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        RBAC.assertAuthority(RBAC.ROLE_ADMIN);
+
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
 		order.setStatus(OrderStatus.CANCELLED);
 		order.persist();
@@ -95,6 +100,8 @@ public class PurchaseOrderRestController {
 	@RequestMapping(value = "pos/{id}", method = RequestMethod.PUT)
     @MethodLookup(METHOD_MODIFY_ORDER)
 	public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
+        RBAC.assertAuthority(RBAC.ROLE_CLIENT);
+
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
 		order.setSiteAddress(res.getSiteAddress());

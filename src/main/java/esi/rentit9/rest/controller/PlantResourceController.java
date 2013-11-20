@@ -1,5 +1,6 @@
 package esi.rentit9.rest.controller;
 
+import esi.rentit9.RBAC;
 import esi.rentit9.domain.Plant;
 import esi.rentit9.rest.PlantResource;
 import esi.rentit9.rest.PlantResourceAssembler;
@@ -58,6 +59,8 @@ public class PlantResourceController {
 
     @RequestMapping(value = "plants", method = RequestMethod.POST)
 	public ResponseEntity<Void> createPlantResource(@RequestBody PlantResource res) {
+        RBAC.assertAuthority(RBAC.ROLE_ADMIN);
+
 		Plant p = new Plant();
 		p.setDescription(res.getDescription());
 		p.setName(res.getName());
