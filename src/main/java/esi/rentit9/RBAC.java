@@ -25,7 +25,7 @@ public class RBAC {
                 return;
             }
         }
-        throw new RuntimeException("RBAC access denied. Operation requires one of " + Arrays.toString(anyOf));
+        throw new UnauthorizedAccessException("RBAC access denied. Operation requires one of " + Arrays.toString(anyOf));
     }
 
     public static Set<String> getAuthorities() {
@@ -40,6 +40,12 @@ public class RBAC {
 
     public static String getUser() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    public static class UnauthorizedAccessException extends RuntimeException {
+        public UnauthorizedAccessException(String message) {
+            super(message);
+        }
     }
 
 }
