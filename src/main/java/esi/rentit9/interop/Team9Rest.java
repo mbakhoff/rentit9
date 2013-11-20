@@ -35,7 +35,7 @@ public class Team9Rest implements BuilditInterop.Rest {
 
     private static Client getClient() {
         Client client = Client.create();
-        client.addFilter(new HTTPBasicAuthFilter("user", "user"));
+        client.addFilter(new HTTPBasicAuthFilter("rentit", "rentit"));
         return client;
     }
 
