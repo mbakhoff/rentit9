@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext-*.xml")
+@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SoapTests {
 

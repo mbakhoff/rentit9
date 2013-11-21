@@ -1,11 +1,11 @@
 package esi.rentit9.rest.controller;
 
+import esi.rentit9.RBAC;
 import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.RemittanceAdvice;
 import esi.rentit9.rest.RemittanaceAdviceResource;
-import esi.rentit9.rest.RemittanceAdviceResourceAssembler;
+import esi.rentit9.rest.util.HttpHelpers;
 import esi.rentit9.rest.util.MethodLookup;
-import esi.rentit9.rest.util.MethodLookupHelper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,25 +21,26 @@ import java.net.URI;
 @Controller
 @RequestMapping("/rest/")
 public class RemittanceAdviceRestController {
+
     public static final int METHOD_CREATE_RA = 1;
 
-    private final RemittanceAdviceResourceAssembler assembler;
-    private final MethodLookupHelper linker;
-
 	public RemittanceAdviceRestController() {
-		assembler = new RemittanceAdviceResourceAssembler();
-        linker = new MethodLookupHelper(RemittanceAdviceRestController.class);
 	}
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception ex) {
         ex.printStackTrace();
-        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        if (ex instanceof RBAC.UnauthorizedAccessException) {
+            return new ResponseEntity<String>(HttpHelpers.getStack(ex), HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<String>(HttpHelpers.getStack(ex), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
     @RequestMapping(value = "ra", method = RequestMethod.POST)
     @MethodLookup(METHOD_CREATE_RA)
 	public ResponseEntity<Void> createRemittance(@RequestBody RemittanaceAdviceResource res) {
+        RBAC.assertAuthority(RBAC.ROLE_CLIENT);
+
         Invoice invoice = Invoice.findInvoice(res.getInvoiceId());
         if (invoice == null) {
             throw new IllegalArgumentException("invoice " + res.getInvoiceId() + " was not found");

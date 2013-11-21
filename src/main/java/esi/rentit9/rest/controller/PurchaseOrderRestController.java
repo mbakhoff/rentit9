@@ -1,10 +1,12 @@
 package esi.rentit9.rest.controller;
 
+import esi.rentit9.RBAC;
 import esi.rentit9.domain.*;
 import esi.rentit9.rest.PurchaseOrderLineListResource;
 import esi.rentit9.rest.PurchaseOrderLineResource;
 import esi.rentit9.rest.PurchaseOrderResource;
 import esi.rentit9.rest.PurchaseOrderResourceAssembler;
+import esi.rentit9.rest.util.HttpHelpers;
 import esi.rentit9.rest.util.MethodLookup;
 import esi.rentit9.rest.util.MethodLookupHelper;
 import org.springframework.dao.DataRetrievalFailureException;
@@ -40,7 +42,10 @@ public class PurchaseOrderRestController {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception ex) {
         ex.printStackTrace();
-        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        if (ex instanceof RBAC.UnauthorizedAccessException) {
+            return new ResponseEntity<String>(HttpHelpers.getStack(ex), HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<String>(HttpHelpers.getStack(ex), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 	@RequestMapping("pos")
@@ -55,6 +60,8 @@ public class PurchaseOrderRestController {
 	@RequestMapping(value = "pos", method = RequestMethod.POST)
     @MethodLookup(METHOD_CREATE_ORDER)
 	public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
+        RBAC.assertAuthority(RBAC.ROLE_CLIENT);
+
 		PurchaseOrder order = new PurchaseOrder();
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
 		order.setSiteAddress(res.getSiteAddress());
@@ -85,6 +92,8 @@ public class PurchaseOrderRestController {
 	@RequestMapping(value = "pos/{id}", method = RequestMethod.DELETE)
     @MethodLookup(METHOD_DELETE_BY_ID)
 	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        RBAC.assertAuthority(RBAC.ROLE_ADMIN);
+
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
 		order.setStatus(OrderStatus.CANCELLED);
 		order.persist();
@@ -94,6 +103,8 @@ public class PurchaseOrderRestController {
 	@RequestMapping(value = "pos/{id}", method = RequestMethod.PUT)
     @MethodLookup(METHOD_MODIFY_ORDER)
 	public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
+        RBAC.assertAuthority(RBAC.ROLE_CLIENT);
+
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
 		order.setSiteAddress(res.getSiteAddress());
