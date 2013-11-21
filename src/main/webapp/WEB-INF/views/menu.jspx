@@ -24,10 +24,10 @@
         <menu:category id="c_purchaseorder" z="LdgN+Z53I4kIOyJx+mc8CFmbIuU=">
             <sec:authorize ifAllGranted="ROLE_ADMIN">
                 <menu:item id="i_purchaseorder_new" messageCode="global_menu_new" url="/purchaseorders?form" z="user-managed"/>
-                <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/users/po?page=1&amp;size=${empty param.size ? 10 : param.size}"/>
+                <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/purchaseorders?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
             </sec:authorize>
             <sec:authorize ifAllGranted="ROLE_USER">
-                <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/users/po?page=1&amp;size=${empty param.size ? 10 : param.size}"/>
+                <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/users/po?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
             </sec:authorize>
         </menu:category>
         <menu:category id="c_buildit" z="igbwfMvX4WHm/AXg9D4bm58AsjY=">

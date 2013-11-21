@@ -7,8 +7,11 @@
         <field:select field="status" id="c_esi_rentit9_domain_PurchaseOrder_status" items="${orderstatuses}" path="orderstatuses" z="gmVZQfYrKE5ONeZb1JU1yPc9yqI="/>
         <field:display field="siteAddress" id="c_esi_rentit9_domain_PurchaseOrder_siteAddress" object="${purchaseOrder}" z="user-managed"/>
         <field:display field="senderSideId" id="c_esi_rentit9_domain_PurchaseOrder_senderSideId" object="${purchaseOrder}" z="user-managed"/>
-        <table:table create="false" data="${purchaseOrder.lines}" delete="false" id="l_esi_rentit9_domain_PurchaseOrderLine" path="/purchaseorderlines" update="false" z="c0vRfsPTNb5NraGxc3hABXG5zxU=">
-            <!--<table:column id="c_esi_rentit9_domain_PurchaseOrderLine_purchaseOrder" property="purchaseOrder" z="anDtU/LqQPnZoyMiOwyf4pGxeck="/>-->
+        <table:table create="false" data="${purchaseOrder.lines}" delete="false" id="l_esi_rentit9_domain_PurchaseOrderLine" path="/purchaseorderlines" update="false" z="user-managed">
+            <table:column id="c_esi_rentit9_domain_PurchaseOrderLine_plant" property="plant" z="user-managed"/>
+            <table:column calendar="true" dateTimePattern="${purchaseOrderLine_startdate_date_format}" id="c_esi_rentit9_domain_PurchaseOrderLine_startDate" property="startDate" z="user-managed"/>
+            <table:column calendar="true" dateTimePattern="${purchaseOrderLine_enddate_date_format}" id="c_esi_rentit9_domain_PurchaseOrderLine_endDate" property="endDate" z="user-managed"/>
+            <table:column id="c_esi_rentit9_domain_PurchaseOrderLine_total" property="total" z="user-managed"/>
         </table:table>
         <field:simple field="lines" id="c_esi_rentit9_domain_PurchaseOrder_lines" messageCode="entity_reference_not_managed" messageCodeAttribute="Purchase Order Line" z="PYjNYaFR0oxAgjjyBCCY71Sdcu0="/>
     </form:update>

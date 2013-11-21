@@ -16,16 +16,21 @@ import javax.validation.Valid;
 public class POUController {
 
 
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
+    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid PurchaseOrder purchaseOrder,
                                        BindingResult bindingResult, Model uiModel,
                                        HttpServletRequest httpServletRequest) {
+        //TODO: To do this before checking bindingResult is suspicious
+        PurchaseOrder po = PurchaseOrder.findPurchaseOrder(purchaseOrder.getId());
+
         if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, purchaseOrder);
+            populateEditForm(uiModel, po);
             return "users/po/update";
         }
-        uiModel.asMap().clear();
-        purchaseOrder.merge();
-        return "redirect:/users/po/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
+
+        po.setStatus(purchaseOrder.getStatus());
+
+        po.persist();
+        return "redirect:/users/po/" + encodeUrlPathSegment(po.getId().toString(), httpServletRequest);
     }
 }
