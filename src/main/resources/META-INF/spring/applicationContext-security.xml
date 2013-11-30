@@ -15,6 +15,7 @@
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/login/**" access="permitAll" />
         <intercept-url pattern="/**" access="isAuthenticated()" />
+        <intercept-url pattern="/purchaseorders/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/**" access="isAuthenticated()" />
         <http-basic />
     </http>
@@ -26,6 +27,7 @@
             <user-service>
                 <user name="admin" password="admin" authorities="ROLE_ADMIN" />
                 <user name="employee" password="employee" authorities="ROLE_EMPLOYEE" />
+                <user name="client" password="user" authorities="ROLE_CLIENT" />
                 <user name="buildit" password="buildit" authorities="ROLE_CLIENT" />
             </user-service>
         </authentication-provider>

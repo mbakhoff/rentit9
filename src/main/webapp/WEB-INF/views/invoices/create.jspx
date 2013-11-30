@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_esi_rentit9_domain_Invoice" modelAttribute="invoice" path="/invoices" render="${empty dependencies}" z="AJFwR/jEiRANvBL+yYpRFaFkcfs=">
-        <field:select field="purchaseOrder" id="c_esi_rentit9_domain_Invoice_purchaseOrder" itemValue="id" items="${purchaseorders}" path="/purchaseorders" z="XmE2mNUpmnY3cc1AWzK88ZCrSe8="/>
+        <field:select field="purchaseOrder" id="c_esi_rentit9_domain_Invoice_purchaseOrder" itemValue="id" items="${purchaseorders}" path="/users/po" z="eqPw4lTmff4Ywtqlw6gb3a4o7OM="/>
         <field:datetime dateTimePattern="${invoice_duedate_date_format}" field="dueDate" id="c_esi_rentit9_domain_Invoice_dueDate" z="EzypVNUym1M+NObhSOd4YTFthMc="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_rentit9_domain_Invoice" render="${not empty dependencies}" z="XDpgiA0tR6mnN43ccP/m62tnpP8="/>

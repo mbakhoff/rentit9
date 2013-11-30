@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show create="false" delete="false" id="ps_esi_rentit9_domain_PurchaseOrder" object="${purchaseorder}" path="/users/po" z="SI8G44tnBcejmrrhScINiYyVLsM=">
+        <field:display field="buildit" id="s_esi_rentit9_domain_PurchaseOrder_buildit" object="${purchaseorder}" z="g54rNfxh3FNc9dVeMXCWFXRgTUU="/>
+        <field:display field="status" id="s_esi_rentit9_domain_PurchaseOrder_status" object="${purchaseorder}" z="6utDBsdH11L335cSF6tKJZMR+XE="/>
+        <field:display field="siteAddress" id="s_esi_rentit9_domain_PurchaseOrder_siteAddress" object="${purchaseorder}" z="4qJPyU7fN+69f7wEpBlHe8I96Rg="/>
+        <field:display field="senderSideId" id="s_esi_rentit9_domain_PurchaseOrder_senderSideId" object="${purchaseorder}" z="zuBGAOncBdSkv6pfu+4opR0Ci7E="/>
+    </page:show>
+</div>
