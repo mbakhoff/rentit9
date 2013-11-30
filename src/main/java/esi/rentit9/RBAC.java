@@ -12,7 +12,7 @@ import java.util.Set;
 public class RBAC {
 
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
-    public static final String ROLE_USER = "ROLE_USER";
+    public static final String ROLE_EMPLOYEE = "ROLE_EMPLOYEE";
     public static final String ROLE_CLIENT = "ROLE_CLIENT";
 
     public static void assertAuthority(String ... anyOf) {

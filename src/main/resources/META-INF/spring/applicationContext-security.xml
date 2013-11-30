@@ -25,7 +25,7 @@
             <password-encoder hash="plaintext" />
             <user-service>
                 <user name="admin" password="admin" authorities="ROLE_ADMIN" />
-                <user name="user" password="user" authorities="ROLE_USER" />
+                <user name="employee" password="employee" authorities="ROLE_EMPLOYEE" />
                 <user name="buildit" password="buildit" authorities="ROLE_CLIENT" />
             </user-service>
         </authentication-provider>
