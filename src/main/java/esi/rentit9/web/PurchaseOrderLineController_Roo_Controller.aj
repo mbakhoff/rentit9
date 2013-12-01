@@ -3,13 +3,10 @@
 
 package esi.rentit9.web;
 
+import esi.rentit9.domain.DeliveryStatus;
 import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrder;
 import esi.rentit9.domain.PurchaseOrderLine;
-import esi.rentit9.web.PurchaseOrderLineController;
-import java.io.UnsupportedEncodingException;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
@@ -20,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 privileged aspect PurchaseOrderLineController_Roo_Controller {
     
@@ -98,6 +100,7 @@ privileged aspect PurchaseOrderLineController_Roo_Controller {
     void PurchaseOrderLineController.populateEditForm(Model uiModel, PurchaseOrderLine purchaseOrderLine) {
         uiModel.addAttribute("purchaseOrderLine", purchaseOrderLine);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("deliverystatuses", Arrays.asList(DeliveryStatus.values()));
         uiModel.addAttribute("plants", Plant.findAllPlants());
         uiModel.addAttribute("purchaseorders", PurchaseOrder.findAllPurchaseOrders());
     }

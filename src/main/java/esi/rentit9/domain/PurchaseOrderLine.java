@@ -25,6 +25,8 @@ public class PurchaseOrderLine {
     @ManyToOne
     private Plant plant;
 
+    private DeliveryStatus status;
+
     /**
      */
     @Temporal(TemporalType.TIMESTAMP)
