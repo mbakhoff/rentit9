@@ -95,9 +95,17 @@ public class PurchaseOrderRestController {
         RBAC.assertAuthority(RBAC.ROLE_ADMIN);
 
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
-		order.setStatus(OrderStatus.CANCELLED);
-		order.persist();
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		OrderStatus currentStatus = order.getStatus();
+		if (currentStatus == OrderStatus.CREATED || 
+				currentStatus == OrderStatus.APPROVED || 
+				currentStatus == OrderStatus.REJECTED){
+			order.setStatus(OrderStatus.CANCELLED);
+			order.persist();
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@RequestMapping(value = "pos/{id}", method = RequestMethod.PUT)
