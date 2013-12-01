@@ -1,9 +1,11 @@
 package esi.rentit9.domain;
 
+import org.joda.time.DateMidnight;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import java.util.Calendar;
 import java.util.List;
@@ -17,6 +19,9 @@ public class Plant {
             "FROM Plant AS plant " +
                     "WHERE plant.name LIKE :name AND " +
                     "NOT EXISTS (FROM PurchaseOrderLine AS line WHERE line.plant = plant AND line.purchaseOrder.status = :postatus AND line.endDate > :start AND line.startDate < :end)";
+
+    private static final String QUERY_ORDERS_FOR_DELIVERY =
+            "FROM PurchaseOrderLine AS line WHERE line.plant = plant AND line.purchaseOrder.status = :postatus AND line.startDate = :date";
 
     /**
      */
@@ -36,6 +41,15 @@ public class Plant {
         query.setParameter("name", '%'+nameLike+'%');
         query.setParameter("start", startDate);
         query.setParameter("end", endDate);
+        query.setParameter("postatus", OrderStatus.APPROVED);
+        return query.getResultList();
+    }
+
+    public static List<PurchaseOrderLine> getPlantsToDeliver(DateMidnight date) {
+        TypedQuery<PurchaseOrderLine> query = entityManager().createQuery(
+                QUERY_ORDERS_FOR_DELIVERY,
+                PurchaseOrderLine.class);
+        query.setParameter("date", date.toGregorianCalendar(), TemporalType.DATE);
         query.setParameter("postatus", OrderStatus.APPROVED);
         return query.getResultList();
     }

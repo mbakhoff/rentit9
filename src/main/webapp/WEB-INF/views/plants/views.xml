@@ -4,6 +4,9 @@
     <definition extends="default" name="plants/list">
         <put-attribute name="body" value="/WEB-INF/views/plants/list.jspx"/>
     </definition>
+    <definition extends="default" name="plants/deliverables">
+        <put-attribute name="body" value="/WEB-INF/views/plants/deliverables.jspx"/>
+    </definition>
 <definition extends="default" name="plants/show">
         <put-attribute name="body" value="/WEB-INF/views/plants/show.jspx"/>
     </definition>

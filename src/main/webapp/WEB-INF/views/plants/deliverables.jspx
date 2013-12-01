@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <h1>Plants to deliver at ${date}</h1>
+    <table style="padding:2em;">
+        <tr>
+            <th>Order id</th>
+            <th>Plant id</th>
+            <th>Plant name</th>
+            <th>Delivery date</th>
+        </tr>
+        <c:forEach var="deliverable" items="${plants}">
+            <tr>
+                <td>${deliverable.orderId}</td>
+                <td>${deliverable.plantId}</td>
+                <td>${deliverable.plantName}</td>
+                <td>${deliverable.deliveryDate}</td>
+            </tr>
+        </c:forEach>
+    </table>
+    <a href="?dateOffset=${prevPage}">Previous</a> -- <a href="?dateOffset=${nextPage}">Next</a>
+
+</div>

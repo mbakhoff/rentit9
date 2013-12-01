@@ -6,6 +6,7 @@
         <menu:category id="c_plant" z="HdutPA2/qByUmXrGQqzl91rhKKQ=">
             <menu:item id="i_plant_new" messageCode="global_menu_new" url="/plants?form" z="xo+pvLk6blhjqcOUBTU4TvBovxs="/>
             <menu:item id="i_plant_list" messageCode="global_menu_list" url="/plants?page=1&amp;size=${empty param.size ? 10 : param.size}" z="nVO5Nlhqho9gPDPyH2U9yITgeHo="/>
+            <menu:item id="i_plants_to_deliver" label="Plants to deliver" url="/plants/deliverables"/>
         </menu:category>
         <menu:category id="c_invoice" z="J8t31gESmLmp6i5o6ds0/j0AMNA=">
             <menu:item id="i_invoice_new" messageCode="global_menu_new" url="/invoices?form" z="QqwPSYJNNoLrSbh5ekf/V1j0eU8="/>
