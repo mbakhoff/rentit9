@@ -5,9 +5,5 @@
     <page:show id="ps_esi_rentit9_domain_PurchaseOrderLine" object="${purchaseorderline}" path="/purchaseorderlines" z="iY9unIcZusEgPRNIbAI7A8OizkQ=">
         <field:display field="purchaseOrder" id="s_esi_rentit9_domain_PurchaseOrderLine_purchaseOrder" object="${purchaseorderline}" z="/L0laEK42V4xLowIg5VpSaT6598="/>
         <field:display field="plant" id="s_esi_rentit9_domain_PurchaseOrderLine_plant" object="${purchaseorderline}" z="4+IVAp5QyIb16psc2p6mw4fJe9c="/>
-        <field:display calendar="true" dateTimePattern="${purchaseOrderLine_startdate_date_format}" field="startDate" id="s_esi_rentit9_domain_PurchaseOrderLine_startDate" object="${purchaseorderline}" z="N721MHtRP5XGEQcx8613UnhGLmE="/>
-        <field:display calendar="true" dateTimePattern="${purchaseOrderLine_enddate_date_format}" field="endDate" id="s_esi_rentit9_domain_PurchaseOrderLine_endDate" object="${purchaseorderline}" z="27ikin9RJiQk1/I6C+jLu5DMWOk="/>
-        <field:display field="total" id="s_esi_rentit9_domain_PurchaseOrderLine_total" object="${purchaseorderline}" z="azUAER5ELfLd2aBwJYur5Rkwhf4="/>
-        <field:display field="status" id="s_esi_rentit9_domain_PurchaseOrderLine_status" object="${purchaseorderline}" z="y7rsIxIwaR4HosXdDc+xjwVgpic="/>
     </page:show>
 </div>

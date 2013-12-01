@@ -59,13 +59,13 @@ public class PlantTests {
     private static void createApprovedOrder(Plant derp, Calendar orderStart, Calendar orderEnd) {
         PurchaseOrder order = new PurchaseOrder();
         order.setStatus(OrderStatus.APPROVED);
+        order.setStartDate(orderStart);
+        order.setEndDate(orderEnd);
         order.persist();
 
         PurchaseOrderLine line = new PurchaseOrderLine();
         line.setPlant(derp);
         line.setPurchaseOrder(order);
-        line.setStartDate(orderStart);
-        line.setEndDate(orderEnd);
         line.persist();
     }
 }

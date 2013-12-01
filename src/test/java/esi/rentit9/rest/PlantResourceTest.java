@@ -4,6 +4,8 @@ package esi.rentit9.rest;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import esi.rentit9.dto.PlantResource;
+import esi.rentit9.dto.PlantResourceList;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
@@ -51,7 +53,7 @@ public class PlantResourceTest {
 
         assertTrue(plants != null);
 
-        PlantResource plant = plants.getPlant().get(0);
+        PlantResource plant = plants.plants.get(0);
         String requestUrl = Common.URL_PLANTS + "/" + plant.getId();
         webResource = client.resource(requestUrl);
         PlantResource plantById = webResource.get(PlantResource.class);

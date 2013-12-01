@@ -6,10 +6,6 @@
         <table:table data="${purchaseorderlines}" id="l_esi_rentit9_domain_PurchaseOrderLine" path="/purchaseorderlines" z="c0vRfsPTNb5NraGxc3hABXG5zxU=">
             <table:column id="c_esi_rentit9_domain_PurchaseOrderLine_purchaseOrder" property="purchaseOrder" z="anDtU/LqQPnZoyMiOwyf4pGxeck="/>
             <table:column id="c_esi_rentit9_domain_PurchaseOrderLine_plant" property="plant" z="+/AReSGD8gwdh9UnCoXCDTi0yeE="/>
-            <table:column calendar="true" dateTimePattern="${purchaseOrderLine_startdate_date_format}" id="c_esi_rentit9_domain_PurchaseOrderLine_startDate" property="startDate" z="8XgVkKK4V32JB96XjwVxaacCWoA="/>
-            <table:column calendar="true" dateTimePattern="${purchaseOrderLine_enddate_date_format}" id="c_esi_rentit9_domain_PurchaseOrderLine_endDate" property="endDate" z="wz5yGwU6bVFbccqvr8fm4/2LigU="/>
-            <table:column id="c_esi_rentit9_domain_PurchaseOrderLine_total" property="total" z="ChIgMp16whJyRD0l0PPp+cRWoEw="/>
-            <table:column id="c_esi_rentit9_domain_PurchaseOrderLine_status" property="status" z="zkuKR3NXGPydwkGyCGB0k2XvD4Q="/>
         </table:table>
     </page:list>
 </div>

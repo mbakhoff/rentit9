@@ -1,4 +1,4 @@
-package esi.rentit9.rest;
+package esi.rentit9.dto;
 
 import esi.rentit9.domain.Plant;
 
@@ -16,14 +16,12 @@ public class PlantResourceAssembler {
 		return res;
 	}
 
-	public PlantResourceList toResource(List<Plant> plants) {
-		PlantResourceList list = new PlantResourceList();
-		List<PlantResource> resources = new ArrayList<PlantResource>();
-		for (Plant p : plants) {
-			resources.add(toResource(p));
-		}
-		list.setPlant(resources);
-		return list;
-	}
+    public List<PlantResource> toResource(List<Plant> plants) {
+        List<PlantResource> resources = new ArrayList<PlantResource>();
+        for (Plant plant : plants) {
+            resources.add(toResource(plant));
+        }
+        return resources;
+    }
 
 }

@@ -3,7 +3,8 @@ package esi.rentit9.rest;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import esi.rentit9.rest.controller.PurchaseOrderRestController.PurchaseOrderResourceList;
+import esi.rentit9.dto.PurchaseOrderResource;
+import esi.rentit9.dto.PurchaseOrderResourceList;
 import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;

@@ -7,6 +7,7 @@ import esi.rentit9.domain.BuildIt;
 import esi.rentit9.domain.OrderStatus;
 import esi.rentit9.domain.PurchaseOrder;
 import esi.rentit9.domain.PurchaseOrderLine;
+import java.util.Calendar;
 import java.util.Set;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
@@ -27,12 +28,36 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.status = status;
     }
     
+    public Float PurchaseOrder.getTotal() {
+        return this.total;
+    }
+    
+    public void PurchaseOrder.setTotal(Float total) {
+        this.total = total;
+    }
+    
     public String PurchaseOrder.getSiteAddress() {
         return this.siteAddress;
     }
     
     public void PurchaseOrder.setSiteAddress(String siteAddress) {
         this.siteAddress = siteAddress;
+    }
+    
+    public Calendar PurchaseOrder.getStartDate() {
+        return this.startDate;
+    }
+    
+    public void PurchaseOrder.setStartDate(Calendar startDate) {
+        this.startDate = startDate;
+    }
+    
+    public Calendar PurchaseOrder.getEndDate() {
+        return this.endDate;
+    }
+    
+    public void PurchaseOrder.setEndDate(Calendar endDate) {
+        this.endDate = endDate;
     }
     
     public String PurchaseOrder.getSenderSideId() {

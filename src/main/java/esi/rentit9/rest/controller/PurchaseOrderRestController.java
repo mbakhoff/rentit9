@@ -2,13 +2,11 @@ package esi.rentit9.rest.controller;
 
 import esi.rentit9.RBAC;
 import esi.rentit9.domain.*;
-import esi.rentit9.rest.PurchaseOrderLineListResource;
-import esi.rentit9.rest.PurchaseOrderLineResource;
-import esi.rentit9.rest.PurchaseOrderResource;
-import esi.rentit9.rest.PurchaseOrderResourceAssembler;
+import esi.rentit9.dto.PurchaseOrderResource;
+import esi.rentit9.dto.PurchaseOrderResourceAssembler;
+import esi.rentit9.dto.PurchaseOrderResourceList;
 import esi.rentit9.rest.util.HttpHelpers;
 import esi.rentit9.rest.util.MethodLookup;
-import esi.rentit9.rest.util.MethodLookupHelper;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
 import java.util.List;
 
@@ -32,11 +29,11 @@ public class PurchaseOrderRestController {
     public static final int METHOD_MODIFY_ORDER = 5;
 
     private final PurchaseOrderResourceAssembler assembler;
-    private final MethodLookupHelper linker;
+    //private final MethodLookupHelper linker;
 
 	public PurchaseOrderRestController() {
 		assembler = new PurchaseOrderResourceAssembler();
-        linker = new MethodLookupHelper(PurchaseOrderRestController.class);
+        //linker = new MethodLookupHelper(PurchaseOrderRestController.class);
 	}
 
     @ExceptionHandler(Exception.class)
@@ -66,9 +63,12 @@ public class PurchaseOrderRestController {
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
 		order.setSiteAddress(res.getSiteAddress());
 		order.setStatus(OrderStatus.CREATED);
+        order.setTotal(res.getTotal());
+        order.setStartDate(res.getStartDate());
+        order.setEndDate(res.getEndDate());
 		order.persist();
 
-		attachLines(order, res.getPurchaseOrderLines());
+		assembler.getOrderLines(order, res.getPlants());
 
 		HttpHeaders headers = new HttpHeaders();
 		URI location =
@@ -84,8 +84,8 @@ public class PurchaseOrderRestController {
 	public ResponseEntity<PurchaseOrderResource> getById(@PathVariable Long id) {
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
 		PurchaseOrderResource resources = assembler.toResource(order);
-        resources.add(linker.buildLink(METHOD_DELETE_BY_ID, order.getId()));
-        resources.add(linker.buildLink(METHOD_MODIFY_ORDER, order.getId()));
+        //resources.add(linker.buildLink(METHOD_DELETE_BY_ID, order.getId()));
+        //resources.add(linker.buildLink(METHOD_MODIFY_ORDER, order.getId()));
 		return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
 	}
 	
@@ -119,8 +119,7 @@ public class PurchaseOrderRestController {
 		order.persist();
 
 		deleteLines(order);
-
-		attachLines(order, res.getPurchaseOrderLines());
+        assembler.getOrderLines(order, res.getPlants());
 
 		HttpHeaders headers = new HttpHeaders();
 		URI location =
@@ -136,26 +135,6 @@ public class PurchaseOrderRestController {
 		}
 	}
 
-	private void attachLines(PurchaseOrder order, PurchaseOrderLineListResource purchaseOrderLines) {
-		for (PurchaseOrderLineResource res : purchaseOrderLines.purchaseOrders) {
-			attachLine(order, res);
-		}
-	}
-
-	private void attachLine(PurchaseOrder order, PurchaseOrderLineResource res) {
-		PurchaseOrderLine line = new PurchaseOrderLine();
-		line.setPlant(getPlant(res.getPlantId()));
-		line.setStartDate(res.getStartDate());
-		line.setEndDate(res.getEndDate());
-		line.setTotal(res.getTotalPrice()); // TODO: recalculate
-		line.setPurchaseOrder(order);
-		line.persist();
-	}
-
-	private Plant getPlant(String plantId) {
-		return Plant.findPlant(Long.parseLong(plantId));
-	}
-
 	private BuildIt getOrCreateBuildIt(String incomingUrl) {
 		try {
 			return BuildIt.getByUrl(incomingUrl);
@@ -167,16 +146,4 @@ public class PurchaseOrderRestController {
 		}
 	}
 
-	@XmlRootElement(name = "purchaseorders")
-	public static class PurchaseOrderResourceList {
-		public List<PurchaseOrderResource> purchaseorder;
-
-		@SuppressWarnings("UnusedDeclaration")
-		public PurchaseOrderResourceList() {
-		}
-
-		public PurchaseOrderResourceList(List<PurchaseOrderResource> purchaseorder) {
-			this.purchaseorder = purchaseorder;
-		}
-	}
 }

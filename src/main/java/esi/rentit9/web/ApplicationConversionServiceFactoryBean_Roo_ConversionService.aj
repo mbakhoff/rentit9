@@ -93,7 +93,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<PurchaseOrder, String> ApplicationConversionServiceFactoryBean.getPurchaseOrderToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.rentit9.domain.PurchaseOrder, java.lang.String>() {
             public String convert(PurchaseOrder purchaseOrder) {
-                return new StringBuilder().append(purchaseOrder.getSiteAddress()).append(' ').append(purchaseOrder.getSenderSideId()).toString();
+                return new StringBuilder().append(purchaseOrder.getTotal()).append(' ').append(purchaseOrder.getSiteAddress()).append(' ').append(purchaseOrder.getStartDate()).append(' ').append(purchaseOrder.getEndDate()).toString();
             }
         };
     }
@@ -117,7 +117,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<PurchaseOrderLine, String> ApplicationConversionServiceFactoryBean.getPurchaseOrderLineToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.rentit9.domain.PurchaseOrderLine, java.lang.String>() {
             public String convert(PurchaseOrderLine purchaseOrderLine) {
-                return new StringBuilder().append(purchaseOrderLine.getStartDate()).append(' ').append(purchaseOrderLine.getEndDate()).append(' ').append(purchaseOrderLine.getTotal()).toString();
+                return "(no displayable fields)";
             }
         };
     }

@@ -2,9 +2,9 @@ package esi.rentit9.rest.controller;
 
 import esi.rentit9.RBAC;
 import esi.rentit9.domain.Plant;
-import esi.rentit9.rest.PlantResource;
-import esi.rentit9.rest.PlantResourceAssembler;
-import esi.rentit9.rest.PlantResourceList;
+import esi.rentit9.dto.PlantResource;
+import esi.rentit9.dto.PlantResourceAssembler;
+import esi.rentit9.dto.PlantResourceList;
 import esi.rentit9.rest.util.HttpHelpers;
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.http.HttpHeaders;
@@ -41,9 +41,8 @@ public class PlantResourceController {
 	@RequestMapping("plants")
 	public ResponseEntity<PlantResourceList> getAllPlants() {
 		List<Plant> plants = Plant.findAllPlants();
-		ResponseEntity<PlantResourceList> response =
-				new ResponseEntity<PlantResourceList>(assembler.toResource(plants), HttpStatus.OK);
-		return response;
+        List<PlantResource> resources = assembler.toResource(plants);
+        return new ResponseEntity<PlantResourceList>(new PlantResourceList(resources), HttpStatus.OK);
 	}
 
     @RequestMapping(value="plants/find", method = RequestMethod.GET)
@@ -52,8 +51,8 @@ public class PlantResourceController {
                 request.getParameter("name"),
                 parseDate(request.getParameter("start")),
                 parseDate(request.getParameter("end")));
-        PlantResourceList resources = assembler.toResource(plants);
-        return new ResponseEntity<PlantResourceList>(resources, HttpStatus.OK);
+        List<PlantResource> resources = assembler.toResource(plants);
+        return new ResponseEntity<PlantResourceList>(new PlantResourceList(resources), HttpStatus.OK);
     }
 
     private Calendar parseDate(String dateString) {

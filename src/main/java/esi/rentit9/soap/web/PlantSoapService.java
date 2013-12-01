@@ -2,7 +2,11 @@ package esi.rentit9.soap.web;
 
 import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrder;
-import esi.rentit9.soap.*;
+import esi.rentit9.dto.PlantResource;
+import esi.rentit9.dto.PlantResourceAssembler;
+import esi.rentit9.dto.PurchaseOrderResource;
+import esi.rentit9.dto.PurchaseOrderResourceAssembler;
+import esi.rentit9.soap.PlantsAvailableRequest;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -11,12 +15,12 @@ import java.util.List;
 @WebService(serviceName = "PlantSoapService")
 public class PlantSoapService {
 
-    private final PlantAssembler plantAssembler;
-    private final PurchaseOrderAssembler purchaseOrderAssembler;
+    private final PlantResourceAssembler plantAssembler;
+    private final PurchaseOrderResourceAssembler purchaseOrderAssembler;
 
     public PlantSoapService() {
-        plantAssembler = new PlantAssembler();
-        purchaseOrderAssembler = new PurchaseOrderAssembler();
+        plantAssembler = new PlantResourceAssembler();
+        purchaseOrderAssembler = new PurchaseOrderResourceAssembler();
     }
 
     @WebMethod

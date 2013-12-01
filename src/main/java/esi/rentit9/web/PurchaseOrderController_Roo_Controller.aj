@@ -12,6 +12,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +44,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String PurchaseOrderController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("purchaseorder", PurchaseOrder.findPurchaseOrder(id));
         uiModel.addAttribute("itemId", id);
         return "purchaseorders/show";
@@ -58,6 +61,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         } else {
             uiModel.addAttribute("purchaseorders", PurchaseOrder.findAllPurchaseOrders());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "purchaseorders/list";
     }
     
@@ -77,8 +81,14 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         return "redirect:/purchaseorders";
     }
     
+    void PurchaseOrderController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("purchaseOrder_startdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("purchaseOrder_enddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void PurchaseOrderController.populateEditForm(Model uiModel, PurchaseOrder purchaseOrder) {
         uiModel.addAttribute("purchaseOrder", purchaseOrder);
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("buildits", BuildIt.findAllBuildIts());
         uiModel.addAttribute("orderstatuses", Arrays.asList(OrderStatus.values()));
         uiModel.addAttribute("purchaseorderlines", PurchaseOrderLine.findAllPurchaseOrderLines());

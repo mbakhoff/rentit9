@@ -15,10 +15,10 @@ public enum OrderStatus {
     /*add CREATED when recieved from buildit
      * PO accepted, 
      * PO rejected, 
-     * plant dispatched, 
-     * plant delivered, 
-     * plant rejected by customer, 
-     * plant returned, 
+     * plants dispatched,
+     * plants delivered,
+     * plants rejected by customer,
+     * plants returned,
      * invoiced
      **/
 

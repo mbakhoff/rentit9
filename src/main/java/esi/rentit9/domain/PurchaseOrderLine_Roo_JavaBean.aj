@@ -3,7 +3,9 @@
 
 package esi.rentit9.domain;
 
-import java.util.Calendar;
+import esi.rentit9.domain.Plant;
+import esi.rentit9.domain.PurchaseOrder;
+import esi.rentit9.domain.PurchaseOrderLine;
 
 privileged aspect PurchaseOrderLine_Roo_JavaBean {
     
@@ -21,38 +23,6 @@ privileged aspect PurchaseOrderLine_Roo_JavaBean {
     
     public void PurchaseOrderLine.setPlant(Plant plant) {
         this.plant = plant;
-    }
-    
-    public DeliveryStatus PurchaseOrderLine.getStatus() {
-        return this.status;
-    }
-    
-    public void PurchaseOrderLine.setStatus(DeliveryStatus status) {
-        this.status = status;
-    }
-    
-    public Calendar PurchaseOrderLine.getStartDate() {
-        return this.startDate;
-    }
-    
-    public void PurchaseOrderLine.setStartDate(Calendar startDate) {
-        this.startDate = startDate;
-    }
-    
-    public Calendar PurchaseOrderLine.getEndDate() {
-        return this.endDate;
-    }
-    
-    public void PurchaseOrderLine.setEndDate(Calendar endDate) {
-        this.endDate = endDate;
-    }
-    
-    public float PurchaseOrderLine.getTotal() {
-        return this.total;
-    }
-    
-    public void PurchaseOrderLine.setTotal(float total) {
-        this.total = total;
     }
     
 }

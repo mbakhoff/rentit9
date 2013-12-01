@@ -1,24 +1,18 @@
 package esi.rentit9.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Set;
 
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
 public class PurchaseOrder {
-
-	public static final String QUERY_ORDER_LINES =
-			"SELECT line FROM PurchaseOrderLine AS line WHERE line.purchaseOrder = :order";
 
 	/**
      */
@@ -31,18 +25,25 @@ public class PurchaseOrder {
 
     /**
      */
+    private Float total;
+
+    /**
+     */
     private String siteAddress;
 
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(style = "M-")
+    private Calendar startDate;
+
+    /**
+     */
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(style = "M-")
+    private Calendar endDate;
 
     private String senderSideId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
     private Set<PurchaseOrderLine> lines;
-
-//	public List<PurchaseOrderLine> getLines() {
-//		TypedQuery<PurchaseOrderLine> query = entityManager().createQuery(QUERY_ORDER_LINES, PurchaseOrderLine.class);
-//		query.setParameter("order", this);
-//		return query.getResultList();
-//	}
 
 }

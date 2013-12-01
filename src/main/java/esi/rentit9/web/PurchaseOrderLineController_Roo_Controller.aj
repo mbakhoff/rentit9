@@ -3,12 +3,13 @@
 
 package esi.rentit9.web;
 
-import esi.rentit9.domain.DeliveryStatus;
 import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrder;
 import esi.rentit9.domain.PurchaseOrderLine;
-import org.joda.time.format.DateTimeFormat;
-import org.springframework.context.i18n.LocaleContextHolder;
+import esi.rentit9.web.PurchaseOrderLineController;
+import java.io.UnsupportedEncodingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 
 privileged aspect PurchaseOrderLineController_Roo_Controller {
     
@@ -44,7 +40,6 @@ privileged aspect PurchaseOrderLineController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String PurchaseOrderLineController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("purchaseorderline", PurchaseOrderLine.findPurchaseOrderLine(id));
         uiModel.addAttribute("itemId", id);
         return "purchaseorderlines/show";
@@ -61,7 +56,6 @@ privileged aspect PurchaseOrderLineController_Roo_Controller {
         } else {
             uiModel.addAttribute("purchaseorderlines", PurchaseOrderLine.findAllPurchaseOrderLines());
         }
-        addDateTimeFormatPatterns(uiModel);
         return "purchaseorderlines/list";
     }
     
@@ -92,15 +86,8 @@ privileged aspect PurchaseOrderLineController_Roo_Controller {
         return "redirect:/purchaseorderlines";
     }
     
-    void PurchaseOrderLineController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("purchaseOrderLine_startdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("purchaseOrderLine_enddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-    }
-    
     void PurchaseOrderLineController.populateEditForm(Model uiModel, PurchaseOrderLine purchaseOrderLine) {
         uiModel.addAttribute("purchaseOrderLine", purchaseOrderLine);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("deliverystatuses", Arrays.asList(DeliveryStatus.values()));
         uiModel.addAttribute("plants", Plant.findAllPlants());
         uiModel.addAttribute("purchaseorders", PurchaseOrder.findAllPurchaseOrders());
     }

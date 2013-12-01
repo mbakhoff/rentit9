@@ -3,11 +3,13 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_esi_rentit9_domain_PurchaseOrder" items="${purchaseorders}" z="EbXJtOYlX2l32rgijv0D279sRrU=">
-        <table:table data="${purchaseorders}" create="false" delete="false" id="l_esi_rentit9_domain_PurchaseOrder" path="/users/po" z="user-managed">
+        <table:table create="false" data="${purchaseorders}" delete="false" id="l_esi_rentit9_domain_PurchaseOrder" path="/users/po" z="user-managed">
             <table:column id="c_esi_rentit9_domain_PurchaseOrder_buildit" property="buildit" z="4o+anoyIl5KDIcuFcrEwM//e89E="/>
             <table:column id="c_esi_rentit9_domain_PurchaseOrder_status" property="status" z="lni/KxwrbLBfr8bTwb1Bt+ghouU="/>
             <table:column id="c_esi_rentit9_domain_PurchaseOrder_siteAddress" property="siteAddress" z="6q4kK9Oe9W4dyLZupqGWdLa6baU="/>
-            <table:column id="c_esi_rentit9_domain_PurchaseOrder_senderSideId" property="senderSideId" z="x9tHZ3cWaCw+u7XzecxAeLlfRn0="/>
+            <table:column id="c_esi_rentit9_domain_PurchaseOrder_total" property="total" z="CqzHDSDpnl29TmjvXUmVlr1si3s="/>
+            <table:column calendar="true" dateTimePattern="${purchaseOrder_startdate_date_format}" id="c_esi_rentit9_domain_PurchaseOrder_startDate" property="startDate" z="vnCsT+XZarAMFCw5zhbO+5ra1KQ="/>
+            <table:column calendar="true" dateTimePattern="${purchaseOrder_enddate_date_format}" id="c_esi_rentit9_domain_PurchaseOrder_endDate" property="endDate" z="VVrhTIr4CsMkd1aAJ2DkVutB1AA="/>
         </table:table>
     </page:list>
 </div>

@@ -16,12 +16,19 @@ import java.util.List;
 public class Plant {
 
     private static final String QUERY_PLANTS_BETWEEN =
-            "FROM Plant AS plant " +
-                    "WHERE plant.name LIKE :name AND " +
-                    "NOT EXISTS (FROM PurchaseOrderLine AS line WHERE line.plant = plant AND line.purchaseOrder.status = :postatus AND line.endDate > :start AND line.startDate < :end)";
+            "FROM Plant AS plant WHERE " +
+                    "plant.name LIKE :name AND " +
+                    "NOT EXISTS (FROM PurchaseOrderLine AS line WHERE " +
+                    "line.plant = plant AND " +
+                    "line.purchaseOrder.status = :postatus AND " +
+                    "line.purchaseOrder.endDate > :start AND " +
+                    "line.purchaseOrder.startDate < :end)";
 
     private static final String QUERY_ORDERS_FOR_DELIVERY =
-            "FROM PurchaseOrderLine AS line WHERE line.plant = plant AND line.purchaseOrder.status = :postatus AND line.startDate = :date";
+            "FROM PurchaseOrderLine AS line WHERE " +
+                    "line.plant = plant AND " +
+                    "line.purchaseOrder.status = :postatus AND " +
+                    "line.purchaseOrder.startDate = :date";
 
     /**
      */

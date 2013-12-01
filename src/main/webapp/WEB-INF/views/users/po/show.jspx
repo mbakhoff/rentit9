@@ -2,10 +2,14 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show create="false" delete="false" id="ps_esi_rentit9_domain_PurchaseOrder" object="${purchaseorder}" path="/users/po" z="SI8G44tnBcejmrrhScINiYyVLsM=">
-        <field:display field="buildit" id="s_esi_rentit9_domain_PurchaseOrder_buildit" object="${purchaseorder}" z="g54rNfxh3FNc9dVeMXCWFXRgTUU="/>
-        <field:display field="status" id="s_esi_rentit9_domain_PurchaseOrder_status" object="${purchaseorder}" z="6utDBsdH11L335cSF6tKJZMR+XE="/>
-        <field:display field="siteAddress" id="s_esi_rentit9_domain_PurchaseOrder_siteAddress" object="${purchaseorder}" z="4qJPyU7fN+69f7wEpBlHe8I96Rg="/>
-        <field:display field="senderSideId" id="s_esi_rentit9_domain_PurchaseOrder_senderSideId" object="${purchaseorder}" z="zuBGAOncBdSkv6pfu+4opR0Ci7E="/>
+    <page:show create="false" delete="false" id="ps_esi_rentit9_domain_PurchaseOrder" object="${orders}" path="/users/po" z="SI8G44tnBcejmrrhScINiYyVLsM=">
+        <field:display field="buildit" id="s_esi_rentit9_domain_PurchaseOrder_buildit" object="${orders}" z="g54rNfxh3FNc9dVeMXCWFXRgTUU="/>
+        <field:display field="status" id="s_esi_rentit9_domain_PurchaseOrder_status" object="${orders}" z="6utDBsdH11L335cSF6tKJZMR+XE="/>
+        <field:display field="siteAddress" id="s_esi_rentit9_domain_PurchaseOrder_siteAddress" object="${orders}" z="4qJPyU7fN+69f7wEpBlHe8I96Rg="/>
+        <field:display field="senderSideId" id="s_esi_rentit9_domain_PurchaseOrder_senderSideId" object="${orders}" z="zuBGAOncBdSkv6pfu+4opR0Ci7E="/>
+        <field:display field="total" id="s_esi_rentit9_domain_PurchaseOrder_total" object="${orders}" z="PsfZJJaf70PSur5wAXaDBkk++Yg="/>
+        <field:display calendar="true" dateTimePattern="${purchaseOrder_startdate_date_format}" field="startDate" id="s_esi_rentit9_domain_PurchaseOrder_startDate" object="${orders}" z="l9FC9ovyBK28x4M/nvxU1D4vNF8="/>
+        <field:display calendar="true" dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="s_esi_rentit9_domain_PurchaseOrder_endDate" object="${orders}" z="QtDpeoNLvgC2cEAHza8i6WPGwJI="/>
+        <field:display field="lines" id="s_esi_rentit9_domain_PurchaseOrder_lines" object="${orders}" z="A1u74BlBCzR5Nl6fXkf3uIhIkU0="/>
     </page:show>
 </div>

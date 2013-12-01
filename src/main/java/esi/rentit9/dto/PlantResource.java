@@ -1,4 +1,4 @@
-package esi.rentit9.rest;
+package esi.rentit9.dto;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
