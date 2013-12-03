@@ -18,17 +18,17 @@ public class Plant {
     private static final String QUERY_PLANTS_BETWEEN =
             "FROM Plant AS plant WHERE " +
                     "plant.name LIKE :name AND " +
-                    "NOT EXISTS (FROM PurchaseOrderLine AS line WHERE " +
-                    "line.plant = plant AND " +
-                    "line.purchaseOrder.status = :postatus AND " +
-                    "line.purchaseOrder.endDate > :start AND " +
-                    "line.purchaseOrder.startDate < :end)";
+                    "NOT EXISTS (FROM PurchaseOrder AS order WHERE " +
+                    "order.plant = plant AND " +
+                    "order.status = :postatus AND " +
+                    "order.endDate > :start AND " +
+                    "order.startDate < :end)";
 
     private static final String QUERY_ORDERS_FOR_DELIVERY =
-            "FROM PurchaseOrderLine AS line WHERE " +
-                    "line.plant = plant AND " +
-                    "line.purchaseOrder.status = :postatus AND " +
-                    "line.purchaseOrder.startDate = :date";
+            "FROM PurchaseOrder AS order WHERE " +
+                    "order.plant = plant AND " +
+                    "order.status = :postatus AND " +
+                    "order.startDate = :date";
 
     /**
      */
@@ -52,10 +52,10 @@ public class Plant {
         return query.getResultList();
     }
 
-    public static List<PurchaseOrderLine> getPlantsToDeliver(DateMidnight date) {
-        TypedQuery<PurchaseOrderLine> query = entityManager().createQuery(
+    public static List<PurchaseOrder> getPlantsToDeliver(DateMidnight date) {
+        TypedQuery<PurchaseOrder> query = entityManager().createQuery(
                 QUERY_ORDERS_FOR_DELIVERY,
-                PurchaseOrderLine.class);
+                PurchaseOrder.class);
         query.setParameter("date", date.toGregorianCalendar(), TemporalType.DATE);
         query.setParameter("postatus", OrderStatus.APPROVED);
         return query.getResultList();

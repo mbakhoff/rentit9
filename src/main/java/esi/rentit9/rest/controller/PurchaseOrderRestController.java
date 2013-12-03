@@ -66,9 +66,8 @@ public class PurchaseOrderRestController {
         order.setTotal(res.getTotal());
         order.setStartDate(res.getStartDate());
         order.setEndDate(res.getEndDate());
+        order.setPlant(res.getPlantObject());
 		order.persist();
-
-		assembler.getOrderLines(order, res.getPlants());
 
 		HttpHeaders headers = new HttpHeaders();
 		URI location =
@@ -116,10 +115,8 @@ public class PurchaseOrderRestController {
 		PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
 		order.setBuildit(getOrCreateBuildIt(res.getBuildit()));
 		order.setSiteAddress(res.getSiteAddress());
+        order.setPlant(res.getPlantObject());
 		order.persist();
-
-		deleteLines(order);
-        assembler.getOrderLines(order, res.getPlants());
 
 		HttpHeaders headers = new HttpHeaders();
 		URI location =
@@ -127,12 +124,6 @@ public class PurchaseOrderRestController {
 						pathSegment(order.getId().toString()).build().toUri();
 		headers.setLocation(location);
 		return new ResponseEntity<Void>(headers, HttpStatus.OK);
-	}
-
-	private void deleteLines(PurchaseOrder order) {
-		for (PurchaseOrderLine line : order.getLines()){
-			line.remove();
-		}
 	}
 
 	private BuildIt getOrCreateBuildIt(String incomingUrl) {

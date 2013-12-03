@@ -2,7 +2,6 @@ package esi.rentit9.web;
 
 import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrder;
-import esi.rentit9.domain.PurchaseOrderLine;
 import org.joda.time.DateTime;
 import org.joda.time.format.ISODateTimeFormat;
 
@@ -15,9 +14,8 @@ public final class PlantToDeliver {
     public final String plantName;
     public final String deliveryDate;
 
-    public PlantToDeliver(PurchaseOrderLine orderLine) {
-        Plant plant = orderLine.getPlant();
-        PurchaseOrder order = orderLine.getPurchaseOrder();
+    public PlantToDeliver(PurchaseOrder order) {
+        Plant plant = order.getPlant();
         this.orderId = order.getId();
         this.plantId = plant.getId();
         this.plantName = plant.getName();

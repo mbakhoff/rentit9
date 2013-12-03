@@ -5,9 +5,10 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import javax.persistence.*;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Calendar;
-import java.util.Set;
 
 @RooJavaBean
 @RooToString
@@ -18,6 +19,9 @@ public class PurchaseOrder {
      */
     @ManyToOne
     private BuildIt buildit;
+
+    @ManyToOne
+    private Plant plant;
 
     /**
      */
@@ -42,8 +46,5 @@ public class PurchaseOrder {
     private Calendar endDate;
 
     private String senderSideId;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
-    private Set<PurchaseOrderLine> lines;
 
 }

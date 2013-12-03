@@ -3,12 +3,7 @@
 
 package esi.rentit9.domain;
 
-import esi.rentit9.domain.BuildIt;
-import esi.rentit9.domain.OrderStatus;
-import esi.rentit9.domain.PurchaseOrder;
-import esi.rentit9.domain.PurchaseOrderLine;
 import java.util.Calendar;
-import java.util.Set;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
     
@@ -18,6 +13,14 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public void PurchaseOrder.setBuildit(BuildIt buildit) {
         this.buildit = buildit;
+    }
+    
+    public Plant PurchaseOrder.getPlant() {
+        return this.plant;
+    }
+    
+    public void PurchaseOrder.setPlant(Plant plant) {
+        this.plant = plant;
     }
     
     public OrderStatus PurchaseOrder.getStatus() {
@@ -66,14 +69,6 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public void PurchaseOrder.setSenderSideId(String senderSideId) {
         this.senderSideId = senderSideId;
-    }
-    
-    public Set<PurchaseOrderLine> PurchaseOrder.getLines() {
-        return this.lines;
-    }
-    
-    public void PurchaseOrder.setLines(Set<PurchaseOrderLine> lines) {
-        this.lines = lines;
     }
     
 }

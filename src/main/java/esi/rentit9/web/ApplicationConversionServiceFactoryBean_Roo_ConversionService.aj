@@ -3,13 +3,7 @@
 
 package esi.rentit9.web;
 
-import esi.rentit9.domain.BuildIt;
-import esi.rentit9.domain.Invoice;
-import esi.rentit9.domain.Plant;
-import esi.rentit9.domain.PurchaseOrder;
-import esi.rentit9.domain.PurchaseOrderLine;
-import esi.rentit9.domain.RemittanceAdvice;
-import esi.rentit9.web.ApplicationConversionServiceFactoryBean;
+import esi.rentit9.domain.*;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -114,30 +108,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<PurchaseOrderLine, String> ApplicationConversionServiceFactoryBean.getPurchaseOrderLineToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<esi.rentit9.domain.PurchaseOrderLine, java.lang.String>() {
-            public String convert(PurchaseOrderLine purchaseOrderLine) {
-                return "(no displayable fields)";
-            }
-        };
-    }
-    
-    public Converter<Long, PurchaseOrderLine> ApplicationConversionServiceFactoryBean.getIdToPurchaseOrderLineConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, esi.rentit9.domain.PurchaseOrderLine>() {
-            public esi.rentit9.domain.PurchaseOrderLine convert(java.lang.Long id) {
-                return PurchaseOrderLine.findPurchaseOrderLine(id);
-            }
-        };
-    }
-    
-    public Converter<String, PurchaseOrderLine> ApplicationConversionServiceFactoryBean.getStringToPurchaseOrderLineConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, esi.rentit9.domain.PurchaseOrderLine>() {
-            public esi.rentit9.domain.PurchaseOrderLine convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), PurchaseOrderLine.class);
-            }
-        };
-    }
-    
     public Converter<RemittanceAdvice, String> ApplicationConversionServiceFactoryBean.getRemittanceAdviceToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.rentit9.domain.RemittanceAdvice, java.lang.String>() {
             public String convert(RemittanceAdvice remittanceAdvice) {
@@ -175,9 +145,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getPurchaseOrderToStringConverter());
         registry.addConverter(getIdToPurchaseOrderConverter());
         registry.addConverter(getStringToPurchaseOrderConverter());
-        registry.addConverter(getPurchaseOrderLineToStringConverter());
-        registry.addConverter(getIdToPurchaseOrderLineConverter());
-        registry.addConverter(getStringToPurchaseOrderLineConverter());
         registry.addConverter(getRemittanceAdviceToStringConverter());
         registry.addConverter(getIdToRemittanceAdviceConverter());
         registry.addConverter(getStringToRemittanceAdviceConverter());

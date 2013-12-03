@@ -13,9 +13,9 @@
             <table:column calendar="true" dateTimePattern="${purchaseOrderLine_enddate_date_format}" id="c_esi_rentit9_domain_PurchaseOrderLine_endDate" property="endDate" z="user-managed"/>
             <table:column id="c_esi_rentit9_domain_PurchaseOrderLine_total" property="total" z="user-managed"/>
         </table:table>
-        <field:input field="lines" id="c_esi_rentit9_domain_PurchaseOrder_lines" z="1amjTyQauqc4GLyjTg+neorC6lc="/>
         <field:input field="total" id="c_esi_rentit9_domain_PurchaseOrder_total" validationMessageCode="field_invalid_number" z="C4XgkECsjA0NixCTjx/cI//q/Fw="/>
         <field:datetime dateTimePattern="${purchaseOrder_startdate_date_format}" field="startDate" id="c_esi_rentit9_domain_PurchaseOrder_startDate" z="AtOXc+sdMT3tiNCIr7c0tpZgHHQ="/>
         <field:datetime dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="c_esi_rentit9_domain_PurchaseOrder_endDate" z="pdngOceZW2zmlWfK8OUEjIqoo+E="/>
+        <field:input field="plant" id="c_esi_rentit9_domain_PurchaseOrder_plant" z="l/aWyJo3cbcVQkZi6f/fO5x7zuw="/>
     </form:update>
 </div>

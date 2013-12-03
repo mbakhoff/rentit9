@@ -4,18 +4,17 @@
 package esi.rentit9.dto;
 
 import esi.rentit9.domain.OrderStatus;
-import esi.rentit9.dto.PurchaseOrderResource;
+
 import java.util.Calendar;
-import java.util.List;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
-    public List<String> PurchaseOrderResource.getPlants() {
-        return this.plants;
+    public String PurchaseOrderResource.getPlant() {
+        return this.plant;
     }
     
-    public void PurchaseOrderResource.setPlants(List<String> plants) {
-        this.plants = plants;
+    public void PurchaseOrderResource.setPlant(String plant) {
+        this.plant = plant;
     }
     
     public Long PurchaseOrderResource.getInternalId() {

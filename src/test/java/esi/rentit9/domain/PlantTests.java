@@ -61,11 +61,7 @@ public class PlantTests {
         order.setStatus(OrderStatus.APPROVED);
         order.setStartDate(orderStart);
         order.setEndDate(orderEnd);
+        order.setPlant(derp);
         order.persist();
-
-        PurchaseOrderLine line = new PurchaseOrderLine();
-        line.setPlant(derp);
-        line.setPurchaseOrder(order);
-        line.persist();
     }
 }

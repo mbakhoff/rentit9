@@ -4,7 +4,6 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.rentit9.dto.PurchaseOrderResource;
 
-import java.util.Arrays;
 import java.util.Calendar;
 
 public class Common {
@@ -15,7 +14,7 @@ public class Common {
         PurchaseOrderResource po = new PurchaseOrderResource();
         po.setSiteAddress("derpland 100c, nowhere");
         po.setBuildit("builders inc.");
-        po.setPlants(Arrays.asList("1", "2"));
+        po.setPlant("1");
         po.setStartDate(Calendar.getInstance());
         po.setEndDate(Calendar.getInstance());
         return po;

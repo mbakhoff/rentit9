@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Arrays;
 import java.util.Calendar;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
@@ -31,7 +30,7 @@ public class SoapTests {
         resource.setStatus(OrderStatus.CREATED);
         resource.setStartDate(startDate);
         resource.setEndDate(endDate);
-        resource.setPlants(Arrays.asList("1"));
+        resource.setPlant("1");
 
         plantSoapService.createPurchaseOrder(resource);
     }

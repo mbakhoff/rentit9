@@ -1,7 +1,7 @@
 package esi.rentit9.web;
 
 import esi.rentit9.domain.Plant;
-import esi.rentit9.domain.PurchaseOrderLine;
+import esi.rentit9.domain.PurchaseOrder;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -28,9 +28,9 @@ public class PlantController {
         return "plants/deliverables";
     }
 
-    private static void addDeliverables(Model uiModel, List<PurchaseOrderLine> ordersForDate) {
+    private static void addDeliverables(Model uiModel, List<PurchaseOrder> ordersForDate) {
         List<PlantToDeliver> deliveries = new ArrayList<PlantToDeliver>();
-        for (PurchaseOrderLine orderLine : ordersForDate) {
+        for (PurchaseOrder orderLine : ordersForDate) {
             deliveries.add(new PlantToDeliver(orderLine));
         }
         uiModel.addAttribute("plants", deliveries);

@@ -12,12 +12,6 @@
             <menu:item id="i_invoice_new" messageCode="global_menu_new" url="/invoices?form" z="QqwPSYJNNoLrSbh5ekf/V1j0eU8="/>
             <menu:item id="i_invoice_list" messageCode="global_menu_list" url="/invoices?page=1&amp;size=${empty param.size ? 10 : param.size}" z="fGp1lAWegbSUAHpxuhrzXY9RQGI="/>
         </menu:category>
-        <sec:authorize ifAllGranted="ROLE_ADMIN">
-            <menu:category id="c_purchaseorderline" z="uQ0OF4bed8agP64HCgEyFx4zFws=">
-                <menu:item id="i_purchaseorderline_new" messageCode="global_menu_new" url="/purchaseorderlines?form" z="0WIUPT+8gFZZMo0v8uINaPVenz0="/>
-                <menu:item id="i_purchaseorderline_list" messageCode="global_menu_list" url="/purchaseorderlines?page=1&amp;size=${empty param.size ? 10 : param.size}" z="WNXxpjb+yJd1QBJ2gfs6XLODqLo="/>
-            </menu:category>
-        </sec:authorize>
         <menu:category id="c_remittanceadvice" z="+IT6zNB9yTzdnF/vS8JQB0NgwEs=">
             <menu:item id="i_remittanceadvice_new" messageCode="global_menu_new" url="/remittanceadvices?form" z="mdaqxtYc+2uDpIFZjG8iTphKjv8="/>
             <menu:item id="i_remittanceadvice_list" messageCode="global_menu_list" url="/remittanceadvices?page=1&amp;size=${empty param.size ? 10 : param.size}" z="/Vws+8CGeCRDPu06fspidky19QQ="/>
