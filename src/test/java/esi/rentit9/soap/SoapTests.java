@@ -27,7 +27,7 @@ public class SoapTests {
         PurchaseOrderResource resource=new PurchaseOrderResource();
         resource.setBuildit("Test");
         resource.setSiteAddress("Test");
-        resource.setStatus(OrderStatus.CREATED);
+        resource.setStatus(OrderStatus.CREATED.toString());
         resource.setStartDate(startDate);
         resource.setEndDate(endDate);
         resource.setPlantId("1");

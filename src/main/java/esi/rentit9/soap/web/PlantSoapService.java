@@ -1,5 +1,6 @@
 package esi.rentit9.soap.web;
 
+import esi.rentit9.domain.OrderStatus;
 import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrder;
 import esi.rentit9.dto.PlantResource;
@@ -39,13 +40,14 @@ public class PlantSoapService {
     public PurchaseOrderResource createPurchaseOrder(PurchaseOrderResource request) {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         purchaseOrderAssembler.fromResource(purchaseOrder, request);
+        purchaseOrder.setStatus(OrderStatus.CREATED);
         purchaseOrder.persist();
         return purchaseOrderAssembler.toResource(purchaseOrder);
     }
 
     @WebMethod
     public PurchaseOrderResource updatePurchaseOrder(PurchaseOrderResource request) {
-        PurchaseOrder purchaseOrder = PurchaseOrder.findPurchaseOrder(request.getRentitOrderId());
+        PurchaseOrder purchaseOrder = PurchaseOrder.findPurchaseOrder(Long.parseLong(request.getRentitOrderId()));
         if (purchaseOrder == null) {
             return request;
         } else {

@@ -76,7 +76,7 @@ public class PurchaseOrderRestController {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         }
 
-        order.setStatus(OrderStatus.CANCELLED_OR_REJECTED);
+        order.setStatus(OrderStatus.CANCELLED);
         order.persist();
         return new ResponseEntity<Void>(HttpStatus.OK);
     }

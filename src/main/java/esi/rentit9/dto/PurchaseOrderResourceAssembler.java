@@ -10,11 +10,12 @@ public class PurchaseOrderResourceAssembler {
 
     public PurchaseOrderResource toResource(PurchaseOrder order) {
         PurchaseOrderResource res = new PurchaseOrderResource();
-        res.setRentitOrderId(order.getId());
+        res.setRentitOrderId(order.getId().toString());
         res.setBuilditOrderId(order.getSenderSideId());
         res.setBuildit(order.getBuildit().getName());
+        res.setRentit("rentit9");
         res.setSiteAddress(order.getSiteAddress());
-        res.setStatus(order.getStatus());
+        res.setStatus(order.getStatus().toString());
         res.setTotal(order.getTotal());
         res.setPlantId(order.getPlant().getId().toString());
         res.setStartDate(order.getStartDate());
@@ -33,7 +34,6 @@ public class PurchaseOrderResourceAssembler {
     public void fromResource(PurchaseOrder purchaseOrder, PurchaseOrderResource orderResource) {
         purchaseOrder.setBuildit(BuildIt.getOrCreate(orderResource.getBuildit()));
         purchaseOrder.setSiteAddress(orderResource.getSiteAddress());
-        purchaseOrder.setStatus(orderResource.getStatus());
         purchaseOrder.setSenderSideId(orderResource.getBuilditOrderId());
         purchaseOrder.setPlant(orderResource.getPlantObject());
         purchaseOrder.setTotal(orderResource.getTotal());

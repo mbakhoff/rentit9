@@ -1,6 +1,5 @@
 package esi.rentit9.dto;
 
-import esi.rentit9.domain.OrderStatus;
 import esi.rentit9.domain.Plant;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
@@ -14,12 +13,13 @@ import java.util.Calendar;
 @RooJavaBean
 public class PurchaseOrderResource {
 
-    private Long rentitOrderId;
+    private String rentitOrderId;
     private String builditOrderId;
     private String plantId;
     private String buildit;
+    private String rentit;
     private String siteAddress;
-    private OrderStatus status;
+    private String status;
     private Float total;
     private Calendar startDate;
     private Calendar endDate;

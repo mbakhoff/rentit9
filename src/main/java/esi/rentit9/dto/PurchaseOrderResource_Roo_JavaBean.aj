@@ -3,17 +3,15 @@
 
 package esi.rentit9.dto;
 
-import esi.rentit9.domain.OrderStatus;
-
 import java.util.Calendar;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
-    public Long PurchaseOrderResource.getRentitOrderId() {
+    public String PurchaseOrderResource.getRentitOrderId() {
         return this.rentitOrderId;
     }
     
-    public void PurchaseOrderResource.setRentitOrderId(Long rentitOrderId) {
+    public void PurchaseOrderResource.setRentitOrderId(String rentitOrderId) {
         this.rentitOrderId = rentitOrderId;
     }
     
@@ -41,6 +39,14 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.buildit = buildit;
     }
     
+    public String PurchaseOrderResource.getRentit() {
+        return this.rentit;
+    }
+    
+    public void PurchaseOrderResource.setRentit(String rentit) {
+        this.rentit = rentit;
+    }
+    
     public String PurchaseOrderResource.getSiteAddress() {
         return this.siteAddress;
     }
@@ -49,11 +55,11 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.siteAddress = siteAddress;
     }
     
-    public OrderStatus PurchaseOrderResource.getStatus() {
+    public String PurchaseOrderResource.getStatus() {
         return this.status;
     }
     
-    public void PurchaseOrderResource.setStatus(OrderStatus status) {
+    public void PurchaseOrderResource.setStatus(String status) {
         this.status = status;
     }
     
