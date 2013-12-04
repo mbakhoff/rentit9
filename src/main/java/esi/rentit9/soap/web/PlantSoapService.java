@@ -38,18 +38,18 @@ public class PlantSoapService {
     @WebMethod
     public PurchaseOrderResource createPurchaseOrder(PurchaseOrderResource request) {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
-        purchaseOrder = purchaseOrderAssembler.fromResource(purchaseOrder, request);
+        purchaseOrderAssembler.fromResource(purchaseOrder, request);
         purchaseOrder.persist();
         return purchaseOrderAssembler.toResource(purchaseOrder);
     }
 
     @WebMethod
     public PurchaseOrderResource updatePurchaseOrder(PurchaseOrderResource request) {
-        PurchaseOrder purchaseOrder = PurchaseOrder.findPurchaseOrder(request.getInternalId());
+        PurchaseOrder purchaseOrder = PurchaseOrder.findPurchaseOrder(request.getRentitOrderId());
         if (purchaseOrder == null) {
             return request;
         } else {
-            purchaseOrder = purchaseOrderAssembler.fromResource(purchaseOrder, request);
+            purchaseOrderAssembler.fromResource(purchaseOrder, request);
             purchaseOrder.persist();
             return purchaseOrderAssembler.toResource(purchaseOrder);
         }

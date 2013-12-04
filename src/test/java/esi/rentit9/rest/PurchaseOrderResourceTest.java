@@ -44,7 +44,7 @@ public class PurchaseOrderResourceTest {
 		WebResource webResource = client.resource(Common.URL_POS);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
-		List<String> id = response.getHeaders().get("RentItId");
+		List<String> id = response.getHeaders().get("EntityId");
 		
 		PurchaseOrderResource po2 = Common.createDummyOrder();
 		po2.setSiteAddress("NewModifiedDerpland 404");
@@ -63,7 +63,7 @@ public class PurchaseOrderResourceTest {
 		WebResource webResource = client.resource(Common.URL_POS);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
-		List<String> id = response.getHeaders().get("RentItId");
+		List<String> id = response.getHeaders().get("EntityId");
 		
         String requestUrl = Common.URL_POS +"/"+id.get(0);
         webResource = client.resource(requestUrl);

@@ -9,28 +9,28 @@ import java.util.Calendar;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
-    public String PurchaseOrderResource.getPlant() {
-        return this.plant;
+    public Long PurchaseOrderResource.getRentitOrderId() {
+        return this.rentitOrderId;
     }
     
-    public void PurchaseOrderResource.setPlant(String plant) {
-        this.plant = plant;
+    public void PurchaseOrderResource.setRentitOrderId(Long rentitOrderId) {
+        this.rentitOrderId = rentitOrderId;
     }
     
-    public Long PurchaseOrderResource.getInternalId() {
-        return this.internalId;
+    public String PurchaseOrderResource.getBuilditOrderId() {
+        return this.builditOrderId;
     }
     
-    public void PurchaseOrderResource.setInternalId(Long internalId) {
-        this.internalId = internalId;
+    public void PurchaseOrderResource.setBuilditOrderId(String builditOrderId) {
+        this.builditOrderId = builditOrderId;
     }
     
-    public String PurchaseOrderResource.getSenderSideId() {
-        return this.senderSideId;
+    public String PurchaseOrderResource.getPlantId() {
+        return this.plantId;
     }
     
-    public void PurchaseOrderResource.setSenderSideId(String senderSideId) {
-        this.senderSideId = senderSideId;
+    public void PurchaseOrderResource.setPlantId(String plantId) {
+        this.plantId = plantId;
     }
     
     public String PurchaseOrderResource.getBuildit() {

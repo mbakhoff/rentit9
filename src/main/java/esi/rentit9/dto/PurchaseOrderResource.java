@@ -14,9 +14,9 @@ import java.util.Calendar;
 @RooJavaBean
 public class PurchaseOrderResource {
 
-    private String plant;
-    private Long internalId;
-    private String senderSideId;
+    private Long rentitOrderId;
+    private String builditOrderId;
+    private String plantId;
     private String buildit;
     private String siteAddress;
     private OrderStatus status;
@@ -25,7 +25,7 @@ public class PurchaseOrderResource {
     private Calendar endDate;
 
     public Plant getPlantObject() {
-        return Plant.findPlant(Long.parseLong(plant));
+        return plantId != null ? Plant.findPlant(Long.parseLong(plantId)) : null;
     }
 
 }

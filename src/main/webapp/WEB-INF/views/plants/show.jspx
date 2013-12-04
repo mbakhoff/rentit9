@@ -2,9 +2,9 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_esi_rentit9_domain_Plant" object="${plant}" path="/plants" z="DPWythARBZfzEedooPyCKW0Rbqs=">
-        <field:display field="name" id="s_esi_rentit9_domain_Plant_name" object="${plant}" z="2UbkMYAZEWMvhmbHh9T4zwIiei4="/>
-        <field:display field="description" id="s_esi_rentit9_domain_Plant_description" object="${plant}" z="zB/QWmrYjSd2jdRN05P65dOJA9Q="/>
-        <field:display field="price" id="s_esi_rentit9_domain_Plant_price" object="${plant}" z="zGs7mrmRDcdbv1f2AXVrmUfrlPs="/>
+    <page:show id="ps_esi_rentit9_domain_Plant" object="${plantId}" path="/plants" z="DPWythARBZfzEedooPyCKW0Rbqs=">
+        <field:display field="name" id="s_esi_rentit9_domain_Plant_name" object="${plantId}" z="2UbkMYAZEWMvhmbHh9T4zwIiei4="/>
+        <field:display field="description" id="s_esi_rentit9_domain_Plant_description" object="${plantId}" z="zB/QWmrYjSd2jdRN05P65dOJA9Q="/>
+        <field:display field="price" id="s_esi_rentit9_domain_Plant_price" object="${plantId}" z="zGs7mrmRDcdbv1f2AXVrmUfrlPs="/>
     </page:show>
 </div>

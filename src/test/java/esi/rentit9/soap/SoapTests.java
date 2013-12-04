@@ -30,7 +30,7 @@ public class SoapTests {
         resource.setStatus(OrderStatus.CREATED);
         resource.setStartDate(startDate);
         resource.setEndDate(endDate);
-        resource.setPlant("1");
+        resource.setPlantId("1");
 
         plantSoapService.createPurchaseOrder(resource);
     }

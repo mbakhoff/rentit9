@@ -15,32 +15,22 @@ import java.util.Calendar;
 @RooJpaActiveRecord
 public class PurchaseOrder {
 
-	/**
-     */
     @ManyToOne
     private BuildIt buildit;
 
     @ManyToOne
     private Plant plant;
 
-    /**
-     */
     private OrderStatus status;
 
-    /**
-     */
     private Float total;
 
-    /**
-     */
     private String siteAddress;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "M-")
     private Calendar startDate;
 
-    /**
-     */
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "M-")
     private Calendar endDate;

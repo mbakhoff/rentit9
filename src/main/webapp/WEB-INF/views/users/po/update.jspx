@@ -16,6 +16,6 @@
         <field:input field="total" id="c_esi_rentit9_domain_PurchaseOrder_total" validationMessageCode="field_invalid_number" z="C4XgkECsjA0NixCTjx/cI//q/Fw="/>
         <field:datetime dateTimePattern="${purchaseOrder_startdate_date_format}" field="startDate" id="c_esi_rentit9_domain_PurchaseOrder_startDate" z="AtOXc+sdMT3tiNCIr7c0tpZgHHQ="/>
         <field:datetime dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="c_esi_rentit9_domain_PurchaseOrder_endDate" z="pdngOceZW2zmlWfK8OUEjIqoo+E="/>
-        <field:input field="plant" id="c_esi_rentit9_domain_PurchaseOrder_plant" z="l/aWyJo3cbcVQkZi6f/fO5x7zuw="/>
+        <field:select field="plant" id="c_esi_rentit9_domain_PurchaseOrder_plant" itemValue="id" items="${plants}" path="/plants" z="jANVVe+AbccPRCldXR/TNPOj1g8="/>
     </form:update>
 </div>

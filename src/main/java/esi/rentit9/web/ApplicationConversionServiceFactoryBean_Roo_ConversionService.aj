@@ -15,7 +15,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<BuildIt, String> ApplicationConversionServiceFactoryBean.getBuildItToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.rentit9.domain.BuildIt, java.lang.String>() {
             public String convert(BuildIt buildIt) {
-                return new StringBuilder().append(buildIt.getName()).append(' ').append(buildIt.getUrl()).toString();
+                return new StringBuilder().append(buildIt.getName()).toString();
             }
         };
     }

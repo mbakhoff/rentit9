@@ -21,7 +21,7 @@ public class Invoice {
 
     /**
      */
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "M-")
     private Calendar dueDate;
 }

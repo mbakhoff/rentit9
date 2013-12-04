@@ -2,7 +2,6 @@ package esi.rentit9.dto;
 
 import esi.rentit9.domain.BuildIt;
 import esi.rentit9.domain.PurchaseOrder;
-import org.springframework.dao.DataRetrievalFailureException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +10,13 @@ public class PurchaseOrderResourceAssembler {
 
     public PurchaseOrderResource toResource(PurchaseOrder order) {
         PurchaseOrderResource res = new PurchaseOrderResource();
-        res.setInternalId(order.getId());
-        res.setBuildit(order.getBuildit().getUrl());
+        res.setRentitOrderId(order.getId());
+        res.setBuilditOrderId(order.getSenderSideId());
+        res.setBuildit(order.getBuildit().getName());
         res.setSiteAddress(order.getSiteAddress());
         res.setStatus(order.getStatus());
         res.setTotal(order.getTotal());
-        res.setPlant(order.getPlant().getId().toString());
+        res.setPlantId(order.getPlant().getId().toString());
         res.setStartDate(order.getStartDate());
         res.setEndDate(order.getEndDate());
         return res;
@@ -30,26 +30,15 @@ public class PurchaseOrderResourceAssembler {
         return resources;
     }
 
-    public PurchaseOrder fromResource(PurchaseOrder purchaseOrder, PurchaseOrderResource orderResource) {
-        purchaseOrder.setBuildit(getOrCreateBuildit(orderResource.getBuildit()));
+    public void fromResource(PurchaseOrder purchaseOrder, PurchaseOrderResource orderResource) {
+        purchaseOrder.setBuildit(BuildIt.getOrCreate(orderResource.getBuildit()));
         purchaseOrder.setSiteAddress(orderResource.getSiteAddress());
         purchaseOrder.setStatus(orderResource.getStatus());
-        purchaseOrder.setSenderSideId(orderResource.getSenderSideId());
+        purchaseOrder.setSenderSideId(orderResource.getBuilditOrderId());
         purchaseOrder.setPlant(orderResource.getPlantObject());
         purchaseOrder.setTotal(orderResource.getTotal());
         purchaseOrder.setStartDate(orderResource.getStartDate());
         purchaseOrder.setEndDate(orderResource.getEndDate());
-        return purchaseOrder;
     }
 
-    private BuildIt getOrCreateBuildit(String buildit) {
-        try {
-            return BuildIt.getByUrl(buildit);
-        } catch (DataRetrievalFailureException ex) {
-            BuildIt buildIt = new BuildIt();
-            buildIt.setUrl(buildit);
-            buildIt.persist();
-            return buildIt;
-        }
-    }
 }

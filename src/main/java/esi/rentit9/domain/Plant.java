@@ -30,18 +30,11 @@ public class Plant {
                     "order.status = :postatus AND " +
                     "order.startDate = :date";
 
-    /**
-     */
     private String name;
 
-    /**
-     */
     private String description;
 
-    /**
-     */
     private Float price;
-
 
     public static List<Plant> getPlantsBetween(String nameLike, Calendar startDate, Calendar endDate){
         TypedQuery<Plant> query = entityManager().createQuery(QUERY_PLANTS_BETWEEN, Plant.class);

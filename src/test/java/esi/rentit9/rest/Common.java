@@ -14,7 +14,7 @@ public class Common {
         PurchaseOrderResource po = new PurchaseOrderResource();
         po.setSiteAddress("derpland 100c, nowhere");
         po.setBuildit("builders inc.");
-        po.setPlant("1");
+        po.setPlantId("1");
         po.setStartDate(Calendar.getInstance());
         po.setEndDate(Calendar.getInstance());
         return po;

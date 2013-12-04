@@ -12,10 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.URI;
 import java.util.Calendar;
 import java.util.List;
 
@@ -40,9 +38,10 @@ public class PlantResourceController {
 
 	@RequestMapping("plants")
 	public ResponseEntity<PlantResourceList> getAllPlants() {
-		List<Plant> plants = Plant.findAllPlants();
-        List<PlantResource> resources = assembler.toResource(plants);
-        return new ResponseEntity<PlantResourceList>(new PlantResourceList(resources), HttpStatus.OK);
+        List<Plant> plants = Plant.findAllPlants();
+
+        PlantResourceList resourceList = new PlantResourceList(assembler.toResource(plants));
+        return new ResponseEntity<PlantResourceList>(resourceList, HttpStatus.OK);
 	}
 
     @RequestMapping(value="plants/find", method = RequestMethod.GET)
@@ -51,16 +50,17 @@ public class PlantResourceController {
                 request.getParameter("name"),
                 parseDate(request.getParameter("start")),
                 parseDate(request.getParameter("end")));
-        List<PlantResource> resources = assembler.toResource(plants);
-        return new ResponseEntity<PlantResourceList>(new PlantResourceList(resources), HttpStatus.OK);
+
+        PlantResourceList resourceList = new PlantResourceList(assembler.toResource(plants));
+        return new ResponseEntity<PlantResourceList>(resourceList, HttpStatus.OK);
     }
 
-    private Calendar parseDate(String dateString) {
+    private static Calendar parseDate(String dateString) {
         return ISODateTimeFormat.yearMonthDay().parseDateTime(dateString).toGregorianCalendar();
     }
 
     @RequestMapping(value = "plants", method = RequestMethod.POST)
-	public ResponseEntity<Void> createPlantResource(@RequestBody PlantResource res) {
+	public ResponseEntity<PlantResource> createPlantResource(@RequestBody PlantResource res) {
         RBAC.assertAuthority(RBAC.ROLE_ADMIN);
 
 		Plant p = new Plant();
@@ -69,22 +69,16 @@ public class PlantResourceController {
 		p.setPrice(res.getPrice());
 		p.persist();
 
-		HttpHeaders headers = new HttpHeaders();
-		URI location =
-				ServletUriComponentsBuilder.fromCurrentRequestUri().
-						pathSegment(p.getId().toString()).build().toUri();
-		headers.setLocation(location);
-		ResponseEntity<Void> response = new
-				ResponseEntity<Void>(headers, HttpStatus.CREATED);
-		return response;
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("EntityId", p.getId().toString());
+        PlantResource resource = assembler.toResource(p);
+        return new ResponseEntity<PlantResource>(resource, headers, HttpStatus.CREATED);
 	}
 
 	@RequestMapping("plants/{id}")
 	public ResponseEntity<PlantResource> getById(@PathVariable Long id) {
-		Plant plant = Plant.findPlant(id);
-		ResponseEntity<PlantResource> response =
-				new ResponseEntity<PlantResource>(assembler.toResource(plant), HttpStatus.OK);
-		return response;
+        PlantResource resource = assembler.toResource(Plant.findPlant(id));
+        return new ResponseEntity<PlantResource>(resource, HttpStatus.OK);
 	}
 
 }
