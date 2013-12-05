@@ -3,6 +3,7 @@
 
 package esi.rentit9.dto;
 
+import esi.rentit9.dto.RemittanaceAdviceResource;
 import java.util.Calendar;
 
 privileged aspect RemittanaceAdviceResource_Roo_JavaBean {

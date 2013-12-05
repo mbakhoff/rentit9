@@ -12,6 +12,8 @@ public class BuildIt {
 
     private String name;
 
+    private String email;
+
     private InteropImplementation provider;
 
     public static BuildIt getOrCreate(String name) {

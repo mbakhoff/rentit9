@@ -3,6 +3,7 @@
 
 package esi.rentit9.dto;
 
+import esi.rentit9.dto.PurchaseOrderResource;
 import java.util.Calendar;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {

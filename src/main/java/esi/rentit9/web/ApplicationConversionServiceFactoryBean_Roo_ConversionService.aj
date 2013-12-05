@@ -3,7 +3,12 @@
 
 package esi.rentit9.web;
 
-import esi.rentit9.domain.*;
+import esi.rentit9.domain.BuildIt;
+import esi.rentit9.domain.Invoice;
+import esi.rentit9.domain.Plant;
+import esi.rentit9.domain.PurchaseOrder;
+import esi.rentit9.domain.RemittanceAdvice;
+import esi.rentit9.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -15,7 +20,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<BuildIt, String> ApplicationConversionServiceFactoryBean.getBuildItToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.rentit9.domain.BuildIt, java.lang.String>() {
             public String convert(BuildIt buildIt) {
-                return new StringBuilder().append(buildIt.getName()).toString();
+                return new StringBuilder().append(buildIt.getName()).append(' ').append(buildIt.getEmail()).toString();
             }
         };
     }

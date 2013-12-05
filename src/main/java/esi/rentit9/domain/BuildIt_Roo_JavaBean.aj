@@ -3,6 +3,7 @@
 
 package esi.rentit9.domain;
 
+import esi.rentit9.domain.BuildIt;
 import esi.rentit9.interop.InteropImplementation;
 
 privileged aspect BuildIt_Roo_JavaBean {
@@ -13,6 +14,14 @@ privileged aspect BuildIt_Roo_JavaBean {
     
     public void BuildIt.setName(String name) {
         this.name = name;
+    }
+    
+    public String BuildIt.getEmail() {
+        return this.email;
+    }
+    
+    public void BuildIt.setEmail(String email) {
+        this.email = email;
     }
     
     public InteropImplementation BuildIt.getProvider() {

@@ -3,6 +3,10 @@
 
 package esi.rentit9.domain;
 
+import esi.rentit9.domain.BuildIt;
+import esi.rentit9.domain.OrderStatus;
+import esi.rentit9.domain.Plant;
+import esi.rentit9.domain.PurchaseOrder;
 import java.util.Calendar;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
