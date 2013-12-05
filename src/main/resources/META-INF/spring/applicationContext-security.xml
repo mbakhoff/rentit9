@@ -29,6 +29,7 @@
                 <user name="employee" password="employee" authorities="ROLE_EMPLOYEE" />
                 <user name="client" password="user" authorities="ROLE_CLIENT" />
                 <user name="buildit" password="buildit" authorities="ROLE_CLIENT" />
+                <user name="buildit1" password="buildit1" authorities="ROLE_CLIENT" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
