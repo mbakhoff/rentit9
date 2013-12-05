@@ -3,6 +3,7 @@ package esi.rentit9.interop;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.PurchaseOrder;
 
 public class Team9Rest implements BuilditInterop.Rest {
@@ -31,6 +32,11 @@ public class Team9Rest implements BuilditInterop.Rest {
         if (status != ClientResponse.Status.OK.getStatusCode()) {
             throw new RemoteHostException(response);
         }
+    }
+
+    @Override
+    public void sendInvoice(Invoice invoice) {
+        throw new UnsupportedOperationException();
     }
 
     private static Client getClient() {

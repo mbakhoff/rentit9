@@ -14,6 +14,18 @@ public enum InteropImplementation implements BuilditInterop {
         }
     },
 
+    Team1 {
+        @Override
+        public Rest getRest() {
+            return new Team1Rest();
+        }
+
+        @Override
+        public Soap getSoap() {
+            throw new UnsupportedOperationException();
+        }
+    },
+
     Dummy {
         @Override
         public Rest getRest() {

@@ -68,7 +68,7 @@ public class PurchaseOrderRestController {
 
     @RequestMapping(value = "pos/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        RBAC.assertAuthority(RBAC.ROLE_ADMIN);
+        RBAC.assertAuthority(RBAC.ROLE_ADMIN, RBAC.ROLE_CLIENT);
 
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
         OrderStatus currentStatus = order.getStatus();
