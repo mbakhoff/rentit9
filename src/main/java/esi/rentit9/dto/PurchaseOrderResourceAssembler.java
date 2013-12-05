@@ -1,6 +1,7 @@
 package esi.rentit9.dto;
 
 import esi.rentit9.domain.BuildIt;
+import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrder;
 
 import java.util.ArrayList;
@@ -17,10 +18,15 @@ public class PurchaseOrderResourceAssembler {
         res.setSiteAddress(order.getSiteAddress());
         res.setStatus(order.getStatus().toString());
         res.setTotal(order.getTotal());
-        res.setPlantId(order.getPlant().getId().toString());
+        res.setPlantId(getPlantId(order));
         res.setStartDate(order.getStartDate());
         res.setEndDate(order.getEndDate());
         return res;
+    }
+
+    private String getPlantId(PurchaseOrder order) {
+        Plant plant = order.getPlant();
+        return plant != null ? plant.getId().toString() : null;
     }
 
     public List<PurchaseOrderResource> toResource(List<PurchaseOrder> orders) {
