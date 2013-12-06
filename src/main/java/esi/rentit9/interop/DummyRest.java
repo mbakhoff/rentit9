@@ -2,6 +2,7 @@ package esi.rentit9.interop;
 
 import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.PurchaseOrder;
+import org.springframework.mail.javamail.JavaMailSender;
 
 public class DummyRest implements BuilditInterop.Rest {
 
@@ -15,7 +16,7 @@ public class DummyRest implements BuilditInterop.Rest {
     }
 
     @Override
-    public void sendInvoice(Invoice invoice) {
+    public void sendInvoice(JavaMailSender smtp, Invoice invoice) {
         System.out.println("dummy sending invoice");
     }
 }

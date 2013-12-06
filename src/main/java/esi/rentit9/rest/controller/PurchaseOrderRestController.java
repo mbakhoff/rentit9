@@ -7,9 +7,11 @@ import esi.rentit9.dto.PurchaseOrderResource;
 import esi.rentit9.dto.PurchaseOrderResourceAssembler;
 import esi.rentit9.dto.PurchaseOrderResourceList;
 import esi.rentit9.rest.util.HttpHelpers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/rest/")
 public class PurchaseOrderRestController {
+
+    @Autowired
+    private JavaMailSender smtp;
 
     private final PurchaseOrderResourceAssembler assembler;
 

@@ -5,6 +5,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.PurchaseOrder;
+import org.springframework.mail.javamail.JavaMailSender;
 
 public class Team9Rest implements BuilditInterop.Rest {
 
@@ -35,7 +36,7 @@ public class Team9Rest implements BuilditInterop.Rest {
     }
 
     @Override
-    public void sendInvoice(Invoice invoice) {
+    public void sendInvoice(JavaMailSender smtp, Invoice invoice) {
         throw new UnsupportedOperationException();
     }
 
