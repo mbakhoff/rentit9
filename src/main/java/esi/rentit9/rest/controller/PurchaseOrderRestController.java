@@ -1,20 +1,15 @@
 package esi.rentit9.rest.controller;
 
 import esi.rentit9.RBAC;
-import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.OrderStatus;
 import esi.rentit9.domain.PurchaseOrder;
 import esi.rentit9.dto.PurchaseOrderResource;
 import esi.rentit9.dto.PurchaseOrderResourceAssembler;
 import esi.rentit9.dto.PurchaseOrderResourceList;
-import esi.rentit9.interop.InteropImplementation;
 import esi.rentit9.rest.util.HttpHelpers;
-import org.joda.time.DateMidnight;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +19,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/rest/")
 public class PurchaseOrderRestController {
-
-    @Autowired
-    private JavaMailSender smtp;
 
     private final PurchaseOrderResourceAssembler assembler;
 
@@ -60,35 +52,10 @@ public class PurchaseOrderRestController {
         order.setStatus(OrderStatus.CREATED);
         order.persist();
 
-        sendInvoiceAsync(order); // for testing - send the invoice automatically
-
         HttpHeaders headers = new HttpHeaders();
         headers.add("EntityId", order.getId().toString());
         PurchaseOrderResource resources = assembler.toResource(order);
         return new ResponseEntity<PurchaseOrderResource>(resources, headers, HttpStatus.CREATED);
-    }
-
-    private void sendInvoiceAsync(PurchaseOrder order) {
-        final Invoice invoice = new Invoice();
-        invoice.setPurchaseOrder(order);
-        invoice.setDueDate(new DateMidnight().plusDays(7).toGregorianCalendar());
-        invoice.persist();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(5000);
-                    InteropImplementation interop = invoice.getPurchaseOrder().getBuildit().getProvider();
-                    if (interop != null) {
-                        interop.getRest().sendInvoice(smtp, invoice);
-                    }
-                } catch (InterruptedException ignored) {
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
     }
 
     @RequestMapping(value = "pos/{id}", method = RequestMethod.GET)

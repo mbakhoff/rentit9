@@ -3,6 +3,7 @@ package esi.rentit9.dto;
 import esi.rentit9.domain.BuildIt;
 import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrder;
+import org.springframework.dao.DataAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,13 +39,24 @@ public class PurchaseOrderResourceAssembler {
     }
 
     public void fromResource(PurchaseOrder purchaseOrder, PurchaseOrderResource orderResource) {
-        purchaseOrder.setBuildit(BuildIt.getOrCreate(orderResource.getBuildit()));
+        purchaseOrder.setBuildit(getBuildItByName(orderResource.getBuildit()));
         purchaseOrder.setSiteAddress(orderResource.getSiteAddress());
         purchaseOrder.setSenderSideId(orderResource.getBuilditOrderId());
         purchaseOrder.setPlant(orderResource.getPlantObject());
         purchaseOrder.setTotal(orderResource.getTotal());
         purchaseOrder.setStartDate(orderResource.getStartDate());
         purchaseOrder.setEndDate(orderResource.getEndDate());
+    }
+
+    private BuildIt getBuildItByName(String name) {
+        if (name == null || name.length() == 0) {
+            throw new IllegalArgumentException("name of buildit must be specified");
+        }
+        try {
+            return BuildIt.findBuildItsByNameEquals(name).getSingleResult();
+        } catch (DataAccessException e) {
+            throw new RuntimeException("buildit with name '" + name + "' was not found", e);
+        }
     }
 
 }
