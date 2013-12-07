@@ -1,4 +1,4 @@
-package esi.rentit9.interop;
+package esi.rentit9.service;
 
 import javax.activation.DataSource;
 import javax.xml.bind.JAXBContext;

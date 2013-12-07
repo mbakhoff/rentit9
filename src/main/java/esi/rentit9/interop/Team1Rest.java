@@ -6,16 +6,13 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.PurchaseOrder;
+import esi.rentit9.service.InvoiceDataSource;
+import esi.rentit9.service.Invoicing;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.mail.javamail.JavaMailSender;
 
-import javax.activation.DataHandler;
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.MessagingException;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -53,37 +50,24 @@ public class Team1Rest implements BuilditInterop.Rest {
     public void sendInvoice(JavaMailSender smtp, Invoice invoice) {
         PurchaseOrder order = invoice.getPurchaseOrder();
         String address = order.getBuildit().getEmail();
-
         try {
-            MimeMessage msg = smtp.createMimeMessage();
-            msg.setRecipients(Message.RecipientType.TO, address);
-            msg.setSubject(getEmailSubject(invoice, order));
-
-            MimeBodyPart mbp1 = new MimeBodyPart();
-            mbp1.setText("Invoice attached. ");
-
-            MimeBodyPart mbp2 = new MimeBodyPart();
-            mbp2.setDataHandler(getInvoiceData(invoice, order));
-            mbp2.setFileName("invoice.xml");
-
-            Multipart mp = new MimeMultipart();
-            mp.addBodyPart(mbp1);
-            mp.addBodyPart(mbp2);
-            msg.setContent(mp);
-
-            smtp.send(msg);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            InvoiceResource resource = getInvoiceResource(invoice, order);
+            InvoiceDataSource<InvoiceResource> ds = new InvoiceDataSource<InvoiceResource>(resource);
+            Invoicing.sendInvoiceEmail(smtp, address, ds, getEmailSubject(invoice, order));
+        } catch (MessagingException e) {
+            throw new RuntimeException("Failed to send email to buildit1", e);
+        } catch (JAXBException e) {
+            throw new RuntimeException("Failed to marshall invoice " + invoice.getId(), e);
         }
     }
 
-    private DataHandler getInvoiceData(Invoice invoice, PurchaseOrder order) throws JAXBException {
+    private InvoiceResource getInvoiceResource(Invoice invoice, PurchaseOrder order) {
         InvoiceResource res = new InvoiceResource();
         res.invoiceId = invoice.getId();
         res.purchaseOrderId = order.getId();
         res.date = new DateMidnight(invoice.getDueDate()).toString(ISODateTimeFormat.yearMonthDay());
         res.total = BigDecimal.valueOf(order.getTotal());
-        return new DataHandler(new InvoiceDataSource<InvoiceResource>(res));
+        return res;
     }
 
     private String getEmailSubject(Invoice invoice, PurchaseOrder order) {
