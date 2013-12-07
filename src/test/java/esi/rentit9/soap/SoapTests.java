@@ -25,7 +25,7 @@ public class SoapTests {
         endDate.set(2010,10,11);
 
         PurchaseOrderResource resource=new PurchaseOrderResource();
-        resource.setBuildit("Test");
+        resource.setBuildit("buildit9");
         resource.setSiteAddress("Test");
         resource.setStatus(OrderStatus.CREATED.toString());
         resource.setStartDate(startDate);

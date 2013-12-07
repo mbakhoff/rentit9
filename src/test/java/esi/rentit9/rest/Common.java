@@ -13,7 +13,7 @@ public class Common {
     public static PurchaseOrderResource createDummyOrder() {
         PurchaseOrderResource po = new PurchaseOrderResource();
         po.setSiteAddress("derpland 100c, nowhere");
-        po.setBuildit("builders inc.");
+        po.setBuildit("buildit9");
         po.setPlantId("1");
         po.setStartDate(Calendar.getInstance());
         po.setEndDate(Calendar.getInstance());
@@ -21,7 +21,7 @@ public class Common {
     }
 
     public static Client withBasicAuth(Client client) {
-        client.addFilter(new HTTPBasicAuthFilter("admin", "admin"));
+        client.addFilter(new HTTPBasicAuthFilter("buildit9", "buildit9"));
         return client;
     }
 }
