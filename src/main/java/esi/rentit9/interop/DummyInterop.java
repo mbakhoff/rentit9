@@ -4,7 +4,7 @@ import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.PurchaseOrder;
 import org.springframework.mail.javamail.JavaMailSender;
 
-public class DummyRest implements BuilditInterop.Rest {
+public class DummyInterop implements BuilditInterop {
 
     @Override
     public void sendAccept(PurchaseOrder order) {

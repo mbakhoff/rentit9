@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-public class Team9Rest implements BuilditInterop.Rest {
+public class Team9Interop implements BuilditInterop {
 
     public static final String BUILDIT_POS = "https://buildit9.herokuapp.com/rest/pos";
 

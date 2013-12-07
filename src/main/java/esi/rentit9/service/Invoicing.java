@@ -2,7 +2,7 @@ package esi.rentit9.service;
 
 import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.PurchaseOrder;
-import esi.rentit9.interop.InteropImplementation;
+import esi.rentit9.interop.BuilditInterop;
 import org.joda.time.DateMidnight;
 import org.springframework.mail.javamail.JavaMailSender;
 
@@ -26,12 +26,8 @@ public class Invoicing {
     }
 
     public static void sendInvoice(JavaMailSender smtp, Invoice invoice) {
-        InteropImplementation interop = invoice.getPurchaseOrder().getBuildit().getProvider();
-        if (interop != null) {
-            interop.getRest().sendInvoice(smtp, invoice);
-        } else {
-            throw new RuntimeException("failed to find interop for invoice " + invoice.getId());
-        }
+        BuilditInterop interop = invoice.getPurchaseOrder().getBuildit().getInterop();
+        interop.sendInvoice(smtp, invoice);
     }
 
     public static void sendInvoiceEmail(JavaMailSender smtp, String address, DataSource ds, String subject) throws MessagingException {

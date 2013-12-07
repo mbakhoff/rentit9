@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
-public class Team1Rest implements BuilditInterop.Rest {
+public class Team1Interop implements BuilditInterop {
 
     private static final String BUILDIT_URL = "https://buildit1.herokuapp.com/rest";
 

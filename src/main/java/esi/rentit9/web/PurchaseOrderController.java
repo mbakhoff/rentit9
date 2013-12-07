@@ -37,12 +37,12 @@ public class PurchaseOrderController {
         boolean statusChanged = old.getStatus() != purchaseOrder.getStatus();
 
 		if (statusChanged && purchaseOrder.getStatus() == OrderStatus.APPROVED) {
-			BuilditInterop provider = purchaseOrder.getBuildit().getProvider();
-			provider.getRest().sendAccept(purchaseOrder);
+			BuilditInterop provider = purchaseOrder.getBuildit().getInterop();
+			provider.sendAccept(purchaseOrder);
 		}
         if (statusChanged && purchaseOrder.getStatus() == OrderStatus.REJECTED) {
-			BuilditInterop provider = purchaseOrder.getBuildit().getProvider();
-			provider.getRest().sendReject(purchaseOrder);
+			BuilditInterop provider = purchaseOrder.getBuildit().getInterop();
+			provider.sendReject(purchaseOrder);
 		}
         if (statusChanged && purchaseOrder.getStatus() == OrderStatus.PLANT_RETURNED) {
             Invoicing.sendInvoice(smtp, Invoicing.createInvoice(purchaseOrder));

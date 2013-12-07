@@ -6,15 +6,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 public interface BuilditInterop {
 
-    Rest getRest();
-    Soap getSoap();
+    void sendAccept(PurchaseOrder order);
+    void sendReject(PurchaseOrder order);
+    void sendInvoice(JavaMailSender smtp, Invoice invoice);
 
-    public static interface Rest {
-        void sendAccept(PurchaseOrder order);
-        void sendReject(PurchaseOrder order);
-        void sendInvoice(JavaMailSender smtp, Invoice invoice);
-    }
-
-    public static interface Soap {
-    }
 }

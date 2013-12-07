@@ -1,41 +1,28 @@
 package esi.rentit9.interop;
 
-public enum InteropImplementation implements BuilditInterop {
+public enum InteropImplementation {
 
     Team9 {
         @Override
-        public Rest getRest() {
-            return new Team9Rest();
-        }
-
-        @Override
-        public Soap getSoap() {
-            throw new UnsupportedOperationException();
+        public BuilditInterop getImpl() {
+            return new Team9Interop();
         }
     },
 
     Team1 {
         @Override
-        public Rest getRest() {
-            return new Team1Rest();
-        }
-
-        @Override
-        public Soap getSoap() {
-            throw new UnsupportedOperationException();
+        public BuilditInterop getImpl() {
+            return new Team1Interop();
         }
     },
 
     Dummy {
         @Override
-        public Rest getRest() {
-            return new DummyRest();
+        public BuilditInterop getImpl() {
+            return new DummyInterop();
         }
+    };
 
-        @Override
-        public Soap getSoap() {
-            return new DummySoap();
-        }
-    }
+    public abstract BuilditInterop getImpl();
 
 }
