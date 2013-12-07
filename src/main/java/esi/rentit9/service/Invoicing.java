@@ -44,6 +44,7 @@ public class Invoicing {
 
         MimeBodyPart mbp2 = new MimeBodyPart();
         mbp2.setDataHandler(new DataHandler(ds));
+        mbp2.setHeader("Content-Type", "application/xml");
         mbp2.setFileName("invoice.xml");
 
         Multipart mp = new MimeMultipart();

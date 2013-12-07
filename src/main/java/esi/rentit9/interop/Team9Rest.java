@@ -5,7 +5,13 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.rentit9.domain.Invoice;
 import esi.rentit9.domain.PurchaseOrder;
+import esi.rentit9.service.InvoiceDataSource;
+import esi.rentit9.service.Invoicing;
 import org.springframework.mail.javamail.JavaMailSender;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 public class Team9Rest implements BuilditInterop.Rest {
 
@@ -14,7 +20,7 @@ public class Team9Rest implements BuilditInterop.Rest {
     @Override
     public void sendAccept(PurchaseOrder order) {
         ClientResponse response = getClient()
-                .resource(getConfirmUrl(order))
+                .resource(String.format("%s/%s/rentitconfirm", BUILDIT_POS, order.getSenderSideId()))
                 .post(ClientResponse.class);
 
         int status = response.getStatus();
@@ -26,8 +32,8 @@ public class Team9Rest implements BuilditInterop.Rest {
     @Override
     public void sendReject(PurchaseOrder order) {
         ClientResponse response = getClient()
-                .resource(getConfirmUrl(order))
-                .delete(ClientResponse.class);
+                .resource(String.format("%s/%s/rentitreject", BUILDIT_POS, order.getSenderSideId()))
+                .post(ClientResponse.class);
 
         int status = response.getStatus();
         if (status != ClientResponse.Status.OK.getStatusCode()) {
@@ -37,7 +43,23 @@ public class Team9Rest implements BuilditInterop.Rest {
 
     @Override
     public void sendInvoice(JavaMailSender smtp, Invoice invoice) {
-        throw new UnsupportedOperationException();
+        PurchaseOrder order = invoice.getPurchaseOrder();
+        String address = order.getBuildit().getEmail();
+        try {
+            InvoiceResource resource = getInvoiceResource(invoice, order);
+            InvoiceDataSource<InvoiceResource> ds = new InvoiceDataSource<InvoiceResource>(resource);
+            Invoicing.sendInvoiceEmail(smtp, address, ds, "invoice from rentit9");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private InvoiceResource getInvoiceResource(Invoice invoice, PurchaseOrder order) {
+        InvoiceResource res = new InvoiceResource();
+        res.id = invoice.getId();
+        res.po = Long.parseLong(order.getSenderSideId());
+        res.total = order.getTotal();
+        return res;
     }
 
     private static Client getClient() {
@@ -46,8 +68,14 @@ public class Team9Rest implements BuilditInterop.Rest {
         return client;
     }
 
-    private static String getConfirmUrl(PurchaseOrder order) {
-        return String.format("%s/%d/confirm", BUILDIT_POS, order.getId());
+    @XmlRootElement(name = "invoice")
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class InvoiceResource {
+
+        public Long id;
+        public Long po;
+        public Float total;
+
     }
 
 }
