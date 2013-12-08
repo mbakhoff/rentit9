@@ -6,14 +6,12 @@ import com.sun.jersey.api.client.WebResource;
 import esi.rentit9.dto.PurchaseOrderResource;
 import esi.rentit9.dto.PurchaseOrderResourceList;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 import static esi.rentit9.rest.Common.withBasicAuth;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class PurchaseOrderResourceTest {
@@ -50,18 +48,21 @@ public class PurchaseOrderResourceTest {
 		PurchaseOrderResource po = Common.createDummyOrder();
 		WebResource webResource = client.resource(Common.URL_POS);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
-		List<String> id = response.getHeaders().get("EntityId");
+				.accept(MediaType.APPLICATION_XML)
+                .post(ClientResponse.class, po);
+        assertEquals(HttpStatus.CREATED.value(), response.getStatus());
+		String id = response.getHeaders().getFirst("EntityId");
 		
 		PurchaseOrderResource po2 = Common.createDummyOrder();
 		po2.setSiteAddress("NewModifiedDerpland 404");
-		
-        String requestUrl = Common.URL_POS +"/"+id.get(0);
+
+        String requestUrl = Common.URL_POS +"/"+id;
         webResource = client.resource(requestUrl);
         ClientResponse response2 = webResource.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML).put(ClientResponse.class, po2);
-        
-		assertTrue(response2.getStatus() == ClientResponse.Status.OK.getStatusCode());
+                .accept(MediaType.APPLICATION_XML)
+                .put(ClientResponse.class, po2);
+
+        assertTrue(response2.getStatus() == ClientResponse.Status.OK.getStatusCode());
 	}
 	
 	@Test
@@ -69,14 +70,16 @@ public class PurchaseOrderResourceTest {
 		PurchaseOrderResource po = Common.createDummyOrder();
 		WebResource webResource = client.resource(Common.URL_POS);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
-		List<String> id = response.getHeaders().get("EntityId");
-		
-        String requestUrl = Common.URL_POS +"/"+id.get(0);
+				.accept(MediaType.APPLICATION_XML)
+                .post(ClientResponse.class, po);
+        assertEquals(HttpStatus.CREATED.value(), response.getStatus());
+		String id = response.getHeaders().getFirst("EntityId");
+
+        String requestUrl = Common.URL_POS +"/"+id;
         webResource = client.resource(requestUrl);
         ClientResponse response2 = webResource.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);
-		assertTrue(response2.getStatus() == ClientResponse.Status.OK.getStatusCode());
+                .accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);
+        assertTrue(response2.getStatus() == ClientResponse.Status.OK.getStatusCode());
 	}
 
     @Test

@@ -18,6 +18,7 @@ public class Common {
         po.setPlantId("1");
         po.setStartDate(Calendar.getInstance());
         po.setEndDate(new DateMidnight().plusDays(3).toGregorianCalendar());
+        po.setTotal(49.99f);
         return po;
     }
 

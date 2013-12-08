@@ -31,6 +31,7 @@ public class SoapTests {
         resource.setStartDate(startDate);
         resource.setEndDate(endDate);
         resource.setPlantId("1");
+        resource.setTotal(49.99f);
 
         plantSoapService.createPurchaseOrder(resource);
     }

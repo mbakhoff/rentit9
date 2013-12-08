@@ -47,6 +47,10 @@ public class PurchaseOrderRestController {
     public ResponseEntity<PurchaseOrderResource> createOrder(@RequestBody PurchaseOrderResource res) {
         RBAC.assertAuthority(RBAC.ROLE_CLIENT);
 
+        if (hasMissingFields(res)) {
+            throw new IllegalArgumentException("some of the required fields are missing");
+        }
+
         PurchaseOrder order = new PurchaseOrder();
         assembler.fromResource(order, res);
         order.setStatus(OrderStatus.CREATED);
@@ -56,6 +60,15 @@ public class PurchaseOrderRestController {
         headers.add("EntityId", order.getId().toString());
         PurchaseOrderResource resources = assembler.toResource(order);
         return new ResponseEntity<PurchaseOrderResource>(resources, headers, HttpStatus.CREATED);
+    }
+
+    private static boolean hasMissingFields(PurchaseOrderResource res) {
+        return res.getBuildit() == null ||
+                res.getStartDate() == null ||
+                res.getEndDate() == null ||
+                res.getTotal() == null ||
+                res.getPlantId() == null ||
+                res.getSiteAddress() == null;
     }
 
     @RequestMapping(value = "pos/{id}", method = RequestMethod.GET)
