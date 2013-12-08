@@ -3,6 +3,7 @@ package esi.rentit9.rest;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.rentit9.dto.PurchaseOrderResource;
+import org.joda.time.DateMidnight;
 
 import java.util.Calendar;
 
@@ -16,7 +17,7 @@ public class Common {
         po.setBuildit("buildit9");
         po.setPlantId("1");
         po.setStartDate(Calendar.getInstance());
-        po.setEndDate(Calendar.getInstance());
+        po.setEndDate(new DateMidnight().plusDays(3).toGregorianCalendar());
         return po;
     }
 

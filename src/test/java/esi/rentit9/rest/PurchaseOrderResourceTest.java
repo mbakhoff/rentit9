@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 import static esi.rentit9.rest.Common.withBasicAuth;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
@@ -34,8 +35,13 @@ public class PurchaseOrderResourceTest {
 		PurchaseOrderResource po = Common.createDummyOrder();
         WebResource webResource = client.resource(Common.URL_POS);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, po);
+				.accept(MediaType.APPLICATION_XML)
+                .post(ClientResponse.class, po);
 		assertTrue(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode());
+
+        PurchaseOrderResource returned = response.getEntity(PurchaseOrderResource.class);
+        assertEquals(po.getStartDate().getTime(), returned.getStartDate().getTime());
+        assertEquals(po.getEndDate().getTime(), returned.getEndDate().getTime());
 	}
 	
 	@Test
