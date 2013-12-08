@@ -12,6 +12,7 @@ import java.util.List;
 
 import static esi.rentit9.rest.Common.withBasicAuth;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
@@ -78,4 +79,12 @@ public class PurchaseOrderResourceTest {
 		assertTrue(response2.getStatus() == ClientResponse.Status.OK.getStatusCode());
 	}
 
+    @Test
+    public void testGetOrders() throws Exception {
+        WebResource webResource = client.resource(Common.URL_POS);
+        PurchaseOrderResourceList response = webResource.type(MediaType.APPLICATION_XML)
+                .accept(MediaType.APPLICATION_XML)
+                .get(PurchaseOrderResourceList.class);
+        assertNotNull(response);
+    }
 }
