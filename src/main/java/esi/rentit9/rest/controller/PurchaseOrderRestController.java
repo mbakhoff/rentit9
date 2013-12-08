@@ -2,6 +2,7 @@ package esi.rentit9.rest.controller;
 
 import esi.rentit9.RBAC;
 import esi.rentit9.domain.OrderStatus;
+import esi.rentit9.domain.Plant;
 import esi.rentit9.domain.PurchaseOrder;
 import esi.rentit9.dto.PurchaseOrderResource;
 import esi.rentit9.dto.PurchaseOrderResourceAssembler;
@@ -49,6 +50,9 @@ public class PurchaseOrderRestController {
 
         if (hasMissingFields(res)) {
             throw new IllegalArgumentException("some of the required fields are missing");
+        }
+        if (Plant.findPlant(Long.parseLong(res.getPlantId())) == null) {
+            throw new IllegalArgumentException("plant not found");
         }
 
         PurchaseOrder order = new PurchaseOrder();
