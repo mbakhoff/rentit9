@@ -95,6 +95,7 @@ public class Team1Interop implements BuilditInterop {
         public long invoiceId;
         public long purchaseOrderId;
         public BigDecimal total;
+        public String rentitEmailAddress;
         public String date;
     }
 
