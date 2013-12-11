@@ -14,6 +14,8 @@ import javax.mail.Multipart;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.util.Calendar;
+import java.util.List;
 
 public class Invoicing {
 
@@ -23,6 +25,24 @@ public class Invoicing {
         invoice.setDueDate(new DateMidnight().plusDays(7).toGregorianCalendar());
         invoice.persist();
         return invoice;
+    }
+
+    public static List<Invoice> getUnpaidInvoices(){
+
+        Calendar lastAcceptedDate = Calendar.getInstance();
+        if (lastAcceptedDate.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
+            lastAcceptedDate.add(Calendar.DATE,-3);
+        }
+        else if (lastAcceptedDate.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+            lastAcceptedDate.add(Calendar.DATE,-2);
+        }
+        else {
+            lastAcceptedDate.add(Calendar.DATE,-1);
+        }
+
+        List<Invoice> unpaid = Invoice.findInvoicesByDueDateGreaterThan(lastAcceptedDate).getResultList();
+
+        return unpaid;
     }
 
     public static void sendInvoice(JavaMailSender smtp, Invoice invoice) {

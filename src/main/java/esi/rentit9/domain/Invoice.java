@@ -2,14 +2,13 @@ package esi.rentit9.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
-
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Calendar;
 
 @RooJavaBean
-@RooJpaActiveRecord
+@RooJpaActiveRecord(finders = { "findInvoicesByDueDateGreaterThan" })
 public class Invoice {
 
     /**
