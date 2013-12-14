@@ -16,6 +16,13 @@ public enum InteropImplementation {
         }
     },
 
+    Team30 {
+        @Override
+        public BuilditInterop getImpl() {
+            return new Team30Interop();
+        }
+    },
+
     Dummy {
         @Override
         public BuilditInterop getImpl() {
