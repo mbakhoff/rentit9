@@ -68,6 +68,7 @@ public class PurchaseOrderRestController {
 
     private static boolean hasMissingFields(PurchaseOrderResource res) {
         return res.getBuildit() == null ||
+                res.getBuilditOrderId() == null ||
                 res.getStartDate() == null ||
                 res.getEndDate() == null ||
                 res.getTotal() == null ||
