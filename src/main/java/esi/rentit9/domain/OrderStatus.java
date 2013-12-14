@@ -9,6 +9,7 @@ public enum OrderStatus {
     PLANT_DISPATCHED,
     PLANT_DELIVERED,
     PLANT_RETURNED,
-    INVOICED
+    INVOICED,
+    COMPLETED
 
 }

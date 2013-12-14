@@ -2,6 +2,8 @@ package esi.rentit9.rest.controller;
 
 import esi.rentit9.RBAC;
 import esi.rentit9.domain.Invoice;
+import esi.rentit9.domain.OrderStatus;
+import esi.rentit9.domain.PurchaseOrder;
 import esi.rentit9.domain.RemittanceAdvice;
 import esi.rentit9.dto.RemittanaceAdviceResource;
 import esi.rentit9.dto.RemittanaceAdviceResourceAssembler;
@@ -47,6 +49,10 @@ public class RemittanceAdviceRestController {
 		remittanceAdvice.setInvoice(invoice);
 		remittanceAdvice.setPayDay(res.getPaymentDate());
 		remittanceAdvice.persist();
+
+        PurchaseOrder order = invoice.getPurchaseOrder();
+        order.setStatus(OrderStatus.COMPLETED);
+        order.merge();
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("EntityId", remittanceAdvice.getId().toString());
