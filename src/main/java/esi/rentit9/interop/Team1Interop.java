@@ -84,7 +84,7 @@ public class Team1Interop implements BuilditInterop {
 
     @XmlRootElement(name="RejectPO")
     @XmlAccessorType(XmlAccessType.FIELD)
-    public class RejectPOResource {
+    public static class RejectPOResource {
         public Long poid;
         public String commentt;
     }
