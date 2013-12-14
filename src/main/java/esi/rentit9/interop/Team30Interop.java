@@ -82,7 +82,7 @@ public class Team30Interop implements BuilditInterop {
 
     @XmlRootElement(name = "InvoiceResource")
     @XmlAccessorType(XmlAccessType.FIELD)
-    public class InvoiceResource {
+    public static class InvoiceResource {
         public Long invoiceId;
         public Date date;
         public InvoiceStatus status;
@@ -93,7 +93,7 @@ public class Team30Interop implements BuilditInterop {
 
     @XmlRootElement(name = "RejectBean")
     @XmlAccessorType(XmlAccessType.FIELD)
-    public class RejectBean {
+    public static class RejectBean {
         public String comment;
         public Long id;
     }
