@@ -10,6 +10,7 @@ import esi.rentit9.service.Invoicing;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import javax.mail.MessagingException;
+import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -40,6 +41,7 @@ public class Team30Interop implements BuilditInterop {
 
         ClientResponse response = getClient()
                 .resource(String.format("%s/reject", BUILDIT_POS))
+                .type(MediaType.APPLICATION_JSON)
                 .post(ClientResponse.class, res);
 
         int status = response.getStatus();
