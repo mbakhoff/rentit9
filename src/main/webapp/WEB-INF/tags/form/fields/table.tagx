@@ -64,7 +64,7 @@
       <c:forEach items="${data}" var="item">
         <tr>
           <c:forTokens items="${columnProperties}" delims="${'&#9999;'}" var="column" varStatus="num">
-            <c:set var="columnMaxLength" value="${lengths[num.count-1]}" />
+            <c:set var="columnMaxLength" value="${60}" />
             <c:set var="columnType" value="${types[num.count-1]}" />
             <c:set var="columnDatePattern" value="${patterns[num.count-1]}" />
             <td>
