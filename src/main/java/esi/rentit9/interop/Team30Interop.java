@@ -70,7 +70,6 @@ public class Team30Interop implements BuilditInterop {
         res.date = invoice.getDueDate().getTime();
         res.invoiceId = invoice.getId();
         res.poId = order.getId();
-        res.status = InvoiceStatus.NOT_PAID;
         res.total = order.getTotal().doubleValue();
         res.requestId = Long.parseLong(order.getSenderSideId());
         return res;
@@ -87,7 +86,6 @@ public class Team30Interop implements BuilditInterop {
     public static class InvoiceResource {
         public Long invoiceId;
         public Date date;
-        public InvoiceStatus status;
         public Double total;
         public Long requestId;
         public Long poId;
@@ -98,10 +96,6 @@ public class Team30Interop implements BuilditInterop {
     public static class RejectBean {
         public String comment;
         public Long id;
-    }
-
-    public enum InvoiceStatus {
-        PAID, NOT_PAID
     }
 
 }
